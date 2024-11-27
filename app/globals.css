@@ -2,26 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.btn {
+    @apply rounded-full;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.mainTitle {
+    font-family: 'Maiden Orange', 'Times New Roman', Times, serif;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        --primary: 32.1 94.6 43.7;
+        --primary-foreground: 0 0 63.9;
+        --accent: 43.3 96.4 56.3;
+        --accent-foreground: 0 0 63.9;
+    }
 }
