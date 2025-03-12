@@ -19,21 +19,16 @@ export const columns: ColumnDef<Appointment>[] = [
         accessorKey: "time",
         header: () => <div className="p-3 mx-3 mr-5 text-center w-max-fit">Time</div>,
         cell: ({ row }) => {
-            const parsedDate = new Date((row.getValue("time"))) || null;
-            const formattedTime = parsedDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-
-            return <div className="p-3 mx-3 mr-5 text-center font-medium">{formattedTime}</div>
+            return <div className="p-3 mx-3 mr-5 text-center font-medium">{row.getValue("time")}</div>
         },
     },
     {
         accessorKey: "status",
         header: () => <div className="p-3 mx-3 text-center w-max-fit">Status</div>,
         cell: ({ row }) => {
-            const apptStatus: string = row.getValue("status")
-
             return (
                 <div className="p-3 mx-3 text-center font-medium">
-                    {apptStatus ? <p className="text-red-600">Booked</p> : <p className="text-green-600">Available</p>}
+                    {row.getValue("status") ? <p className="text-red-600">Booked</p> : <p className="text-green-600">Available</p>}
                 </div>
             )
         },
