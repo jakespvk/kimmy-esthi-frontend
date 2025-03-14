@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Headline from '../about/headline'
-import { Appointment, columns } from "./appointments/columns"
+import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -66,7 +66,7 @@ export default function DatePickerForm() {
 
             let result = await response.json();
             console.log(result);
-            result.forEach((each: Appointment) => each.date = format(data.appointmentDate, "PPP"));
+            // result.forEach((each: Appointment) => each.date = format(data.appointmentDate, "PPP"));
             for (let appt of result) {
                 appt.date = format(data.appointmentDate, "PPP");
                 appt.time = new Date(appt.time);
@@ -77,6 +77,41 @@ export default function DatePickerForm() {
             console.error("Error posting data: ", error);
         }
     }
+
+    // const forTestingAppointments = JSON.parse(JSON.stringify([
+    //     {
+    //         id: 1,
+    //         date: "3/12/2025",
+    //         time: new Date(2025, 3, 12, 9, 0, 0),
+    //         status: true,
+    //     },
+    //     {
+    //         id: 2,
+    //         date: "3/12/2025",
+    //         time: new Date(2025, 3, 12, 10, 0, 0),
+    //         status: true,
+    //     },
+    //     {
+    //         id: 3,
+    //         date: "3/12/2025",
+    //         time: new Date(2025, 3, 12, 11, 0, 0),
+    //         status: true,
+    //     },
+    //     {
+    //         id: 4,
+    //         date: "3/12/2025",
+    //         time: new Date(2025, 3, 12, 12, 0, 0),
+    //         status: true,
+    //     },
+    //     {
+    //         id: 5,
+    //         date: "3/12/2025",
+    //         time: new Date(2025, 3, 12, 13, 0, 0),
+    //         status: true,
+    //     }
+    // ]));
+    //
+    // setData(forTestingAppointments);
 
     return (
         <>
@@ -89,7 +124,7 @@ export default function DatePickerForm() {
                             control={form.control}
                             name="appointmentDate"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
+                                <FormItem className="flex flex-col items-center">
                                     <FormLabel>Select a date to see available appointments:</FormLabel>
                                     <Popover>
                                         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
@@ -123,6 +158,7 @@ export default function DatePickerForm() {
                                                     //disabled={(date) =>
                                                     //date < new Date(new Date().setHours(0,0,0,0))
                                                     //}
+                                                    className="bg-(--color-base-100)"
                                                     initialFocus
                                                 />
                                             </PopoverContent>

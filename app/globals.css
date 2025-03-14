@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+   themes: caramellatte --default;
+};
 
 .btn {
     @apply rounded-full;
@@ -8,14 +9,4 @@
 
 .mainTitle {
     font-family: 'Maiden Orange', 'Times New Roman', Times, serif;
-}
-
-@layer base {
-    :root {
-        --radius: 0.5rem;
-        --primary: 32.1 94.6 43.7;
-        --primary-foreground: 0 0 63.9;
-        --accent: 43.3 96.4 56.3;
-        --accent-foreground: 0 0 63.9;
-    }
 }
