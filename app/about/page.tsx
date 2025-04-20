@@ -38,7 +38,7 @@ const about = () => {
                         cardContent={"We offer many different facials, from vegan to pumpkin"}
                         cardImgSrc={"https://media.allure.com/photos/5c2e8ec54325fe2d62c0943a/16:9/w_2560%2Cc_limit/how-often-should-you-get-a-facial-lede.jpg"}
                         cardLinkTo={"/booking"}
-                        cardOverlayContent={"We offer many different facials, from vegan to pumpkin"}
+                        cardOverlayContent={"Completely customized facial"}
                     />
                     <ServicesCards
                         cardTitle={"☀️ Facials"}

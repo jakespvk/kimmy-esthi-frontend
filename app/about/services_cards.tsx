@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useState } from 'react'
+import React from 'react'
 
 const ServicesCards = ({ cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOverlayContent }: { cardTitle: string, cardContent: string, cardImgSrc: string, cardLinkTo: string, cardOverlayContent: string }) => {
-    // const [hover, setHover] = useState(false);
-
     return (
         <>
             <div className='relative group'>
@@ -29,7 +27,7 @@ const ServicesCards = ({ cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOve
                             backgroundImage: "url(https://t4.ftcdn.net/jpg/05/01/83/79/360_F_501837926_xvM4Ym7pql243YOrjmct5NCXjFTxz11v.jpg)",
                         }}>
                         <p className="p-5">{cardOverlayContent}</p>
-                        <div className="card-actions justify-center">
+                        <div className="card-actions justify-center items-end grow">
                             <a role="button" className="btn btn-accent mb-10 text-lg px-4 py-2" href={cardLinkTo}>Book Now</a>
                         </div>
                     </div>
