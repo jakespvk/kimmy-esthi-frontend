@@ -1,7 +1,9 @@
-import Image from 'next/image'
-import { Glass_Antiqua } from 'next/font/google'
+// import Image from 'next/image'
+import { Glass_Antiqua } from 'next/font/google';
+import { Ms_Madi } from 'next/font/google';
 
-const fraunces = Glass_Antiqua({ weight: '400', subsets: ['latin'] })
+const fraunces = Glass_Antiqua({ weight: '400', subsets: ['latin'] });
+const msMadi = Ms_Madi({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
     return (
@@ -14,18 +16,15 @@ export default function Home() {
                 <div className="hero-content text-center">
                     <div className="">
                         <div className={fraunces.className}>
-                            <h1 className="mb-5 text-9xl">SunsetKimcare</h1>
+                            <h1 className="mb-5 text-[10rem]/23 ">SunsetKimcare</h1>
                         </div>
-                        <p className="mb-5 text-2xl">
+                        <p className={`${msMadi.className} mb-5 text-6xl`}>
                             Let me make something clear... your skin
                         </p>
                         <a role="button" className="btn btn-accent mb-10 text-lg px-4 py-2" href="/about">Get Started</a>
                     </div>
                 </div>
             </div>
-
-            <div className="pb-5"></div>
-
         </>
     )
 }
