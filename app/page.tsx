@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import { Glass_Antiqua } from 'next/font/google';
 import { Ms_Madi } from 'next/font/google';
 
