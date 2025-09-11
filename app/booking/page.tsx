@@ -29,6 +29,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+import { getAppointments, Appointment } from './cal'
+
 const FormSchema = z.object({
   appointmentDate: z.date({
     required_error: "A date is required.",
@@ -46,7 +48,14 @@ export default function DatePickerForm() {
   useEffect(() => {
     const today = new Date(new Date().setHours(0, 0, 0, 0));
     form.setValue("appointmentDate", today);
-    onSubmit({ appointmentDate: today });
+    const appts = getAppointments(today, 1);
+    for (const [date, slots] of Object.entries(appts.data)) {
+      console.log(date, slots);
+      slots.forEach((slot: Appointment) => {
+        console.log(slot.start);
+      });
+    }
+    // onSubmit({ appointmentDate: today });
   }, [form]);
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
