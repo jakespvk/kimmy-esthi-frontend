@@ -3,23 +3,19 @@
 import Link from "next/link"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { Appointment } from "@/app/types";
 // import { MoreHorizontal } from "lucide-react"
 // import { Button } from "@/components/ui/button"
 // import StatusIndicator from "./statusIndicator"
 
-export type Appointment = {
-  id: number
-  date: string
-  time: Date
-  status: boolean
-}
-
 export const columns: ColumnDef<Appointment>[] = [
   {
-    accessorKey: "time",
+    accessorKey: "dateTime",
     header: () => <div className="p-3 mx-3 mr-5 text-center w-max-fit">Time</div>,
     cell: ({ row }) => {
-      return <div className="p-3 mx-3 mr-5 text-center font-medium">{row.getValue("time")}</div>
+      return <div className="p-3 mx-3 mr-5 text-center font-medium">
+        {new Date(row.getValue("dateTime")).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+      </div>
     },
   },
   {

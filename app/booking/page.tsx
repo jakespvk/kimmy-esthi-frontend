@@ -35,6 +35,8 @@ const FormSchema = z.object({
   }),
 })
 
+const baseUrl = "https://sunsetkimcare.automeetbackend.space"
+
 export default function DatePickerForm() {
   const [data, setData] = useState([]);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -53,7 +55,7 @@ export default function DatePickerForm() {
     const formattedDate = format(data.appointmentDate, "MM-dd-yyyy");
     console.log(formattedDate);
     try {
-      const response = await fetch(`http://localhost:5102/appointments/${formattedDate}`, {
+      const response = await fetch(`${baseUrl}/appointments/${formattedDate}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -65,13 +67,6 @@ export default function DatePickerForm() {
       }
 
       let result = await response.json();
-      console.log(result);
-      // result.forEach((each: Appointment) => each.date = format(data.appointmentDate, "PPP"));
-      for (let appt of result) {
-        appt.date = format(data.appointmentDate, "PPP");
-        appt.time = new Date(appt.time);
-        appt.time = appt.time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      }
       setData(result);
     } catch (error) {
       console.error("Error posting data: ", error);
