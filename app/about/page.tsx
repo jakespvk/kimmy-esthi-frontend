@@ -101,13 +101,14 @@ const about = () => {
             cardOverlayContent={"Designed for anyone craving a reset, this package pairs two of my most-loved treatments to revive dull, depleted skin. Think of it as a double dose of hydration, renewal, and confidence; leaving you with a bright, rested complexion and that unmistakable “I’ve been taking good care of myself” energy."}
             packageItems={["Day Dream Facial", "Radiance Revival Facial (includes jelly mask)", "1 FREE high frequency add on"]}
             price={"$105 ($125 value)"}
+            type={ServiceCardType.Facial}
           />
-          <ServicesCards
+          < ServicesCards
             cardTitle={"Self Care Series"}
             cardContent={""}
             cardImgSrc={"https://www.shutterstock.com/image-photo/cosmetologist-performs-hydropiling-beauty-salon-600nw-2208041711.jpg"}
             cardLinkTo={"/booking"}
-            cardOverlayContent={"A 45-minute express treatment made for returning clients or anyone needing a quick renewal. This facial helps maintain your skin’s clarity and balance between full sessions, featuring gentle exfoliation, hydration, and a soothing massage for that fresh, just-treated feel."}
+            cardOverlayContent={"Perfect for keeping your skin balanced between seasons or busy schedules, this series helps you slow down and stay consistent. Each visit focuses on renewal and hydration, making space for calm moments and healthy, happy skin that stays that way."}
             packageItems={["2 Day Dream Facials", "1 FREE jelly mask add on"]}
             price={"$110 ($120 value)"}
           />
@@ -116,7 +117,7 @@ const about = () => {
             cardContent={""}
             cardImgSrc={"https://t3.ftcdn.net/jpg/01/44/24/88/360_F_144248813_1PduH2CEnX2mdR9UpVNerzZs6Kv64qsw.jpg"}
             cardLinkTo={"/booking"}
-            cardOverlayContent={"We offer many different facials, from vegan to pumpkin"}
+            cardOverlayContent={"The ultimate indulgence for anyone ready to fully reset. This retreat-style experience blends deep cleansing, advanced exfoliation, and targeted treatments that refine texture and restore balance. Expect smoother, clearer skin and a revitalized sense of calm; like a mini vacation for your face and mind."}
             packageItems={["Radiance Revival Facial (includes jelly mask)", "Acne Afterglow Facial (includes LED)", "1 FREE High Frequency add-on", "1 Dermaplaning add-on included"]}
             price={"$140 ($155 value)"}
           />
@@ -125,7 +126,7 @@ const about = () => {
             cardContent={""}
             cardImgSrc={"https://media.allure.com/photos/5c2e8ec54325fe2d62c0943a/16:9/w_2560%2Cc_limit/how-often-should-you-get-a-facial-lede.jpg"}
             cardLinkTo={"/booking"}
-            cardOverlayContent={"We offer many different facials, from vegan to pumpkin"}
+            cardOverlayContent={"A thoughtful series created for acne-prone or sensitive skin that needs consistency, care, and gentle guidance. Each session builds on the last, helping calm inflammation, encourage healing, and support your long-term skin journey. Over time, you’ll notice more clarity, balance, and quiet confidence in your skin’s natural rhythm."}
             packageItems={["3 Acne Afterglow Facials (includes blue LED)", "FREE High Frequency on all sessions"]}
             price={"$180 ($210 value)"}
           />
@@ -144,36 +145,40 @@ const about = () => {
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
           <ServicesCards
-            cardTitle={"☀️ High Frequency"}
+            cardTitle={"High Frequency"}
             cardContent={""}
             cardImgSrc={"https://static.wixstatic.com/media/2fdacb_ee6a2b770650475293e4fd855667ad55~mv2.jpg/v1/fill/w_640,h_484,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2fdacb_ee6a2b770650475293e4fd855667ad55~mv2.jpg"}
             cardLinkTo={"/booking/daydream"}
             cardOverlayContent={"Boost circulation and target breakouts with gentle electrical currents that calm, purify, and support skin healing."}
             notBookable={true}
+            type={ServiceCardType.AddOn}
           />
           <ServicesCards
-            cardTitle={"☀️ Custom Hydrojelly Mask"}
+            cardTitle={"Custom Hydrojelly Mask"}
             cardContent={""}
             cardImgSrc={"https://www.honeybesthetics.com/cdn/shop/files/IMG-1851.png?v=1746437836"}
             cardLinkTo={"/booking"}
             cardOverlayContent={"A cooling, skin-loving mask tailored to your needs; adds hydration, soothes irritation, and seals in nutrients for a supple finish."}
             notBookable={true}
+            type={ServiceCardType.AddOn}
           />
           <ServicesCards
-            cardTitle={"☀️ LED Light Therapy"}
+            cardTitle={"LED Light Therapy"}
             cardContent={""}
             cardImgSrc={"https://images.squarespace-cdn.com/content/v1/68061840f8f9a419beb845be/13eaaaad-3b37-4e8d-b121-c25678549109/Maryville-Acupuncture_LED-Light-Therapy_Header-Image.png"}
             cardLinkTo={"/booking"}
             cardOverlayContent={"Harness the power of light energy to refine texture, calm redness, and promote a more even, healthy complexion."}
             notBookable={true}
+            type={ServiceCardType.AddOn}
           />
           <ServicesCards
-            cardTitle={"☀️ Dermaplaning"}
+            cardTitle={"Dermaplaning"}
             cardContent={""}
             cardImgSrc={"https://images.squarespace-cdn.com/content/v1/5c4f6ba1e2ccd1ee6075495d/b46da5d5-865c-4244-8bab-6d8abd83f222/dermaplaning-benefits.jpg"}
             cardLinkTo={"/booking"}
             cardOverlayContent={"Instantly smooth and brighten with this gentle exfoliating treatment that removes dull surface buildup and peach fuzz for a flawless finish."}
             notBookable={true}
+            type={ServiceCardType.AddOn}
           />
         </div>
       </div>
@@ -184,3 +189,9 @@ const about = () => {
 }
 
 export default about
+
+export enum ServiceCardType {
+  Facial,
+  Package,
+  AddOn
+}
