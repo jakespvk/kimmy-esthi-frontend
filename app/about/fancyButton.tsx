@@ -1,6 +1,17 @@
-export const FancyButton = ({ cardLinkTo }: { cardLinkTo: string }) => {
+import Link from "next/link"
+
+export const FancyButton = ({ cardLinkTo, appointmentType }: { cardLinkTo: string, appointmentType: string }) => {
   return (
-    <a role="button" className="btn btn-accent mb-10 text-lg px-4 py-2 jellybtn" href={cardLinkTo}>
+    <Link
+      href={{
+        pathname: cardLinkTo,
+        query: {
+          appointmentType: appointmentType,
+        },
+      }}
+      type="button"
+      className="btn btn-accent mb-10 text-lg px-4 py-2 jellybtn"
+    >
       Book Now
       <div className="star-1">
         <svg
@@ -116,6 +127,6 @@ export const FancyButton = ({ cardLinkTo }: { cardLinkTo: string }) => {
           </g>
         </svg>
       </div>
-    </a>
+    </Link>
   )
 }

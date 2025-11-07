@@ -62,6 +62,7 @@ export const columns: ColumnDef<Appointment>[] = [
               pathname: "/booking/scheduleAppointment",
               query: {
                 id: appointment.id,
+                appointmentType: appointment.appointmentType,
               },
             }}
             type="button"

@@ -28,6 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Appointment } from '../types'
 
 const FormSchema = z.object({
   appointmentDate: z.date({
@@ -35,9 +36,14 @@ const FormSchema = z.object({
   }),
 })
 
-const baseUrl = "https://sunsetkimcare.automeetbackend.space"
+// const baseUrl = "https://sunsetkimcare.automeetbackend.space"
+const baseUrl = "http://localhost:5000"
 
-export default function DatePickerForm() {
+export default function DatePickerForm({ searchParams }:
+  {
+    searchParams:
+    { appointmentType: string }
+  }) {
   const [data, setData] = useState([]);
   const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -67,50 +73,23 @@ export default function DatePickerForm() {
       }
 
       let result = await response.json();
+      console.log(result);
+      result.forEach((appointment: Appointment) => appointment.appointmentType = searchParams.appointmentType);
+      console.log(result);
       setData(result);
     } catch (error) {
       console.error("Error posting data: ", error);
     }
   }
 
-  // const forTestingAppointments = JSON.parse(JSON.stringify([
-  //     {
-  //         id: 1,
-  //         date: "3/12/2025",
-  //         time: new Date(2025, 3, 12, 9, 0, 0),
-  //         status: true,
-  //     },
-  //     {
-  //         id: 2,
-  //         date: "3/12/2025",
-  //         time: new Date(2025, 3, 12, 10, 0, 0),
-  //         status: true,
-  //     },
-  //     {
-  //         id: 3,
-  //         date: "3/12/2025",
-  //         time: new Date(2025, 3, 12, 11, 0, 0),
-  //         status: true,
-  //     },
-  //     {
-  //         id: 4,
-  //         date: "3/12/2025",
-  //         time: new Date(2025, 3, 12, 12, 0, 0),
-  //         status: true,
-  //     },
-  //     {
-  //         id: 5,
-  //         date: "3/12/2025",
-  //         time: new Date(2025, 3, 12, 13, 0, 0),
-  //         status: true,
-  //     }
-  // ]));
-  //
-  // setData(forTestingAppointments);
-
   return (
     <>
       <Headline text={"Booking"} />
+
+      <div className="flex flex-col justify-center items-center">
+        <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
+        <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
+      </div>
 
       <div className="flex flex-col items-center justify-center gap-10">
         <Form {...form}>

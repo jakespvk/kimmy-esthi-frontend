@@ -21,8 +21,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import { AppointmentDateTime } from "@/app/types";
-
 const formSchema = z.object({
   preferredName: z.string(),
   email: z.string().min(2, {
@@ -37,9 +35,13 @@ const formSchema = z.object({
   }),
 })
 
+const baseUrl = "http://localhost:5000";
+// const baseUrl = "https://sunset-kimcare.automeet.space";
+
 export default function ScheduleAppointment({ searchParams }: {
   searchParams: {
     id: string;
+    appointmentType: string;
   };
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,16 +56,19 @@ export default function ScheduleAppointment({ searchParams }: {
 
   const [result, setResult] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
-  let tempDate = new Date().toString();
-  const [appointment, setAppointment] = useState<AppointmentDateTime>({ time: tempDate, date: tempDate });
+  const [appointmentDate, setAppointmentDate] = useState("...");
+  const [appointmentTime, setAppointmentTime] = useState("...");
 
   useEffect(() => {
     const fetchAppointment = async () => {
       try {
-        const response = await fetch(`http://localhost:5102/appointment/${searchParams.id}`);
+        console.log(searchParams.id);
+        const response = await fetch(`${baseUrl}/appointment/${searchParams.id}`);
+        console.log(response);
         const data = await response.json();
         console.log(data);
-        setAppointment(data as AppointmentDateTime);
+        setAppointmentDate(format(data.date, "EEEE, MMMM d, yyyy"));
+        setAppointmentTime(format(data.time, "h:mm a"));
       } catch (err) {
         console.error("Error getting appointment data: ", err);
         return (
@@ -84,12 +89,27 @@ export default function ScheduleAppointment({ searchParams }: {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(searchParams.id);
     try {
-      const response = await fetch('http://localhost:5102/appointment', {
+      // let appointmentDateTimeStr = appointmentDate + " " + appointmentTime;
+      // console.log(appointmentDateTimeStr);
+      // let appointmentDateTime = new Date(appointmentDateTimeStr);
+      // console.log(appointmentDateTime);
+      console.log(JSON.stringify({
+        id: searchParams.id,
+        // datetime: appointmentDateTime,
+        serviceName: searchParams.appointmentType,
+        // status: "Booked",
+        scheduledAppointment: { appointmentId: searchParams.id, ...values },
+      }));
+      const response = await fetch(`${baseUrl}/appointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ AppointmentId: searchParams.id, values }),
+        body: JSON.stringify({
+          appointmentId: searchParams.id,
+          serviceName: searchParams.appointmentType,
+          scheduledAppointment: { appointmentId: searchParams.id, ...values },
+        }),
       });
 
       if (!response.ok) {
@@ -102,15 +122,7 @@ export default function ScheduleAppointment({ searchParams }: {
       console.log(result);
     } catch (error) {
       console.error("Error posting data: ", error);
-      return (
-        <div>
-          <Headline text={"Schedule Appointment"} />
-
-          <div className="flex justify-center">
-            <p className="text-red-900">Error: appointment is no longer available :/</p>
-          </div>
-        </div>
-      )
+      return;
     }
   }
 
@@ -119,8 +131,13 @@ export default function ScheduleAppointment({ searchParams }: {
 
       <Headline text={"Schedule Appointment"} />
 
+      <div className="flex flex-col justify-center items-center">
+        <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
+        <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
+      </div>
+
       <div className="flex justify-center">
-        <p className="">Scheduling {format(appointment!.time, "h:mm a")} appointment on {format(appointment!.date, "EEEE, MMMM d, yyyy")}</p>
+        <p className="">Scheduling {appointmentTime} appointment on {appointmentDate}</p>
       </div>
       <div className="flex justify-center p-3">
         <a type="button" href="javascript:history.back()" className="btn p-1 mx-1 max-w-32 w-32 min-w-fit text-white bg-gradient-to-r 
@@ -142,9 +159,6 @@ export default function ScheduleAppointment({ searchParams }: {
                     <FormControl>
                       <Input placeholder="Jane Doe" className="border-amber-500 focused:border-amber-800 focus-visible:ring-1 ring-amber-700" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Whatever name you&apos;re most comfortable using in my swamp :)
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -159,7 +173,7 @@ export default function ScheduleAppointment({ searchParams }: {
                       <Input placeholder="info@dermalogica.com" className="border-amber-500 focused:border-amber-800 focus-visible:ring-1 ring-amber-700" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Used for confirmation only, unless you elect to receive promotions
+                      Used for confirmation only!
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -174,9 +188,6 @@ export default function ScheduleAppointment({ searchParams }: {
                     <FormControl>
                       <Input placeholder="(562) 555-1234" className="border-amber-500 focused:border-amber-800 focus-visible:ring-1 ring-amber-700" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Not gonna spam yo ass
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -192,8 +203,6 @@ export default function ScheduleAppointment({ searchParams }: {
                     focused:border-amber-800 focus-visible:ring-1 ring-amber-700 focus:outline-none shadow-sm rounded-sm p-2.5 resize-none"
                         {...field}></textarea>
                     </FormControl>
-                    <FormDescription>
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -208,7 +217,7 @@ export default function ScheduleAppointment({ searchParams }: {
           </Form>
         </div>
       </div>
-      {isEnabled && <p disabled className="text-center pt-5 text-green-600">{result}!</p>}
+      {isEnabled && <p className="text-center pt-5 text-green-600">{result}!</p>}
 
       <div className="pb-5"></div>
     </>
