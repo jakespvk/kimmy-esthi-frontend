@@ -61,7 +61,7 @@ export const columns: ColumnDef<Appointment>[] = [
             href={{
               pathname: "/booking/scheduleAppointment",
               query: {
-                id: appointment.id,
+                appointmentId: appointment.id,
                 appointmentType: appointment.appointmentType,
               },
             }}

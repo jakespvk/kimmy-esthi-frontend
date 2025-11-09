@@ -1,7 +1,5 @@
-import { UUID } from "crypto";
-
 export interface Appointment {
-  id: UUID;
+  id: string;
   dateTime: Date;
   status: boolean;
   appointmentType: string;

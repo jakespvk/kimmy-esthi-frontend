@@ -49,16 +49,18 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0
               ?
-              <p className="p-5 pb-0 text-center text-lg {notBookable ? my-auto : my-0}">{cardOverlayContent}</p>
+              <p className="p-5 my-auto text-center text-lg">{cardOverlayContent}</p>
               :
               null
             }
-            {price ? <strong className="text-center my-auto">{price}</strong> : null}
-            {notBookable ? null :
-              <div className="card-actions justify-center items-end grow">
-                <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
-              </div>
-            }
+            <div className="flex flex-col">
+              {price ? <strong className="text-center my-2">{price}</strong> : null}
+              {notBookable ? null :
+                <div className="card-actions justify-center items-end grow">
+                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
+                </div>
+              }
+            </div>
           </div>
         </div >
       </div >

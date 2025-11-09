@@ -22,13 +22,12 @@ const Headline = ({ text }: { text: string }) => {
       <div className="w-full flex items-center justify-center">
         <div className="my-10">
 
-
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>
                   <div className={fraunces.className}>
-                    <Link href={text == "About SunsetKimcare" ? "/" : "/about"}>
+                    <Link href="/">
                       <h1 id="mainTitle" className="text-7xl p-2 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block text-transparent bg-clip-text">
                         {text}
                       </h1>
@@ -37,12 +36,13 @@ const Headline = ({ text }: { text: string }) => {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <Link href="/about">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>About Us / Services</NavigationMenuLink>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>About Us</NavigationMenuLink>
                   </Link>
-                  <Link href="/social">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                      Social
-                    </NavigationMenuLink>
+                  <Link href="/services">
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>Services</NavigationMenuLink>
+                  </Link>
+                  <Link href="/policies">
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>Policies</NavigationMenuLink>
                   </Link>
                 </NavigationMenuContent>
               </NavigationMenuItem>

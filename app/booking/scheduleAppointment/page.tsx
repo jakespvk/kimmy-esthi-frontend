@@ -40,7 +40,7 @@ const baseUrl = "http://localhost:5000";
 
 export default function ScheduleAppointment({ searchParams }: {
   searchParams: {
-    id: string;
+    appointmentId: string;
     appointmentType: string;
   };
 }) {
@@ -62,11 +62,8 @@ export default function ScheduleAppointment({ searchParams }: {
   useEffect(() => {
     const fetchAppointment = async () => {
       try {
-        console.log(searchParams.id);
-        const response = await fetch(`${baseUrl}/appointment/${searchParams.id}`);
-        console.log(response);
+        const response = await fetch(`${baseUrl}/appointment/${searchParams.appointmentId}`);
         const data = await response.json();
-        console.log(data);
         setAppointmentDate(format(data.date, "EEEE, MMMM d, yyyy"));
         setAppointmentTime(format(data.time, "h:mm a"));
       } catch (err) {
@@ -87,28 +84,18 @@ export default function ScheduleAppointment({ searchParams }: {
   }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(searchParams.id);
     try {
-      // let appointmentDateTimeStr = appointmentDate + " " + appointmentTime;
-      // console.log(appointmentDateTimeStr);
-      // let appointmentDateTime = new Date(appointmentDateTimeStr);
-      // console.log(appointmentDateTime);
-      console.log(JSON.stringify({
-        id: searchParams.id,
-        // datetime: appointmentDateTime,
-        serviceName: searchParams.appointmentType,
-        // status: "Booked",
-        scheduledAppointment: { appointmentId: searchParams.id, ...values },
-      }));
       const response = await fetch(`${baseUrl}/appointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          appointmentId: searchParams.id,
-          serviceName: searchParams.appointmentType,
-          scheduledAppointment: { appointmentId: searchParams.id, ...values },
+          appointmentId: searchParams.appointmentId,
+          scheduledAppointment: {
+            serviceName: searchParams.appointmentType,
+            ...values
+          },
         }),
       });
 
@@ -119,6 +106,7 @@ export default function ScheduleAppointment({ searchParams }: {
       let result = await response.text();
       setResult(result.replace(/"/g, ""));
       setIsEnabled(true);
+      form.reset();
       console.log(result);
     } catch (error) {
       console.error("Error posting data: ", error);
@@ -217,7 +205,7 @@ export default function ScheduleAppointment({ searchParams }: {
           </Form>
         </div>
       </div>
-      {isEnabled && <p className="text-center pt-5 text-green-600">{result}!</p>}
+      {isEnabled && <p className="text-center pt-5 text-green-600">{result}</p>}
 
       <div className="pb-5"></div>
     </>
