@@ -26,15 +26,15 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
               {packageItems !== undefined && packageItems.length > 0
                 ?
                 <ul className="mx-4 list-disc text-lg">
-                  {packageItems.map((item) => <li className="">{item}</li>)}
+                  {packageItems.map((item, idx) => <li key={idx} className="">{item}</li>)}
                 </ul>
                 :
                 null}
               <p className="text-lg">{cardContent}</p>
               {(tags) || (price) ?
                 <div className="card-actions justify-end">
-                  {(tags) ? tags.map((tag: string) =>
-                    <div className="text-warning">{tag}</div>
+                  {(tags) ? tags.map((tag: string, idx) =>
+                    <div key={idx} className="text-warning">{tag}</div>
                   ) : null}
                   <div>{price}</div>
                 </div>

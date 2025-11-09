@@ -106,6 +106,7 @@ export default function NewAppointments({ searchParams }:
                 value={item.value}
                 id={i.toString()}
                 type={item.type}
+                key={i}
               />
             );
           })}
