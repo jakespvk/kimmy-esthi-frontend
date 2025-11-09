@@ -7,27 +7,16 @@ import { DataTable } from "./appointments/data-table"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Form,
-  FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import { Appointment } from '../types'
 
 const FormSchema = z.object({
@@ -36,8 +25,9 @@ const FormSchema = z.object({
   }),
 })
 
-// const baseUrl = "https://sunsetkimcare.automeetbackend.space"
-const baseUrl = "http://localhost:5000"
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const today = new Date(new Date().setHours(0, 0, 0, 0));
 
 export default function DatePickerForm({ searchParams }:
   {
@@ -45,14 +35,12 @@ export default function DatePickerForm({ searchParams }:
     { appointmentType: string }
   }) {
   const [data, setData] = useState([]);
-  const [popoverOpen, setPopoverOpen] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
 
   useEffect(() => {
-    const today = new Date(new Date().setHours(0, 0, 0, 0));
     form.setValue("appointmentDate", today);
     onSubmit({ appointmentDate: today });
   }, [form]);
@@ -97,58 +85,16 @@ export default function DatePickerForm({ searchParams }:
               render={({ field }) => (
                 <FormItem className="flex flex-col items-center">
                   <FormLabel>Select a date to see available appointments:</FormLabel>
-                  {/* <Popover> */}
-                  {/*   <Popover open={popoverOpen} onOpenChange={setPopoverOpen}> */}
-                  {/*     <PopoverTrigger asChild> */}
-                  {/*       <FormControl> */}
-                  {/*         <Button */}
-                  {/*           variant={"outline"} */}
-                  {/*           className={cn( */}
-                  {/*             "w-[240px] pl-3 text-left font-normal hover:bg-accent/10", */}
-                  {/*             !field.value && "text-muted-foreground" */}
-                  {/*           )} */}
-                  {/*         > */}
-                  {/*           {field.value ? ( */}
-                  {/*             format(field.value, "PPP") */}
-                  {/*           ) : ( */}
-                  {/*             <span>Pick a date</span> */}
-                  {/*           )} */}
-                  {/*           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" /> */}
-                  {/*         </Button> */}
-                  {/*       </FormControl> */}
-                  {/*     </PopoverTrigger> */}
-                  {/*     <PopoverContent className="w-auto p-0" align="start"> */}
-                  {/*       <Calendar */}
-                  {/*         mode="single" */}
-                  {/*         selected={field.value} */}
-                  {/*         onSelect={(selectedDate) => { */}
-                  {/*           field.onChange(selectedDate); */}
-                  {/*           onSubmit({ appointmentDate: selectedDate }); */}
-                  {/*           setPopoverOpen(false); */}
-                  {/*         }} */}
-                  {/*         //disabled={(date) => */}
-                  {/*         //date < new Date(new Date().setHours(0,0,0,0)) */}
-                  {/*         //} */}
-                  {/*         className="bg-(--color-base-100)" */}
-                  {/*         initialFocus */}
-                  {/*       /> */}
-                  {/*     </PopoverContent> */}
-                  {/*   </Popover> */}
-                  {/* </Popover> */}
-                  {/* <FormDescription> */}
-                  {/* </FormDescription> */}
-                  {/* <FormMessage /> */}
                   <Calendar
                     mode="single"
                     selected={field.value}
                     onSelect={(selectedDate) => {
                       field.onChange(selectedDate);
-                      onSubmit({ appointmentDate: selectedDate });
-                      setPopoverOpen(false);
+                      onSubmit({ appointmentDate: selectedDate ?? today });
                     }}
-                    //disabled={(date) =>
-                    //date < new Date(new Date().setHours(0,0,0,0))
-                    //}
+                    disabled={(date) =>
+                      date < today
+                    }
                     className="bg-(--color-base-100)"
                     initialFocus
                   />

@@ -3,7 +3,7 @@ import { Montserrat_Alternates } from 'next/font/google'
 
 const montserrat = Montserrat_Alternates({ weight: ['400'], subsets: ['latin'] })
 
-const baseUrl = "https://sunsetkimcare.automeetbackend.space"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const metadata = {
   title: 'Sunset Kimcare',

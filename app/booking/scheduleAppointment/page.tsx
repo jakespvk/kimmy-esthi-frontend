@@ -35,8 +35,7 @@ const formSchema = z.object({
   }),
 })
 
-const baseUrl = "http://localhost:5000";
-// const baseUrl = "https://sunset-kimcare.automeet.space";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function ScheduleAppointment({ searchParams }: {
   searchParams: {

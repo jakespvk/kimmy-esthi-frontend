@@ -47,9 +47,8 @@ export const columns: ColumnDef<Appointment>[] = [
       const appointment = row.original
 
       if (appointment.status == true) {
-        {/*return <div><button disabled className="btn">Book Now!</button></div>*/ }
-        // @ts-ignore
         return <div>
+          {/* @ts-ignore */}
           <a type="button" disabled
             className="disabled:bg-slate-50 p-3 mx-3 my-1 btn">
             Book Now!
