@@ -1,66 +1,22 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
 import { Calendar } from "@/components/ui/calendar"
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
-import { Appointment } from '../../types'
 import { FormEvent, useState } from "react"
-
-const FormSchema = z.object({
-  appointmentDates: z.object({
-    Item: z.date({
-      required_error: "A date is required.",
-    }),
-  }),
-})
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+interface Appointment {
+  datetime: string;
+  status: number;
+}
+
 const today = new Date(new Date().setHours(0, 0, 0, 0));
 
-export default function NewAppointments({ searchParams }:
-  {
-    searchParams:
-    { appointmentType: string }
-  }) {
+export default function NewAppointments() {
 
   const [selectedDates, setSelectedDates] = useState<Date[] | undefined>();
-  const [selectedTimes, setSelectedTimes] = useState();
-  const [testTime, setTestTime] = useState();
-  const [count, setCount] = useState<number>(1);
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  })
-
-  const onSubmit = async (data: z.infer<typeof FormSchema> | undefined) => {
-    if (data === undefined) {
-      // HANDLE THROW ERROR
-    } else {
-      const response = await fetch(`${baseUrl}/admin/appointments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...data.appointmentDates }),
-      });
-
-      if (!response.ok) {
-        // HANDLE ERROR RESPONSE
-      }
-
-      let result = await response.json();
-    }
-  }
+  const [responseText, setResponseText] = useState('');
 
   const inputArr = [
     {
@@ -70,10 +26,43 @@ export default function NewAppointments({ searchParams }:
     }
   ];
 
-  const [arr, setArr] = useState(inputArr);
+  const [selectedTimes, setSelectedTimes] = useState(inputArr);
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    let appointments: Appointment[] = [];
+    for (const time of selectedTimes) {
+      if (!selectedDates) {
+        return;
+      }
+      selectedDates.map((date) => {
+        const hours = parseInt(time.value.substring(0, 2));
+        const minutes = parseInt(time.value.substring(3, 5));
+        const datetime = format(new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes), "yyyy-MM-dd'T'HH:mm:ss");
+        appointments.push({ datetime: datetime, status: 0 });
+      });
+    }
+    const response = await fetch(`${baseUrl}/admin/appointments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appointments),
+    });
+
+    if (!response.ok) {
+      setResponseText("Error adding appointments: " + response.statusText);
+    }
+
+    setSelectedDates(undefined);
+    setSelectedTimes(inputArr);
+    setResponseText("Successfully created new appointments!");
+    setTimeout(() => setResponseText(''), 10000);
+  }
 
   const addInput = () => {
-    setArr((s: any) => {
+    setSelectedTimes((s: any) => {
       return [
         ...s,
         {
@@ -88,7 +77,7 @@ export default function NewAppointments({ searchParams }:
     e.preventDefault();
 
     const index = e.target.id;
-    setArr(s => {
+    setSelectedTimes(s => {
       const newArr = s.slice();
       newArr[index].value = e.target.value;
 
@@ -96,76 +85,42 @@ export default function NewAppointments({ searchParams }:
     });
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    let appointmentsList: Appointment[] = [];
-    if (selectedDates === undefined) {
-      return;
-    } else {
-      for (let i = 0; i < selectedDates.length; i++) {
-        inputArr.map((time) => {
-          console.log(time.value);
-          let apptTime = new Date(time.value);
-          console.log(apptTime);
-          let apptDate = new Date(
-            selectedDates[i].getFullYear(),
-            selectedDates[i].getMonth(),
-            selectedDates[i].getDay(),
-            apptTime.getHours(),
-            apptTime.getMinutes()
-          );
-          appointmentsList.push({
-            dateTime: apptDate,
-            status: false,
-          });
-        })
-      }
-      await createAppointments(appointmentsList);
-    }
-  }
-
-  async function createAppointments(appointments: Appointment[]) {
-    console.log(appointments);
-    const response = await fetch(`${baseUrl}/admin/appointments`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ appointments }),
-    });
-    console.log(response.json());
-  }
-
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-row items-start justify-center gap-10">
-          <div className="flex flex-col space-y-3">
-            <button onClick={addInput}>+</button>
-            {arr.map((item, i) => {
-              return (
-                <input
-                  onChange={handleChange}
-                  value={item.value}
-                  id={i.toString()}
-                  type={item.type}
-                  key={i}
-                />
-              );
-            })}
+      <form onSubmit={onSubmit}>
+        <div className="flex flex-col items-center justify-center mt-10">
+          <div className="flex flex-row items-center justify-center border rounded-xl">
+            <div className="flex flex-col space-y-3 mx-3">
+              {selectedTimes.map((item, i: number) => {
+                return (
+                  <div className="border rounded-full px-4 py-2">
+                    <input
+                      onChange={handleChange}
+                      value={item.value}
+                      id={i.toString()}
+                      type={item.type}
+                      key={i}
+                    />
+                  </div>
+                );
+              })}
+              <button onClick={addInput}>+</button>
+            </div>
+            <Calendar
+              mode="multiple"
+              selected={selectedDates}
+              onSelect={setSelectedDates}
+              disabled={(date) =>
+                date < today
+              }
+              className="bg-(--color-base-100) rounded-r-xl border-l"
+              initialFocus
+            />
           </div>
-          <Calendar
-            mode="multiple"
-            selected={selectedDates}
-            onSelect={setSelectedDates}
-            disabled={(date) =>
-              date < today
-            }
-            className="bg-(--color-base-100)"
-            initialFocus
-          />
-          <button type="submit">submit</button>
-          <input type="time" value={testTime} onChange={setTestTime((e: FormEvent<HTMLFormElement>) => e.target)} />
+          <div className="flex flex-col items-center justify-center py-2">
+            <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
+            <p className="text-green-700">{responseText}</p>
+          </div>
         </div>
       </form>
     </>
