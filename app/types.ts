@@ -1,6 +1,6 @@
 export interface Appointment {
-  id: string;
+  id?: string;
   dateTime: Date;
   status: boolean;
-  appointmentType: string;
+  appointmentType?: string;
 }
