@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { ServiceCardType } from './page';
 import { FancyButton } from './fancyButton';
 
@@ -14,7 +13,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
         <div className="p-5">
           <div className={"card bg-base-100 shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-96")}>
             <figure>
-              <Image
+              <img
                 className={"w-full object-cover " + (serviceType === ServiceCardType.AddOn ? "h-40" : "h-56")}
                 src={cardImgSrc}
                 alt="Facial" />
