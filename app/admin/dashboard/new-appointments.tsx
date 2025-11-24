@@ -18,15 +18,15 @@ export default function NewAppointments() {
   const [selectedDates, setSelectedDates] = useState<Date[] | undefined>();
   const [responseText, setResponseText] = useState('');
 
-  const inputArr = [
+  const timeInputsInitialState = [
     {
       type: "time",
       id: 1,
-      value: ""
+      value: "09:00"
     }
   ];
 
-  const [selectedTimes, setSelectedTimes] = useState(inputArr);
+  const [selectedTimes, setSelectedTimes] = useState(timeInputsInitialState);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -59,24 +59,24 @@ export default function NewAppointments() {
     }
 
     setSelectedDates(undefined);
-    setSelectedTimes(inputArr);
+    setSelectedTimes(timeInputsInitialState);
     setResponseText("Successfully created new appointments!");
     setTimeout(() => setResponseText(''), 10000);
   }
 
-  const addInput = () => {
+  const addTimeInput = () => {
     setSelectedTimes((s: any) => {
       return [
         ...s,
         {
           type: "time",
-          value: ""
+          value: "09:00"
         }
       ];
     });
   };
 
-  const handleChange = (e: any) => {
+  const handleChangeTime = (e: any) => {
     e.preventDefault();
 
     const index = e.target.id;
@@ -98,20 +98,20 @@ export default function NewAppointments() {
         <div className="flex flex-col items-center justify-center">
           <div className="md:flex md:flex-row items-center justify-center md:border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
-              {selectedTimes.map((item, idx) => {
+              {selectedTimes.map((timeInput, idx) => {
                 return (
                   <input
-                    onChange={handleChange}
-                    value={item.value}
+                    onChange={handleChangeTime}
+                    value={timeInput.value}
                     id={idx.toString()}
-                    type={item.type}
+                    type={timeInput.type}
                     key={idx}
-                    className="border rounded-full px-4 py-2"
+                    className="border rounded-full px-4 py-2 bg-background appearance-none"
                   />
                 );
               })}
               <div className="flex justify-center">
-                <button className="rounded-full border w-fit py-2 px-4" onClick={addInput}>Add another time</button>
+                <button className="rounded-full border w-fit py-2 px-4" onClick={addTimeInput}>Add another time</button>
               </div>
             </div>
             <Calendar
