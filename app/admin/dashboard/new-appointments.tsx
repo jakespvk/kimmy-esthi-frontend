@@ -90,12 +90,12 @@ export default function NewAppointments() {
 
   return (
     <>
-      <div className="flex items-center justify-center my-5">
+      <div className="flex flex-col md:flex md:items-center md:justify-center my-5">
         <h1 className="text-xl">Create New Appointments</h1>
       </div>
 
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col items-center justify-center">
+        <div className="md:flex md:flex-col md:items-center md:justify-center">
           <div className="flex flex-row items-center justify-center border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
               {selectedTimes.map((item, idx) => {
