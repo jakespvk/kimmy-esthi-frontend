@@ -41,15 +41,19 @@ export default function ScheduleAppointment({ searchParams }: {
   searchParams: {
     appointmentId: string;
     appointmentType: string;
+    preferredName?: string;
+    email?: string;
+    phoneNumber?: string;
+    skinConcerns?: string;
   };
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      preferredName: "",
-      email: "",
-      phoneNumber: "",
-      skinConcerns: "",
+      preferredName: searchParams.preferredName ?? "",
+      email: searchParams.email ?? "",
+      phoneNumber: searchParams.phoneNumber ?? "",
+      skinConcerns: searchParams.skinConcerns ?? "",
     },
   })
 
