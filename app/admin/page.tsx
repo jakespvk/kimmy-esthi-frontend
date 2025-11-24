@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 
@@ -15,6 +16,8 @@ const formSchema = z.object({
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const Admin = () => {
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,9 +35,10 @@ const Admin = () => {
       body: JSON.stringify({ ...values })
     });
     if (!response.ok) {
-      // HANDLE ERROR
+      console.error("err:", response.statusText);
     }
-    redirect("/admin/dashboard");
+    localStorage.setItem("super-secret-token", await response.json());
+    router.push("/admin/dashboard");
   }
 
   return (

@@ -43,7 +43,8 @@ export default function NewAppointments() {
         appointments.push({ datetime: datetime, status: 0 });
       });
     }
-    const response = await fetch(`${baseUrl}/admin/appointments`, {
+    const token = localStorage.getItem("super-secret-token");
+    const response = await fetch(`${baseUrl}/admin/${token}/appointments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,6 +54,8 @@ export default function NewAppointments() {
 
     if (!response.ok) {
       setResponseText("Error adding appointments: " + response.statusText);
+      setTimeout(() => setResponseText(''), 30000);
+      return;
     }
 
     setSelectedDates(undefined);
@@ -123,7 +126,7 @@ export default function NewAppointments() {
           </div>
           <div className="flex flex-col items-center justify-center py-2">
             <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
-            <p className="text-green-700">{responseText}</p>
+            <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>
         </div>
       </form>

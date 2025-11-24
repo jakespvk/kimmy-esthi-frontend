@@ -10,13 +10,14 @@ export default function ListAppointments() {
   const [data, setData] = useState([]);
 
   const onSubmit = async (data: { statusFilter: "Available" | "Booked"; appointmentDate?: Date }) => {
+    const token = localStorage.getItem("super-secret-token");
     let formattedDate: string | undefined;
-    let url = `${baseUrl}/admin/appointments?` + new URLSearchParams({
+    let url = `${baseUrl}/admin/${token}/appointments?` + new URLSearchParams({
       booked: "Booked", // FIX THIS
     });
     if (data.appointmentDate) {
       formattedDate = format(data.appointmentDate, "MM-dd-yyyy");
-      url = `${baseUrl}/admin/appointments?` + new URLSearchParams({
+      url = `${baseUrl}/admin/${token}/appointments?` + new URLSearchParams({
         booked: data.statusFilter === "Booked" ? "true" : "false",
         date: formattedDate
       });
