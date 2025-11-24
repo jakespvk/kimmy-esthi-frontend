@@ -107,7 +107,7 @@ export default function NewAppointments() {
                     type={timeInput.type}
                     key={idx}
                     step={1800}
-                    className="border rounded-full px-4 py-2 bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                    className="border rounded-full px-4 py-2 bg-background"
                   />
                 );
               })}
