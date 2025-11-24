@@ -5,7 +5,9 @@ const About = () => {
   const classname = "text-lg md:text-xl py-3";
   return (
     <>
-      <Headline text={"About SunsetKimcare"} />
+      <div className="w-full">
+        <Headline text={"About SunsetKimcare"} />
+      </div>
 
       <div className="lg:w-4/5 px-5 mx-auto my-auto">
         <p className={classname}>

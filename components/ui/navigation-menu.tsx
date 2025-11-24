@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
-import { ChevronDownIcon } from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -74,7 +74,8 @@ function NavigationMenuTrigger({
       {...props}
     >
       {children}{" "}
-      <ChevronDownIcon
+      <Menu
+        color="oklch(46.44% 0.111 37.85)"
         className="relative top-[1px] size-6 transition duration-100 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
