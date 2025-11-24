@@ -13,10 +13,10 @@ const about = () => {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={fraunces.className}>
-          <h1 id="mainTitle" className="text-5xl pt-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="mainTitle" className="text-2xl md:text-5xl md:pt-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Signature Facials
           </h1>
-          <h3 className="text-3xl pb-6">Select a facial:</h3>
+          <h3 className="text-xl md:text-3xl md:mb-6">Select a facial:</h3>
         </div>
 
       </div>

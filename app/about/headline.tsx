@@ -19,16 +19,16 @@ const Headline = ({ text }: { text: string }) => {
   return (
     <>
 
-      <div className="w-full flex items-center justify-center">
-        <div className="my-10">
+      <div className="w-full flex items-center md:justify-center">
+        <div className="mt-1 mb-5 md:my-10">
 
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>
-                  <div className={fraunces.className}>
+                  <div className={fraunces.className + " w-fit flex justify-center items-center border-b"}>
                     <Link href="/">
-                      <h1 id="mainTitle" className="text-3xl md:text-7xl p-2 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block text-transparent bg-clip-text">
+                      <h1 id="mainTitle" className="text-3xl md:text-7xl text-transparent bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block bg-clip-text">
                         {text}
                       </h1>
                     </Link>
