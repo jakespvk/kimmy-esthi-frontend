@@ -28,7 +28,7 @@ const Headline = ({ text }: { text: string }) => {
                 <NavigationMenuTrigger>
                   <div className={fraunces.className}>
                     <Link href="/">
-                      <h1 id="mainTitle" className="text-7xl p-2 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block text-transparent bg-clip-text">
+                      <h1 id="mainTitle" className="text-3xl md:text-7xl p-2 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block text-transparent bg-clip-text">
                         {text}
                       </h1>
                     </Link>

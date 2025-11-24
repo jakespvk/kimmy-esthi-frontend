@@ -4,14 +4,16 @@ import { ServiceCardType } from './page';
 import { FancyButton } from './fancyButton';
 
 import { Coiny } from 'next/font/google'
+import { useState } from 'react';
 const fraunces = Coiny({ weight: '400', subsets: ['latin'] })
 
 const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardLinkTo: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
+  const [clicked, setClicked] = useState(false);
   return (
     <>
-      <div className="relative group">
+      <div className="relative group" onClick={() => setClicked}>
         <div className="p-5">
-          <div className={"card bg-base-100 shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-96")}>
+          <div className={"card bg-base-100 shadow-xl max-w-full " + (serviceType === ServiceCardType.AddOn ? "w-60" : "md:w-96")}>
             <figure>
               <img
                 className={"w-full object-cover " + (serviceType === ServiceCardType.AddOn ? "h-40" : "h-56")}
@@ -41,10 +43,10 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
             </div>
           </div>
         </div>
-        <div className="p-5 absolute inset-0 opacity-0 hover:opacity-100 bg-blend-overlay">
+        <div className={(clicked ? "opacity-100" : "") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 bg-blend-overlay"}>
           <div className={
-            "card h-full backdrop-blur-xl bg-base-300/70 bg-blend-overlay shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
-            + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-96")}
+            "card h-full max-w-full backdrop-blur-xl bg-base-300/70 bg-blend-overlay shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
+            + (serviceType === ServiceCardType.AddOn ? "w-60" : "md:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0
               ?
