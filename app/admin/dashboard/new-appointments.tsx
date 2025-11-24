@@ -98,17 +98,16 @@ export default function NewAppointments() {
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-row items-center justify-center border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
-              {selectedTimes.map((item, i: number) => {
+              {selectedTimes.map((item, idx) => {
                 return (
-                  <div className="border rounded-full px-4 py-2">
-                    <input
-                      onChange={handleChange}
-                      value={item.value}
-                      id={i.toString()}
-                      type={item.type}
-                      key={i}
-                    />
-                  </div>
+                  <input
+                    onChange={handleChange}
+                    value={item.value}
+                    id={idx.toString()}
+                    type={item.type}
+                    key={idx}
+                    className="border rounded-full px-4 py-2"
+                  />
                 );
               })}
               <button onClick={addInput}>+</button>

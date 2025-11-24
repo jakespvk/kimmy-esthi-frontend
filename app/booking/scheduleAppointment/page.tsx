@@ -84,7 +84,7 @@ export default function ScheduleAppointment({ searchParams }: {
     };
 
     fetchAppointment();
-  }, []);
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {

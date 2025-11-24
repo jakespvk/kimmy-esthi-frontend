@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
@@ -40,12 +40,7 @@ export default function DatePickerForm({ searchParams }:
     resolver: zodResolver(FormSchema),
   })
 
-  useEffect(() => {
-    form.setValue("appointmentDate", today);
-    onSubmit({ appointmentDate: today });
-  }, [form]);
-
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
     const formattedDate = format(data.appointmentDate, "MM-dd-yyyy");
     try {
       const response = await fetch(`${baseUrl}/appointments/${formattedDate}`, {
@@ -65,7 +60,12 @@ export default function DatePickerForm({ searchParams }:
     } catch (error) {
       console.error("Error posting data: ", error);
     }
-  }
+  }, [searchParams.appointmentType]);
+
+  useEffect(() => {
+    form.setValue("appointmentDate", today);
+    onSubmit({ appointmentDate: today });
+  }, [form, onSubmit]);
 
   return (
     <>
