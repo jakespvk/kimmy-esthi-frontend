@@ -43,7 +43,7 @@ const Admin = () => {
 
   return (
     <div className="flex items-center justify-center h-svh">
-      <div className="flex items-center justify-center max-w-4/5 md:max-w-1/5">
+      <div className="flex items-center justify-center max-w-full mx-5 md:max-w-1/5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -79,7 +79,7 @@ const Admin = () => {
               )}
             />
             <div className='flex justify-center'>
-              <Button type="submit">Submit</Button>
+              <Button variant="outline" type="submit">Submit</Button>
             </div>
           </form>
         </Form>

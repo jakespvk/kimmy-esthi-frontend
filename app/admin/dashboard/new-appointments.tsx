@@ -90,13 +90,13 @@ export default function NewAppointments() {
 
   return (
     <>
-      <div className="flex flex-col md:flex md:items-center md:justify-center my-5">
+      <div className="flex flex-col items-center justify-center my-5">
         <h1 className="text-xl">Create New Appointments</h1>
       </div>
 
       <form onSubmit={onSubmit}>
-        <div className="md:flex md:flex-col md:items-center md:justify-center">
-          <div className="flex flex-row items-center justify-center border rounded-xl">
+        <div className="flex flex-col items-center justify-center">
+          <div className="md:flex md:flex-row items-center justify-center md:border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
               {selectedTimes.map((item, idx) => {
                 return (
@@ -110,7 +110,9 @@ export default function NewAppointments() {
                   />
                 );
               })}
-              <button onClick={addInput}>+</button>
+              <div className="flex justify-center">
+                <button className="rounded-full border w-fit py-2 px-4" onClick={addInput}>Add another time</button>
+              </div>
             </div>
             <Calendar
               mode="multiple"
@@ -119,7 +121,7 @@ export default function NewAppointments() {
               disabled={(date) =>
                 date < today
               }
-              className="bg-(--color-base-100) rounded-r-xl border-l"
+              className="bg-(--color-base-100) md:rounded-r-xl md:border-l"
               initialFocus
             />
           </div>
