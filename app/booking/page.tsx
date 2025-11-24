@@ -71,12 +71,12 @@ export default function DatePickerForm({ searchParams }:
     <>
       <Headline text={"Booking"} />
 
-      <div className="flex flex-col justify-center items-center text-lg">
+      <div className="md:flex flex-col justify-center items-center text-lg mx-2">
         <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
         <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
-      <div className="flex flex-row items-start justify-center gap-10">
+      <div className="md:flex flex-row items-start justify-center gap-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -103,7 +103,9 @@ export default function DatePickerForm({ searchParams }:
             />
           </form>
         </Form>
-        <DataTable columns={columns} data={data} />
+        <div className='flex mx-2 items-center justify-center'>
+          <DataTable columns={columns} data={data} />
+        </div>
       </div>
 
       <div className="pb-5"></div>

@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   preferredName: z.string(),
@@ -47,6 +48,8 @@ export default function ScheduleAppointment({ searchParams }: {
     skinConcerns?: string;
   };
 }) {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -122,20 +125,20 @@ export default function ScheduleAppointment({ searchParams }: {
 
       <Headline text={"Schedule Appointment"} />
 
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center mx-2">
         <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
         <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mx-2">
         <p className="">Scheduling {appointmentTime} appointment on {appointmentDate}</p>
       </div>
       <div className="flex justify-center p-3">
-        <a type="button" href="javascript:history.back()" className="btn p-1 mx-1 max-w-32 w-32 min-w-fit text-white bg-gradient-to-r 
+        <Button type="button" onClick={() => router.back()} className="btn w-32 min-w-fit text-white bg-gradient-to-r 
                 from-amber-400 to-amber-600 border-amber-500 hover:from-amber-300 hover:to-amber-500 hover:border-amber-400">
           Go Back
-        </a>
-      </div>
+        </Button>
+      </div >
 
       <div className="w-full flex justify-center content-center">
         <div className="w-[400px] max-w-4/5">
