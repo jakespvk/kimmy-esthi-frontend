@@ -9,7 +9,7 @@ export default function AdminDashboard() {
       <div className="flex-col">
         <NewAppointments />
       </div>
-      <div className="flex-col mx-10">
+      <div className="flex-col mx-3 md:mx-10 border-t md:border-0">
         <ListAppointments />
       </div>
     </div>
