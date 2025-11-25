@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { columns } from "./columns";
 import { DataTable } from "../../booking/appointments/data-table"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -12,7 +12,7 @@ export default function ListAppointments() {
   const [statusFilter, setStatusFilter] = useState("booked");
   const [dateFilter, setDateFilter] = useState(null);
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     const token = localStorage.getItem("super-secret-token");
     let formattedDate: string | undefined;
     let url = `${baseUrl}/admin/${token}/appointments?` + new URLSearchParams({
@@ -45,11 +45,11 @@ export default function ListAppointments() {
     } catch (error) {
       console.error("Error posting data: ", error);
     }
-  }
+  }, [dateFilter, statusFilter]);
 
   useEffect(() => {
     onSubmit();
-  }, [statusFilter]);
+  }, [statusFilter, onSubmit]);
 
   return (
     <div className="pb-5">

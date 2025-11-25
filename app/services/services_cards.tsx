@@ -60,8 +60,8 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
             <div className="flex flex-col">
               {price ? <strong className="text-center my-2">{price}</strong> : null}
               {notBookable ? null :
-                <div className="card-actions justify-center items-end grow">
-                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} disabled={!clicked} />
+                <div className={(clicked ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none") + " card-actions justify-center items-end grow"}>
+                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
                 </div>
               }
             </div>

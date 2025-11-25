@@ -1,13 +1,18 @@
 import './globals.css'
+import type { Viewport } from 'next'
 import { Montserrat_Alternates } from 'next/font/google'
 
 const montserrat = Montserrat_Alternates({ weight: ['400'], subsets: ['latin'] })
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 export const metadata = {
   title: 'Sunset Kimcare',
   description: 'Sunset Kimcare Esthetician Services',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
