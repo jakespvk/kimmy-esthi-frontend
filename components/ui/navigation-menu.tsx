@@ -76,7 +76,7 @@ function NavigationMenuTrigger({
       {children}{" "}
       <Menu
         color="oklch(46.44% 0.111 37.85)"
-        className="relative top-[1px] size-6 transition duration-100 group-data-[state=open]:rotate-180"
+        className="relative top-[1px] size-6 md:size-8 transition duration-100 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
     </NavigationMenuPrimitive.Trigger>
