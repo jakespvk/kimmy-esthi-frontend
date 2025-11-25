@@ -9,18 +9,21 @@ const fraunces = Coiny({ weight: '400', subsets: ['latin'] })
 
 const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardLinkTo: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
   const [clicked, setClicked] = useState(false);
+  function toggleClicked() {
+    clicked ? setClicked(false) : setClicked(true);
+  }
   return (
     <>
-      <div className="relative group" onClick={() => setClicked}>
+      <div className="relative group" onClick={() => toggleClicked()}>
         <div className="p-5">
-          <div className={"card bg-base-100 shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-full md:w-96")}>
+          <div className={"card bg-base-100 shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-80 md:w-96")}>
             <figure>
               <img
                 className={"w-full object-cover " + (serviceType === ServiceCardType.AddOn ? "h-40" : "h-52 md:h-56")}
                 src={cardImgSrc}
                 alt="Facial" />
             </figure>
-            <div className={"card-body " + (packageItems !== undefined && packageItems.length > 0 ? "h-[22rem]" : (serviceType === ServiceCardType.AddOn ? "h-28 py-1 my-auto" : "h-44"))}>
+            <div className={"card-body " + (packageItems !== undefined && packageItems.length > 0 ? "h-[18rem] md:h-[22rem]" : (serviceType === ServiceCardType.AddOn ? "h-24 md:h-28 py-1 flex items-center justify-center" : "h-44"))}>
               <div className={fraunces.className}>
                 <h2 id="card_title" className={"card-title tracking-wide text-center pb-3 " + (serviceType === ServiceCardType.AddOn ? "text-xl md:text-2xl" : "text-2xl md:text-3xl")}>{cardTitle}</h2>
               </div>
@@ -58,7 +61,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
               {price ? <strong className="text-center my-2">{price}</strong> : null}
               {notBookable ? null :
                 <div className="card-actions justify-center items-end grow">
-                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
+                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} disabled={!clicked} />
                 </div>
               }
             </div>
