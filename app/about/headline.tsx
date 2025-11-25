@@ -20,7 +20,7 @@ const Headline = ({ text }: { text: string }) => {
 
       <div className="block m-2 mb-5 md:mb-10">
         <div className="w-full flex relative">
-          <div className="md:mx-auto flex justify-center">
+          <div className="ml-2 md:mx-auto flex justify-center">
             <div className={fraunces.className + " border-b"}>
               <Link href="/">
                 <h1 id="mainTitle" className="text-3xl md:text-7xl text-transparent bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block bg-clip-text">
