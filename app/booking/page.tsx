@@ -71,9 +71,9 @@ export default function DatePickerForm({ searchParams }:
     <>
       <Headline text={"Booking"} />
 
-      <div className="md:flex flex-col justify-center items-center text-lg mx-2">
+      <div className="md:flex flex-col justify-center items-center text-lg mx-5">
         <p className="font-bold md:font-normal">Selecting a date and time sends a request, not a confirmed appointment.</p>
-        <p className="pb-5 font-bold md:font-normal">You’ll receive a message or email once your booking has been approved.</p>
+        <p className="pt-1 pb-5 font-bold md:font-normal">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
       <div className="md:flex flex-row items-start justify-center gap-10">

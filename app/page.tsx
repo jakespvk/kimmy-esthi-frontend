@@ -8,16 +8,16 @@ export default function Home() {
   return (
     <>
       <div
-        className="hero min-h-screen bg-cover overscroll-none"
+        className="hero min-h-screen bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none"
         style={{
           backgroundImage: "url(https://t4.ftcdn.net/jpg/05/01/83/79/360_F_501837926_xvM4Ym7pql243YOrjmct5NCXjFTxz11v.jpg)",
         }}>
         <div className="hero-content text-center">
           <div className="">
             <div className={fraunces.className}>
-              <h1 className="mb-5 text-[10rem]/23 ">SunsetKimcare</h1>
+              <h1 className="mb-5 text-4xl md:text-[10rem]/23 ">SunsetKimcare</h1>
             </div>
-            <p className={`${msMadi.className} mb-5 text-6xl`}>
+            <p className={`${msMadi.className} mb-5 text-4xl md:text-6xl`}>
               Let me make something clear... your skin
             </p>
             <a role="button" className="btn btn-accent mb-10 text-lg px-4 py-2" href="/services">Get Started</a>
