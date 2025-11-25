@@ -73,7 +73,7 @@ const about = () => {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={fraunces.className}>
-          <h1 id="mainTitle" className="text-5xl p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Packages
           </h1>
         </div>
@@ -132,7 +132,7 @@ const about = () => {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={fraunces.className}>
-          <h1 id="mainTitle" className="text-5xl p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Add-Ons
           </h1>
         </div>
