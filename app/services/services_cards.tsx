@@ -46,9 +46,12 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
             </div>
           </div>
         </div>
-        <div className={(clicked ? "opacity-100" : "") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 focus-within:opacity-100 bg-blend-overlay"}>
+        <div className={(clicked ? "opacity-100" : "") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
           <div className={
-            "card h-full backdrop-blur-xl bg-base-300/70 bg-blend-overlay shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
+            // "card h-full backdrop-blur-xl bg-conic/decreasing from-base-300 via-base-200 via-80% to-base-300 to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
+            // "card h-full backdrop-blur-xl bg-gradient-to-tr from-base-300 from-20% to-warning to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
+            "card h-full backdrop-blur-xl bg-radial-[at_25%_35%] from-base-200 from-5% via-base-300 via-80% to-base-200 to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
+            // "card h-full backdrop-blur-xl bg-base-300/70 bg-blend-overlay shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
             + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-full lg:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0
