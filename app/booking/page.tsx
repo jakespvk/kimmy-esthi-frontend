@@ -40,7 +40,7 @@ export default function DatePickerForm({ searchParams }:
     { appointmentType: string }
   }) {
   const [data, setData] = useState([]);
-  const [bookedDates, setBookedDates] = useState([]);
+  let bookedDates: Date[] = [];
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -78,11 +78,13 @@ export default function DatePickerForm({ searchParams }:
     });
 
     if (!res.ok) {
-      console.error("err:", res.statusText);
+      console.error("err:");
     }
 
     let result = await res.json();
-    setBookedDates(result.map((item: AppointmentDateTimeAndStatus) => item.dateTime));
+    console.log(result);
+    bookedDates = Array.from(result.map((item: AppointmentDateTimeAndStatus) => (item.dateTime)));
+    console.log(bookedDates);
     return result;
   };
 
@@ -116,17 +118,15 @@ export default function DatePickerForm({ searchParams }:
                     onSelect={(selectedDate) => {
                       field.onChange(selectedDate);
                       onSubmit({ appointmentDate: selectedDate ?? today });
-                      getAppointmentDatesAndStatuses(selectedDate ?? today);
                     }}
-                    disabled={((date: Date) => date < today || bookedDates.indexOf(format(date, "yyyy-MM-dd'T'HH:mm:ss")) === -1)}
+                    disabled={(date: Date) => date < today}
                     modifiers={{
                       booked: bookedDates,
                     }}
                     modifiersClassNames={{
-                      booked: "[&>button]:line-through opacity-100",
+                      booked: "[&>button]:line-through bg-red-500 opacity-100",
                     }}
                     className="bg-(--color-base-100)"
-                    initialFocus
                   />
                 </FormItem>
               )}

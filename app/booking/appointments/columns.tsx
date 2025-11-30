@@ -11,19 +11,19 @@ import { Appointment } from "@/app/types";
 export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: "dateTime",
-    header: () => <div className="p-3 mx-3 mr-5 text-center w-max-fit">Time</div>,
+    header: () => <div className="text-center">Time</div>,
     cell: ({ row }) => {
-      return <div className="p-3 mx-3 mr-5 text-center font-medium">
+      return <div className="ml-3 w-max text-center">
         {new Date(row.getValue("dateTime")).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
       </div>
     },
   },
   {
     accessorKey: "status",
-    header: () => <div className="p-3 mx-3 text-center w-max-fit">Status</div>,
+    header: () => <div className="text-center">Status</div>,
     cell: ({ row }) => {
       return (
-        <div className="p-3 mx-3 text-center font-medium">
+        <div className="ml-3 text-center w-max">
           {row.getValue("status") ? <p className="text-red-600">Booked</p> : <p className="text-green-600">Available</p>}
         </div>
       )
@@ -31,7 +31,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     id: "actions",
-    header: () => <div className="p-3 mx-3 text-center w-max-fit">Book</div>,
+    header: () => <div className="text-center">Book</div>,
     cell: ({ row }) => {
       // need to potentially make functionality where:
       // appointments are listed every half hour
@@ -50,7 +50,7 @@ export const columns: ColumnDef<Appointment>[] = [
         return <div>
           {/* @ts-ignore */}
           <a type="button" disabled
-            className="disabled:bg-slate-50 p-3 mx-3 my-1 btn">
+            className="disabled:bg-slate-50 w-max btn">
             Book Now!
           </a>
         </div>

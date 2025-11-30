@@ -55,6 +55,7 @@ export default function NewAppointments() {
     if (!response.ok) {
       setResponseText("Error adding appointments: " + response.statusText);
       setTimeout(() => setResponseText(''), 30000);
+      console.error("err:", response);
       return;
     }
 
@@ -112,7 +113,7 @@ export default function NewAppointments() {
                 );
               })}
               <div className="flex justify-center">
-                <button className="rounded-full border w-fit py-2 px-4" onClick={addTimeInput}>Add another time</button>
+                <button className="rounded-full border w-fit py-2 px-4" type="button" onClick={addTimeInput}>Add another time</button>
               </div>
             </div>
             <Calendar

@@ -8,20 +8,29 @@ import { Appointment } from "@/app/types";
 export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: "dateTime",
-    header: () => <div className="p-3 mx-3 mr-5 text-center w-max-fit">Time</div>,
+    header: () => <div className="text-center">Date</div>,
     cell: ({ row }) => {
-      return <div className="p-3 mx-3 mr-5 text-center font-medium">
+      return <div className="ml-2 text-center w-max">
+        {new Date(row.getValue("dateTime")).toLocaleDateString()}
+      </div>
+    },
+  },
+  {
+    accessorKey: "dateTime",
+    header: () => <div className="text-center">Time</div>,
+    cell: ({ row }) => {
+      return <div className="text-center w-max">
         {new Date(row.getValue("dateTime")).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
       </div>
     },
   },
   {
     accessorKey: "appointmentType",
-    header: () => <div className="p-3 mx-3 text-center w-max-fit">Appointment Type</div>,
+    header: () => <div className="text-center">Appointment Type</div>,
     cell: ({ row }) => {
       const serviceName = row.original.scheduledAppointment?.serviceName;
       return (
-        <div className="p-3 mx-3 text-center font-medium">
+        <div className="text-center w-max">
           {serviceName}
         </div>
       )
@@ -29,10 +38,10 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "status",
-    header: () => <div className="p-3 mx-3 text-center w-max-fit">Status</div>,
+    header: () => <div className="text-center">Status</div>,
     cell: ({ row }) => {
       return (
-        <div className="p-3 mx-3 text-center font-medium">
+        <div className="text-center">
           {row.getValue("status") ? <p className="text-red-600">Booked</p> : <p className="text-green-600">Available</p>}
         </div>
       )
@@ -40,7 +49,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     id: "actions",
-    header: () => <div className="p-3 mx-3 text-center w-max-fit">Book</div>,
+    header: () => <div className="text-center">Book</div>,
     cell: ({ row }) => {
       // need to potentially make functionality where:
       // appointments are listed every half hour
@@ -59,7 +68,7 @@ export const columns: ColumnDef<Appointment>[] = [
         return <div>
           {/* @ts-ignore */}
           <a type="button" disabled
-            className="disabled:bg-slate-50 p-3 mx-3 my-1 btn">
+            className="disabled:bg-slate-50 mx-2 w-max btn">
             Book Now!
           </a>
         </div>
@@ -78,7 +87,7 @@ export const columns: ColumnDef<Appointment>[] = [
               },
             }}
             type="button"
-            className="p-3 mx-3 my-1 btn text-white 
+            className="w-max btn mx-2 text-white 
                             bg-gradient-to-r from-amber-400 to-amber-600 border-amber-500 
                             hover:from-amber-300 hover:to-amber-500 hover:border-amber-400"
           >
