@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <div
-        className="hero min-h-screen bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none"
+        className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none"
         style={{
           backgroundImage: "url(https://t4.ftcdn.net/jpg/05/01/83/79/360_F_501837926_xvM4Ym7pql243YOrjmct5NCXjFTxz11v.jpg)",
         }}>
