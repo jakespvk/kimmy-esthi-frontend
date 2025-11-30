@@ -7,11 +7,8 @@ const msMadi = Ms_Madi({ weight: '400', subsets: ['latin'] });
 export default function Home() {
   return (
     <>
-      <div
-        className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none"
-        style={{
-          backgroundImage: "url(https://t4.ftcdn.net/jpg/05/01/83/79/360_F_501837926_xvM4Ym7pql243YOrjmct5NCXjFTxz11v.jpg)",
-        }}>
+      <div className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-linear-30 from-amber-700 to-amber-400">
+        {/* <div className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-[radial-gradient(ellipse_at_75%_25%,#d17d34,#cc9a43),radial-gradient(ellipse_at_25%_75%,#d17d34,#cc9a43)]"> */}
         <div className="hero-content text-center">
           <div className="">
             <div className={fraunces.className}>
