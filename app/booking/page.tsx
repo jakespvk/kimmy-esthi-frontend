@@ -25,6 +25,11 @@ const FormSchema = z.object({
   }),
 })
 
+interface AppointmentDateTimeAndStatus {
+  dateTime: Date;
+  status: number;
+}
+
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const today = new Date(new Date().setHours(0, 0, 0, 0));
@@ -35,6 +40,7 @@ export default function DatePickerForm({ searchParams }:
     { appointmentType: string }
   }) {
   const [data, setData] = useState([]);
+  const [bookedDates, setBookedDates] = useState([]);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -62,9 +68,28 @@ export default function DatePickerForm({ searchParams }:
     }
   }, [searchParams.appointmentType]);
 
+  const getAppointmentDatesAndStatuses = async (monthDateTime: Date) => {
+    const formattedMonthDateTime = format(monthDateTime, "MM-dd-yyyy");
+    const res = await fetch(`${baseUrl}/appointments?` + new URLSearchParams({ monthDateTime: formattedMonthDateTime }), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!res.ok) {
+      console.error("err:", res.statusText);
+    }
+
+    let result = await res.json();
+    setBookedDates(result.map((item: AppointmentDateTimeAndStatus) => item.dateTime));
+    return result;
+  };
+
   useEffect(() => {
     form.setValue("appointmentDate", today);
     onSubmit({ appointmentDate: today });
+    getAppointmentDatesAndStatuses(today);
   }, [form, onSubmit]);
 
   return (
@@ -91,10 +116,15 @@ export default function DatePickerForm({ searchParams }:
                     onSelect={(selectedDate) => {
                       field.onChange(selectedDate);
                       onSubmit({ appointmentDate: selectedDate ?? today });
+                      getAppointmentDatesAndStatuses(selectedDate ?? today);
                     }}
-                    disabled={(date) =>
-                      date < today
-                    }
+                    disabled={((date: Date) => date < today || bookedDates.indexOf(format(date, "yyyy-MM-dd'T'HH:mm:ss")) === -1)}
+                    modifiers={{
+                      booked: bookedDates,
+                    }}
+                    modifiersClassNames={{
+                      booked: "[&>button]:line-through opacity-100",
+                    }}
                     className="bg-(--color-base-100)"
                     initialFocus
                   />
