@@ -7,7 +7,7 @@ const msMadi = Ms_Madi({ weight: '400', subsets: ['latin'] });
 export default function Home() {
   return (
     <>
-      <div className="hero min-h-[-webkit-fill-available] min-h-screen bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-linear-30 from-amber-700 to-amber-400">
+      <div className="hero min-h-dvh bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-linear-30 from-amber-700 to-amber-400">
         {/* <div className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-[radial-gradient(ellipse_at_75%_25%,#d17d34,#cc9a43),radial-gradient(ellipse_at_25%_75%,#d17d34,#cc9a43)]"> */}
         <div className="hero-content text-center">
           <div className="">
