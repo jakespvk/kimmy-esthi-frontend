@@ -120,13 +120,7 @@ export default function DatePickerForm({ searchParams }:
                       onSubmit({ appointmentDate: selectedDate ?? today });
                     }}
                     disabled={(date: Date) => date < today}
-                    modifiers={{
-                      booked: bookedDates,
-                    }}
-                    modifiersClassNames={{
-                      booked: "[&>button]:line-through bg-red-500 opacity-100",
-                    }}
-                    className="bg-(--color-base-100)"
+                    className="w-full px-5"
                   />
                 </FormItem>
               )}

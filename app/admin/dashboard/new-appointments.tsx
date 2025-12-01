@@ -97,7 +97,7 @@ export default function NewAppointments() {
 
       <form onSubmit={onSubmit}>
         <div className="flex flex-col items-center justify-center">
-          <div className="md:flex md:flex-row items-center justify-center md:border rounded-xl">
+          <div className="md:flex md:flex-row md:w-[500px] w-full items-center justify-center md:border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
               {selectedTimes.map((timeInput, idx) => {
                 return (
@@ -123,8 +123,7 @@ export default function NewAppointments() {
               disabled={(date) =>
                 date < today
               }
-              className="bg-(--color-base-100) md:rounded-r-xl md:border-l"
-              initialFocus
+              className="w-full px-5 md:rounded-r-xl md:border-l"
             />
           </div>
           <div className="flex flex-col items-center justify-center py-2">
