@@ -3,9 +3,8 @@
 import { ServiceCardType } from './page';
 import { FancyButton } from './fancyButton';
 
-import { Coiny } from 'next/font/google'
 import { useState } from 'react';
-const fraunces = Coiny({ weight: '400', subsets: ['latin'] })
+import { coiny } from '../fonts';
 
 const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardLinkTo: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
   const [clicked, setClicked] = useState(false);
@@ -24,7 +23,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
                 alt="Facial" />
             </figure>
             <div className={"card-body " + (packageItems !== undefined && packageItems.length > 0 ? "h-72 lg:h-88" : (serviceType === ServiceCardType.AddOn ? "h-24 lg:h-28 py-1 flex items-center justify-center" : "h-44"))}>
-              <div className={fraunces.className}>
+              <div className={coiny.className}>
                 <h2 id="card_title" className={"card-title tracking-wide text-center pb-3 " + (serviceType === ServiceCardType.AddOn ? "text-xl lg:text-2xl" : "text-2xl lg:text-3xl")}>{cardTitle}</h2>
               </div>
               {packageItems !== undefined && packageItems.length > 0

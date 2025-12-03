@@ -1,8 +1,4 @@
-import { Glass_Antiqua } from 'next/font/google';
-import { Ms_Madi } from 'next/font/google';
-
-const fraunces = Glass_Antiqua({ weight: '400', subsets: ['latin'] });
-const msMadi = Ms_Madi({ weight: '400', subsets: ['latin'] });
+import { glassAntiqua, msMadi } from "./fonts";
 
 export default function Home() {
   return (
@@ -10,8 +6,8 @@ export default function Home() {
       <div className="hero min-h-dvh bg-cover overscroll-none bg-linear-30 from-amber-700 to-amber-400">
         {/* <div className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-[radial-gradient(ellipse_at_75%_25%,#d17d34,#cc9a43),radial-gradient(ellipse_at_25%_75%,#d17d34,#cc9a43)]"> */}
         <div className="hero-content text-center">
-          <div className="">
-            <div className={fraunces.className}>
+          <div>
+            <div className={glassAntiqua.className}>
               <h1 className="mb-5 text-4xl md:text-[10rem]/23 ">SunsetKimcare</h1>
             </div>
             <p className={`${msMadi.className} mb-5 text-4xl md:text-6xl`}>

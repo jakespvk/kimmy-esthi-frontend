@@ -1,4 +1,3 @@
-import React from 'react';
 import Headline from "../about/headline";
 import InstagramEmbed from './InstagramEmbed';
 

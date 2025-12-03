@@ -1,10 +1,8 @@
 import './globals.css'
-import type { Viewport } from 'next'
-import { Montserrat_Alternates } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { montserrat } from './fonts'
 
-const montserrat = Montserrat_Alternates({ weight: ['400'], subsets: ['latin'] })
-
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Sunset Kimcare',
   description: 'Sunset Kimcare Esthetician Services',
 }

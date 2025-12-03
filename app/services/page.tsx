@@ -1,9 +1,6 @@
 import ServicesCards from './services_cards'
 import Headline from '../about/headline'
-
-import { Glass_Antiqua } from 'next/font/google'
-
-const fraunces = Glass_Antiqua({ weight: '400', subsets: ['latin'] })
+import { glassAntiqua } from '../fonts'
 
 export default function ServicesPage() {
   return (
@@ -11,7 +8,7 @@ export default function ServicesPage() {
       <Headline text="SunsetKimcare Services" />
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
-        <div className={fraunces.className}>
+        <div className={glassAntiqua.className}>
           <h1 id="mainTitle" className="text-2xl md:text-5xl md:pt-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Signature Facials
           </h1>
@@ -71,7 +68,7 @@ export default function ServicesPage() {
 
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
-        <div className={fraunces.className}>
+        <div className={glassAntiqua.className}>
           <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Packages
           </h1>
@@ -130,7 +127,7 @@ export default function ServicesPage() {
 
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
-        <div className={fraunces.className}>
+        <div className={glassAntiqua.className}>
           <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Add-Ons
           </h1>
