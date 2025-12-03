@@ -10,7 +10,7 @@ import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar, CalendarDayButton } from "@/components/ui/calendar"
 import {
   Form,
   FormField,
@@ -40,7 +40,7 @@ export default function DatePickerForm({ searchParams }:
     { appointmentType: string }
   }) {
   const [data, setData] = useState([]);
-  let bookedDates: Date[] = [];
+  const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -82,10 +82,7 @@ export default function DatePickerForm({ searchParams }:
     }
 
     let result = await res.json();
-    console.log(result);
-    bookedDates = Array.from(result.map((item: AppointmentDateTimeAndStatus) => (item.dateTime)));
-    console.log(bookedDates);
-    return result;
+    setAppointmentDates(result);
   };
 
   useEffect(() => {
@@ -120,14 +117,26 @@ export default function DatePickerForm({ searchParams }:
                       onSubmit({ appointmentDate: selectedDate ?? today });
                     }}
                     disabled={(date: Date) => date < today}
-                    className="w-full px-5"
+                    className="w-full px-5 pb-5"
+                    components={{
+                      DayButton: ({ children, modifiers, day, ...props }) => {
+                        const daysWithAppointmentsStatus = appointmentDates?.find(x => (new Date(x.dateTime)).getDate() == day.date.getDate())?.status;
+
+                        return (
+                          <CalendarDayButton day={day} modifiers={modifiers} {...props}>
+                            {children}
+                            {!modifiers.outside && <span>{daysWithAppointmentsStatus ? "yes" : "no"}</span>}
+                          </CalendarDayButton>
+                        )
+                      },
+                    }}
                   />
                 </FormItem>
               )}
             />
           </form>
         </Form>
-        <div className='flex mx-2 items-center justify-center'>
+        <div className='flex mx-5 items-center justify-center'>
           <DataTable columns={columns} data={data} />
         </div>
       </div>
