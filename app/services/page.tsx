@@ -1,4 +1,3 @@
-import React from 'react'
 import ServicesCards from './services_cards'
 import Headline from '../about/headline'
 
@@ -6,7 +5,7 @@ import { Glass_Antiqua } from 'next/font/google'
 
 const fraunces = Glass_Antiqua({ weight: '400', subsets: ['latin'] })
 
-const about = () => {
+export default function ServicesPage() {
   return (
     <>
       <Headline text="SunsetKimcare Services" />
@@ -187,8 +186,6 @@ const about = () => {
     </>
   )
 }
-
-export default about
 
 export enum ServiceCardType {
   Facial,
