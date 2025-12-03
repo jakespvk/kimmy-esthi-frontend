@@ -2,7 +2,7 @@
 
 import Headline from "@/app/about/headline"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react';
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -38,16 +38,19 @@ const formSchema = z.object({
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export default function ScheduleAppointment({ searchParams }: {
-  searchParams: {
-    appointmentId: string;
-    appointmentType: string;
-    preferredName?: string;
-    email?: string;
-    phoneNumber?: string;
-    skinConcerns?: string;
-  };
-}) {
+export default function ScheduleAppointment(
+  props: {
+    searchParams: Promise<{
+      appointmentId: string;
+      appointmentType: string;
+      preferredName?: string;
+      email?: string;
+      phoneNumber?: string;
+      skinConcerns?: string;
+    }>;
+  }
+) {
+  const searchParams = use(props.searchParams);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({

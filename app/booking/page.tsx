@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, use } from 'react';
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
@@ -34,11 +34,13 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const today = new Date(new Date().setHours(0, 0, 0, 0));
 
-export default function DatePickerForm({ searchParams }:
-  {
-    searchParams:
-    { appointmentType: string }
-  }) {
+export default function DatePickerForm(
+  props0:
+    {
+      searchParams: Promise<{ appointmentType: string }>
+    }
+) {
+  const searchParams = use(props0.searchParams);
   const [data, setData] = useState([]);
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
