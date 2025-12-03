@@ -1,25 +1,13 @@
 "use client"
-// if keys includes date, show, if date has available show green
-// in other words
-// if keys includes date, but no available show red, includes date with available show green
 
 import { useState, useEffect, useCallback, use } from 'react';
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
 
 import { Calendar, CalendarDayButton } from "@/components/ui/calendar"
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
 import { Appointment } from '../types'
 import { Dot } from 'lucide-react';
 
@@ -32,14 +20,14 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const today = new Date(new Date().setHours(0, 0, 0, 0));
 
-export default function DatePickerForm(
+export default function AppointmentsPage(
   props0:
     {
       searchParams: Promise<{ appointmentType: string }>
     }
 ) {
   const searchParams = use(props0.searchParams);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Appointment[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
@@ -84,8 +72,11 @@ export default function DatePickerForm(
 
   useEffect(() => {
     fetchAppointments();
+  });
+
+  useEffect(() => {
     getAppointmentDatesAndStatuses();
-  }, [selectedDate, fetchAppointments]);
+  })
 
   return (
     <>
@@ -96,7 +87,7 @@ export default function DatePickerForm(
         <p className="pt-1 pb-5 font-bold md:font-normal">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
-      <label className='flex items-center justify-center text-center mb-2'>Select a date to see available appointments:</label>
+      <label className='flex items-center justify-center text-center mx-5 mb-2'>Select a date to see available appointments:</label>
       <div className='flex flex-col md:flex-row space-y-3 items-center md:items-start justify-center'>
         <Calendar
           mode="single"
@@ -118,7 +109,7 @@ export default function DatePickerForm(
             },
           }}
         />
-        <div className='px-5'>
+        <div className='px-5 min-w-full md:min-w-fit'>
           <DataTable columns={columns} data={data} />
         </div>
       </div>

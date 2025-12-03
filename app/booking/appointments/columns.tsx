@@ -4,9 +4,6 @@ import Link from "next/link"
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Appointment } from "@/app/types";
-// import { MoreHorizontal } from "lucide-react"
-// import { Button } from "@/components/ui/button"
-// import StatusIndicator from "./statusIndicator"
 
 export const columns: ColumnDef<Appointment>[] = [
   {
