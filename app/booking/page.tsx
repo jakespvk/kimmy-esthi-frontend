@@ -1,4 +1,7 @@
 "use client"
+// if keys includes date, show, if date has available show green
+// in other words
+// if keys includes date, but no available show red, includes date with available show green
 
 import { useState, useEffect, useCallback, use } from 'react';
 import Headline from '../about/headline'
@@ -18,12 +21,7 @@ import {
   FormLabel,
 } from "@/components/ui/form"
 import { Appointment } from '../types'
-
-const FormSchema = z.object({
-  appointmentDate: z.date({
-    required_error: "A date is required.",
-  }),
-})
+import { Dot } from 'lucide-react';
 
 interface AppointmentDateTimeAndStatus {
   dateTime: Date;
@@ -42,14 +40,12 @@ export default function DatePickerForm(
 ) {
   const searchParams = use(props0.searchParams);
   const [data, setData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  })
-
-  const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
-    const formattedDate = format(data.appointmentDate, "MM-dd-yyyy");
+  const fetchAppointments = useCallback(async () => {
+    if (selectedDate === undefined) return;
+    const formattedDate = format(selectedDate, "MM-dd-yyyy");
     try {
       const response = await fetch(`${baseUrl}/appointments/${formattedDate}`, {
         method: 'GET',
@@ -68,11 +64,10 @@ export default function DatePickerForm(
     } catch (error) {
       console.error("Error posting data: ", error);
     }
-  }, [searchParams.appointmentType]);
+  }, [selectedDate, searchParams.appointmentType]);
 
-  const getAppointmentDatesAndStatuses = async (monthDateTime: Date) => {
-    const formattedMonthDateTime = format(monthDateTime, "MM-dd-yyyy");
-    const res = await fetch(`${baseUrl}/appointments?` + new URLSearchParams({ monthDateTime: formattedMonthDateTime }), {
+  const getAppointmentDatesAndStatuses = async () => {
+    const res = await fetch(`${baseUrl}/appointments/status`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -88,10 +83,9 @@ export default function DatePickerForm(
   };
 
   useEffect(() => {
-    form.setValue("appointmentDate", today);
-    onSubmit({ appointmentDate: today });
-    getAppointmentDatesAndStatuses(today);
-  }, [form, onSubmit]);
+    fetchAppointments();
+    getAppointmentDatesAndStatuses();
+  }, [selectedDate, fetchAppointments]);
 
   return (
     <>
@@ -102,43 +96,29 @@ export default function DatePickerForm(
         <p className="pt-1 pb-5 font-bold md:font-normal">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
-      <div className="md:flex flex-row items-start justify-center gap-10">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="appointmentDate"
-              render={({ field }) => (
-                <FormItem className="flex flex-col items-center">
-                  <FormLabel>Select a date to see available appointments:</FormLabel>
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={(selectedDate) => {
-                      field.onChange(selectedDate);
-                      onSubmit({ appointmentDate: selectedDate ?? today });
-                    }}
-                    disabled={(date: Date) => date < today}
-                    className="w-full px-5 pb-5"
-                    components={{
-                      DayButton: ({ children, modifiers, day, ...props }) => {
-                        const daysWithAppointmentsStatus = appointmentDates?.find(x => (new Date(x.dateTime)).getDate() == day.date.getDate())?.status;
+      <label className='flex items-center justify-center text-center mb-2'>Select a date to see available appointments:</label>
+      <div className='flex flex-col md:flex-row space-y-3 items-center md:items-start justify-center'>
+        <Calendar
+          mode="single"
+          selected={selectedDate}
+          onSelect={setSelectedDate}
+          disabled={(date: Date) => date < today}
+          className="rounded-xl border shadow-sm"
+          components={{
+            DayButton: ({ children, modifiers, day, ...props }) => {
+              const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).getDate() == day.date.getDate());
+              const dayWithAppointmentsStatus = dayWithAppointments?.status;
 
-                        return (
-                          <CalendarDayButton day={day} modifiers={modifiers} {...props}>
-                            {children}
-                            {!modifiers.outside && <span>{daysWithAppointmentsStatus ? "yes" : "no"}</span>}
-                          </CalendarDayButton>
-                        )
-                      },
-                    }}
-                  />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-        <div className='flex mx-5 items-center justify-center'>
+              return (
+                <CalendarDayButton className='text-2xl' day={day} modifiers={modifiers} {...props}>
+                  {children}
+                  <span className='absolute top-4'>{dayWithAppointmentsStatus ? <Dot className='size-8' color="#ffa348" /> : dayWithAppointments && <Dot className='size-8' color="#a51d2d" />}</span>
+                </CalendarDayButton>
+              )
+            },
+          }}
+        />
+        <div className='px-5'>
           <DataTable columns={columns} data={data} />
         </div>
       </div>
