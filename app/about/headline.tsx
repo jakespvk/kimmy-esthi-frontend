@@ -32,7 +32,7 @@ const Headline = ({ text }: { text: string }) => {
             </div>
           </div>
 
-          <NavigationMenu className="lg:absolute lg:top-2 lg:right-2 ml-auto">
+          <NavigationMenu className="relative lg:absolute lg:top-2 lg:right-2 ml-auto">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="pr-5 m-0" />

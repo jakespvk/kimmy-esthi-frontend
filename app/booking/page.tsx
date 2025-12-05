@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, use } from 'react';
+import { useState, useEffect, useCallback, use, useMemo } from 'react';
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
@@ -31,7 +31,23 @@ export default function AppointmentsPage(
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
-  const fetchAppointments = useCallback(async () => {
+  const getAppointmentDatesAndStatuses = async () => {
+    const res = await fetch(`${baseUrl}/appointments/status`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!res.ok) {
+      console.error("err:");
+    }
+
+    const result = await res.json();
+    setAppointmentDates(result);
+  };
+
+  const fetchAppointments = async () => {
     if (selectedDate === undefined) return;
     const formattedDate = format(selectedDate, "MM-dd-yyyy");
     try {
@@ -46,37 +62,21 @@ export default function AppointmentsPage(
         throw new Error("network response was not ok");
       }
 
-      let result = await response.json();
+      const result = await response.json();
       result.forEach((appointment: Appointment) => appointment.appointmentType = searchParams.appointmentType);
       setData(result);
     } catch (error) {
       console.error("Error posting data: ", error);
     }
-  }, [selectedDate, searchParams.appointmentType]);
-
-  const getAppointmentDatesAndStatuses = async () => {
-    const res = await fetch(`${baseUrl}/appointments/status`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!res.ok) {
-      console.error("err:");
-    }
-
-    let result = await res.json();
-    setAppointmentDates(result);
   };
 
   useEffect(() => {
-    fetchAppointments();
-  });
+    getAppointmentDatesAndStatuses();
+  }, []);
 
   useEffect(() => {
-    getAppointmentDatesAndStatuses();
-  })
+    fetchAppointments();
+  }, [selectedDate]);
 
   return (
     <>
@@ -97,13 +97,13 @@ export default function AppointmentsPage(
           className="rounded-xl border shadow-sm"
           components={{
             DayButton: ({ children, modifiers, day, ...props }) => {
-              const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).getDate() == day.date.getDate());
+              const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).toLocaleDateString() === day.date.toLocaleDateString());
               const dayWithAppointmentsStatus = dayWithAppointments?.status;
 
               return (
                 <CalendarDayButton className='text-2xl' day={day} modifiers={modifiers} {...props}>
                   {children}
-                  <span className='absolute top-4'>{dayWithAppointmentsStatus ? <Dot className='size-8' color="#ffa348" /> : dayWithAppointments && <Dot className='size-8' color="#a51d2d" />}</span>
+                  <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8' color="#ffa348" /> : dayWithAppointments && <Dot className='size-8' color="#a51d2d" />}</span>
                 </CalendarDayButton>
               )
             },
