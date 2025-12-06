@@ -3,6 +3,10 @@
    themes: caramellatte --default;
 };
 
+html, body {
+  margin: 0;
+}
+
 .btn {
     @apply rounded-full;
 }
