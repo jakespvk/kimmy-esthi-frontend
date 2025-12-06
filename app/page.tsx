@@ -2,7 +2,7 @@ import { glassAntiqua, msMadi } from "./fonts";
 
 export default function Home() {
   return (
-    <div className="hero min-h-lvh h-lvh bg-repeat-round overscroll-none bg-linear-30 from-amber-700 to-amber-400">
+    <div className="hero min-h-dvh h-dvh bg-repeat-round overscroll-none overflow-clip bg-linear-30 from-amber-700 to-amber-400">
       {/* <div className="hero min-h-screen h-screen overflow-clip bg-cover bg-repeat bg-origin-border bg-fixed overscroll-none bg-[radial-gradient(ellipse_at_75%_25%,#d17d34,#cc9a43),radial-gradient(ellipse_at_25%_75%,#d17d34,#cc9a43)]"> */}
       <div className="hero-content text-center">
         <div>
