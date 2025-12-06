@@ -58,7 +58,8 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
             <div className="flex flex-col">
               {price && <strong className="text-center my-2">{price}</strong>}
               {!notBookable &&
-                <div className={(clicked ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none") + " card-actions justify-center items-end grow"}>
+                // TODO
+                <div className={(clicked ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none lg:pointer-events-auto") + " card-actions justify-center items-end grow"}>
                   <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
                 </div>
               }
