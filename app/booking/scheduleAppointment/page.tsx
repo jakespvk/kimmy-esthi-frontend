@@ -137,7 +137,7 @@ export default function ScheduleAppointment(
         <p className="">Scheduling {appointmentTime} appointment on {appointmentDate}</p>
       </div>
       <div className="flex justify-center p-3">
-        <Button type="button" onClick={() => router.back()} className="btn w-32 min-w-fit text-white bg-gradient-to-r 
+        <Button type="button" onClick={() => router.back()} className="btn w-32 min-w-fit text-base-100 bg-gradient-to-r 
                 from-amber-400 to-amber-600 border-amber-500 hover:from-amber-300 hover:to-amber-500 hover:border-amber-400">
           Go Back
         </Button>
