@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
+import BookingRequestWarningText from "@/components/ui/booking-request-warning-text";
 
 const formSchema = z.object({
   preferredName: z.string(),
@@ -128,10 +129,7 @@ export default function ScheduleAppointment(
 
       <Headline text={"Schedule Appointment"} />
 
-      <div className="flex flex-col justify-center items-center mx-5">
-        <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
-        <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
-      </div>
+      <BookingRequestWarningText />
 
       <div className="flex justify-center mx-5">
         <p className="">Scheduling {appointmentTime} appointment on {appointmentDate}</p>

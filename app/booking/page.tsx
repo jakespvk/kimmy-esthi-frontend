@@ -10,6 +10,7 @@ import { format } from "date-fns"
 import { Calendar, CalendarDayButton } from "@/components/ui/calendar"
 import { Appointment } from '../types'
 import { Dot } from 'lucide-react';
+import BookingRequestWarningText from '@/components/ui/booking-request-warning-text';
 
 interface AppointmentDateTimeAndStatus {
   dateTime: Date;
@@ -82,10 +83,7 @@ export default function AppointmentsPage(
     <>
       <Headline text={"Booking"} />
 
-      <div className="md:flex flex-col justify-center items-center text-lg mx-5">
-        <p className="font-bold md:font-normal">Selecting a date and time sends a request, not a confirmed appointment.</p>
-        <p className="pt-1 pb-5 font-bold md:font-normal">You’ll receive a message or email once your booking has been approved.</p>
-      </div>
+      <BookingRequestWarningText />
 
       <label className='flex items-center justify-center text-center mx-5 mb-2'>Select a date to see available appointments:</label>
       <div className='flex flex-col md:flex-row space-y-3 items-center md:items-start justify-center'>
