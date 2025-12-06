@@ -101,7 +101,7 @@ export default function AppointmentsPage(
               const dayWithAppointmentsStatus = dayWithAppointments?.status;
 
               return (
-                <CalendarDayButton className='text-2xl' day={day} modifiers={modifiers} {...props}>
+                <CalendarDayButton day={day} modifiers={modifiers} {...props}>
                   {children}
                   <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8' color="#ffa348" /> : dayWithAppointments && <Dot className='size-8' color="#a51d2d" />}</span>
                 </CalendarDayButton>

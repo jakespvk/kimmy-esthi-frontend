@@ -19,7 +19,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
     <>
       <div className="relative group" onClick={() => toggleClicked()}>
         <div className="p-5">
-          <div className={"card bg-base-100 border-2 border-base-300 shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-80 lg:w-96")}>
+          <div className={"card bg-accent text-accent-content border-2 border-accent shadow-xl " + (serviceType === ServiceCardType.AddOn ? "w-60" : "w-80 lg:w-96")}>
             <figure>
               <img
                 className={"w-full object-cover " + (serviceType === ServiceCardType.AddOn ? "h-40" : "h-52 lg:h-56")}
