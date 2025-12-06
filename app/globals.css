@@ -3,6 +3,10 @@
    themes: caramellatte --default;
 };
 
+@theme {
+  --color-base-400: oklch(78% 0.0686 73.684);
+}
+
 @plugin "daisyui/theme" {
   name: "caramellatte";
   default: true;
@@ -11,7 +15,6 @@
   --color-base-100: oklch(98% 0.016 73.684);
   --color-base-200: oklch(95% 0.038 75.164);
   --color-base-300: oklch(90% 0.076 70.697);
-  --color-base-400: oklch(78% 0.0686 73.684);
   --color-base-content: oklch(40% 0.123 38.172);
   --color-primary: oklch(0% 0 0);
   --color-primary-content: oklch(100% 0 0);

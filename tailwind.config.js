@@ -17,13 +17,6 @@ module.exports = {
         primary: 'hsl(var(--primary))',
         accent: 'hsl(var(--accent))',
       },
-      minHeight: {
-        'screen-full': '100svh',
-      },
-      padding: {
-        'safe-top': 'env(safe-area-inset-top)',
-        'safe-bottom': 'env(safe-area-inset-bottom)',
-      },
     },
   },
   daisyui: {
