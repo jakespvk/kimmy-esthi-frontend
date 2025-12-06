@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-export const FancyButton = ({ cardLinkTo, appointmentType }: { cardLinkTo: string, appointmentType: string }) => {
+export const FancyButton = ({ cardLinkTo, canHover, appointmentType }: { cardLinkTo: string, canHover: boolean | undefined, appointmentType: string }) => {
   return (
     <Link
       href={{

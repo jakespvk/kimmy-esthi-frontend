@@ -64,7 +64,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
               {!notBookable &&
                 // TODO
                 <div className={"card-actions justify-center items-end grow " + ((prefersHover) ? "hover:touch-auto pointer-events-auto" : (clicked) ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none")}>
-                  <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
+                  <FancyButton cardLinkTo={cardLinkTo} canHover={prefersHover} appointmentType={serviceName} />
                 </div>
               }
             </div>
