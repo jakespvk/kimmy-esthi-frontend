@@ -3,11 +3,15 @@
 import { ServiceCardType } from './page';
 import { FancyButton } from './fancyButton';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { coiny } from '../fonts';
 
 const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardImgSrc, cardLinkTo, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardLinkTo: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
+  const [prefersHover, setPrefersHover] = useState(true);
   const [clicked, setClicked] = useState(false);
+  useEffect(() => setPrefersHover(window.matchMedia('(hover: hover)').matches), []);
+  // const overlayActive = prefersHover ? hovered : clicked;
+
   function toggleClicked() {
     clicked ? setClicked(false) : setClicked(true);
   }
@@ -44,7 +48,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
             </div>
           </div>
         </div>
-        <div className={(clicked && "opacity-100") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
+        <div className={((!prefersHover && clicked) && "opacity-100") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
           <div className={
             // "card h-full backdrop-blur-xl bg-conic/decreasing from-base-300 via-base-200 via-80% to-base-300 to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
             // "card h-full backdrop-blur-xl bg-gradient-to-tr from-base-300 from-20% to-warning to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border-1 border-base-200 "
@@ -59,7 +63,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
               {price && <strong className="text-center my-2">{price}</strong>}
               {!notBookable &&
                 // TODO
-                <div className={(clicked ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none lg:pointer-events-auto") + " card-actions justify-center items-end grow"}>
+                <div className={"card-actions justify-center items-end grow " + ((prefersHover) ? "hover:touch-auto pointer-events-auto" : (clicked) ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none")}>
                   <FancyButton cardLinkTo={cardLinkTo} appointmentType={serviceName} />
                 </div>
               }
