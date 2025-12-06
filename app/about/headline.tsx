@@ -22,10 +22,10 @@ const Headline = ({ text }: { text: string }) => {
       <div className="block m-2 mb-5 lg:mb-10">
         <div className="w-full flex relative">
           <div className="ml-2 lg:mx-auto flex justify-center">
-            <div className={glassAntiqua.className + " border-b"}>
-              <Button className="appearance-none p-0 bg-transparent border-0 shadow-none h-fit w-fit" onClick={() => router.back()}>
-                <ChevronLeftIcon />
-                <h1 id="mainTitle" className="text-3xl lg:text-7xl text-transparent bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 hover:bg-gradient-to-l inline-block bg-clip-text">
+            <div className={glassAntiqua.className}>
+              <Button className="appearance-none text-transparent bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 bg-clip-text hover:bg-gradient-to-l p-0 bg-transparent border-0 shadow-none h-fit w-fit" onClick={() => router.back()}>
+                <ChevronLeftIcon className="text-secondary" />
+                <h1 id="mainTitle" className="text-3xl lg:text-7xl inline-block border-b border-secondary">
                   {text}
                 </h1>
               </Button>

@@ -1,17 +1,10 @@
 import './globals.css'
-import type { Metadata, Viewport } from 'next'
+import type { Metadata } from 'next'
 import { montserrat } from './fonts'
 
 export const metadata: Metadata = {
   title: 'Sunset Kimcare',
   description: 'Sunset Kimcare Esthetician Services',
-}
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  viewportFit: 'cover',
-  themeColor: '#bb4d00',
 }
 
 export default function RootLayout({
@@ -20,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className='bg-base-200'>
       <body className={montserrat.className}>{children}</body>
     </html>
   )
