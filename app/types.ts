@@ -9,3 +9,24 @@ export interface Appointment {
 export interface ScheduledAppointment {
   serviceName: string;
 }
+
+export enum ServiceCardType {
+  Facial,
+  Package,
+  AddOn
+}
+
+export interface Service {
+  serviceName: string;
+  serviceType: ServiceCardType;
+  cardTitle: string;
+  cardContent: string;
+  cardImgSrc: string;
+  cardLinkTo: string;
+  cardOverlayContent?: string;
+  packageItems?: string[];
+  tags?: string[];
+  notBookable?: boolean;
+  price?: string;
+}
+

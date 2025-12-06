@@ -1,6 +1,6 @@
 'use client';
 
-import { ServiceCardType } from './page';
+import { ServiceCardType } from '../types';
 import { FancyButton } from './fancyButton';
 
 import { useEffect, useState } from 'react';
@@ -26,10 +26,8 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
                 src={cardImgSrc}
                 alt="Facial" />
             </figure>
-            <div className={"card-body " + (packageItems !== undefined && packageItems.length > 0 ? "h-72 lg:h-88" : (serviceType === ServiceCardType.AddOn ? "h-24 lg:h-28 py-1 flex items-center justify-center" : "h-44"))}>
-              <div className={coiny.className}>
-                <h2 id="card_title" className={"card-title tracking-wide text-center pb-3 " + (serviceType === ServiceCardType.AddOn ? "text-xl lg:text-2xl" : "text-2xl lg:text-3xl")}>{cardTitle}</h2>
-              </div>
+            <div className={"card-body mt-0 pt-0 " + (packageItems !== undefined && packageItems.length > 0 ? "h-72 lg:h-88" : (serviceType === ServiceCardType.AddOn ? "h-24 lg:h-28 flex items-center justify-center" : "h-44"))}>
+              <h2 id="card_title" className={coiny.className + " card-title tracking-wide text-center " + (serviceType === ServiceCardType.AddOn ? "text-lg lg:text-xl grow my-[50%]" : "text-2xl my-2")}>{cardTitle}</h2>
               {packageItems !== undefined && packageItems.length > 0
                 &&
                 <ul className="mx-4 list-disc lg:text-lg">
