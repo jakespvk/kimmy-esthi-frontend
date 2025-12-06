@@ -128,12 +128,12 @@ export default function ScheduleAppointment(
 
       <Headline text={"Schedule Appointment"} />
 
-      <div className="flex flex-col justify-center items-center mx-2">
+      <div className="flex flex-col justify-center items-center mx-5">
         <p className="">Selecting a date and time sends a request, not a confirmed appointment.</p>
         <p className="pb-5">You’ll receive a message or email once your booking has been approved.</p>
       </div>
 
-      <div className="flex justify-center mx-2">
+      <div className="flex justify-center mx-5">
         <p className="">Scheduling {appointmentTime} appointment on {appointmentDate}</p>
       </div>
       <div className="flex justify-center p-3">
