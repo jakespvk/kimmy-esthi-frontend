@@ -8,6 +8,10 @@ export interface Appointment {
 
 export interface ScheduledAppointment {
   serviceName: string;
+  preferredName: string;
+  email: string;
+  phoneNumber: string;
+  skinConcerns: string;
 }
 
 export enum ServiceCardType {

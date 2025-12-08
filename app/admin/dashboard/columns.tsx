@@ -4,6 +4,7 @@ import Link from "next/link"
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Appointment } from "@/app/types";
+import { BookingDetails } from "./booking-details";
 
 export const columns: ColumnDef<Appointment>[] = [
   {
@@ -22,6 +23,17 @@ export const columns: ColumnDef<Appointment>[] = [
       return <div className="text-center w-max">
         {new Date(row.getValue("dateTime")).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
       </div>
+    },
+  },
+  {
+    accessorKey: "scheduledAppointment",
+    header: () => <div className="text-center">Booking Details</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="w-max mx-2">
+          <BookingDetails scheduledAppointment={row.original.scheduledAppointment} />
+        </div>
+      )
     },
   },
   {
