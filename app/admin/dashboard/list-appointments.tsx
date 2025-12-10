@@ -3,6 +3,8 @@ import { columns } from "./columns";
 import { DataTable } from "../../booking/appointments/data-table"
 import { useCallback, useEffect, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@radix-ui/react-label";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const today = new Date(new Date().setHours(0, 0, 0, 0));
@@ -10,22 +12,31 @@ const today = new Date(new Date().setHours(0, 0, 0, 0));
 export default function ListAppointments() {
   const [data, setData] = useState([]);
   const [statusFilter, setStatusFilter] = useState("booked");
+  const [includeArchived, setIncludeArchived] = useState(false);
   const [dateFilter, setDateFilter] = useState(null);
+
+  function toggleIncludeArchived() {
+    if (includeArchived) setIncludeArchived(false);
+    else setIncludeArchived(true);
+  }
 
   const onSubmit = useCallback(async () => {
     const token = localStorage.getItem("super-secret-token");
     let formattedDate: string | undefined;
     let url = `${baseUrl}/admin/${token}/appointments?` + new URLSearchParams({
       booked: statusFilter === "booked" ? "true" : "false",
+      includeArchived: includeArchived.toString(),
     });
     if (dateFilter) {
       formattedDate = format(dateFilter, "MM-dd-yyyy");
       url = `${baseUrl}/admin/${token}/appointments?` + new URLSearchParams({
         booked: statusFilter === "booked" ? "true" : "false",
+        includeArchived: includeArchived.toString(),
         date: formattedDate
       });
     }
     try {
+      console.log(url);
 
       const response = await fetch(url,
         {
@@ -45,18 +56,18 @@ export default function ListAppointments() {
     } catch (error) {
       console.error("Error posting data: ", error);
     }
-  }, [dateFilter, statusFilter]);
+  }, [dateFilter, statusFilter, includeArchived]);
 
   useEffect(() => {
     onSubmit();
-  }, [statusFilter, onSubmit]);
+  }, [onSubmit]);
 
   return (
     <div className="pb-5">
       <h1 className="flex justify-center my-5 text-xl">Appointments List</h1>
-      <div className="mb-2">
+      <div className="flex mb-2">
         <Select value={statusFilter} onValueChange={(e) => setStatusFilter(e)}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] mr-3">
             <SelectValue placeholder="Status Filter" />
           </SelectTrigger>
           <SelectContent>
@@ -64,6 +75,10 @@ export default function ListAppointments() {
             <SelectItem value="booked">Show Booked Only</SelectItem>
           </SelectContent>
         </Select>
+        <div className="self-center flex items-center gap-1">
+          <Checkbox checked={includeArchived} onCheckedChange={() => toggleIncludeArchived()} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" id="archivedToggle" />
+          <Label htmlFor="archivedToggle">Include Archived</Label>
+        </div>
       </div>
       <DataTable columns={columns} data={data} />
     </div>

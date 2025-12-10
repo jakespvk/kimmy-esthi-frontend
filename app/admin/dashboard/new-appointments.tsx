@@ -116,15 +116,17 @@ export default function NewAppointments() {
                 <button className="rounded-full border w-fit py-2 px-4" type="button" onClick={addTimeInput}>Add another time</button>
               </div>
             </div>
-            <Calendar
-              mode="multiple"
-              selected={selectedDates}
-              onSelect={setSelectedDates}
-              disabled={(date) =>
-                date < today
-              }
-              className="w-full px-5 md:rounded-r-xl md:border-l"
-            />
+            <div className="flex justify-center items-center">
+              <Calendar
+                mode="multiple"
+                selected={selectedDates}
+                onSelect={setSelectedDates}
+                disabled={(date) =>
+                  date < today
+                }
+                className="px-5 md:rounded-r-xl md:border-l"
+              />
+            </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
             <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
