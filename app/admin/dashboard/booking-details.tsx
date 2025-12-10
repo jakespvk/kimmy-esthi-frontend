@@ -2,6 +2,7 @@ import { ScheduledAppointment } from "@/app/types"
 
 export const BookingDetails = ({ scheduledAppointment }: { scheduledAppointment: ScheduledAppointment | undefined }) => {
   function showModal() {
+    {/* @ts-ignore */ }
     document.getElementById("appointment-detail-modal")?.showModal();
   }
   return (
