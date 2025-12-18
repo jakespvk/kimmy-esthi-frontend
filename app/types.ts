@@ -6,6 +6,16 @@ export interface Appointment {
   scheduledAppointment?: ScheduledAppointment;
 }
 
+export interface AdminAppointment {
+  id?: string;
+  dateTime: string;
+  date?: string;
+  time?: string
+  status: boolean;
+  appointmentType?: string;
+  scheduledAppointment?: ScheduledAppointment;
+}
+
 export interface ScheduledAppointment {
   serviceName: string;
   preferredName: string;

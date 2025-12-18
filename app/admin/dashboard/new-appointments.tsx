@@ -92,7 +92,7 @@ export default function NewAppointments() {
   return (
     <>
       <div className="flex flex-col items-center justify-center my-5">
-        <h1 className="text-xl">Create New Appointments</h1>
+        <h1 className="text-xl" id="create-appointments">Create New Appointments</h1>
       </div>
 
       <form onSubmit={onSubmit}>
