@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./signature-pad.css";
+
 @plugin "daisyui" {
    themes: caramellatte --default;
 };
