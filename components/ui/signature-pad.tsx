@@ -303,6 +303,7 @@ const SignaturePad = React.forwardRef<SignaturePadRef, SignaturePadProps>(
               size="icon-sm"
               onClick={handleClear}
               className="rounded-full"
+              type="button"
             >
               {clearButtonIcon || <Eraser />}
             </Button>
@@ -311,6 +312,7 @@ const SignaturePad = React.forwardRef<SignaturePadRef, SignaturePadProps>(
               size="icon-sm"
               onClick={handleSave}
               className="rounded-full"
+              type="button"
             >
               {saveButtonIcon || <Save />}
             </Button>
