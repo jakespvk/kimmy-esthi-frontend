@@ -24,6 +24,7 @@ const signaturePadVariants = cva("touch-none cursor-pencil", {
     },
     size: {
       default: "w-full h-[200px]",
+      xsm: "w-full h-[100px]",
       sm: "w-full h-[150px]",
       md: "w-full h-[250px]",
       lg: "w-full h-[300px]",
@@ -35,7 +36,7 @@ const signaturePadVariants = cva("touch-none cursor-pencil", {
   },
 });
 
-export type Base64URLString = string;
+export type Base64URLString = string | null;
 
 export interface SignaturePadProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
@@ -298,21 +299,21 @@ const SignaturePad = React.forwardRef<SignaturePadRef, SignaturePadProps>(
           onTouchEnd={stopDrawing}
         />
 
-        {showButtons && (
+        {showButtons && ( // (showButtons && !isDrawing)
           <div className="absolute bottom-2 right-2 flex gap-1">
             <Button
               variant="outline"
-              size="sm"
+              size={size === "xsm" ? undefined : "sm"}
               onClick={handleClear}
-              className="rounded-full"
+              className={size === "xsm" ? "rounded-full size-2" : "rounded-full"}
             >
               {clearButtonIcon || <Eraser />}
             </Button>
             <Button
               variant="outline"
-              size="sm"
+              size={size === "xsm" ? undefined : "sm"}
               onClick={handleSave}
-              className="rounded-full"
+              className={size === "xsm" ? "rounded-full size-2" : "rounded-full"}
             >
               {saveButtonIcon || <Save />}
             </Button>
