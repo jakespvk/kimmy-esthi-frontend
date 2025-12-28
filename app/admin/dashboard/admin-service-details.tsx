@@ -1,10 +1,17 @@
 import { Service } from "@/app/types";
+import { ServiceEditor } from "./service-editor";
 
 export default function AdminServiceDetails({ service }: { service: Service }) {
   function showModal() {
     {/* @ts-ignore */ }
     document.getElementById("service-detail-modal")?.showModal();
   }
+
+  function editService() {
+    console.log("edit service")
+    return <ServiceEditor service={service} />
+  }
+
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -12,39 +19,14 @@ export default function AdminServiceDetails({ service }: { service: Service }) {
       <dialog id="service-detail-modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Booking Details</h3>
-          <div className="flex py-4">
-            <label className="font-bold">Service Name:&nbsp;</label>
-            <p>{service.serviceName}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Service Type:&nbsp;</label>
-            <p>{service.serviceType}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Card Title:&nbsp;</label>
-            <p>{service.cardTitle}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Card Content:&nbsp;</label>
-            <p>{service.cardContent}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Card Image (URL):&nbsp;</label>
-            <p>{service.cardImgSrc}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Card Overlay Content:&nbsp;</label>
-            <p>{service.cardOverlayContent}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Tags:&nbsp;</label>
-            <p>{service.tags}</p>
-          </div>
-          <div className="flex py-4">
-            <label className="font-bold">Price:&nbsp;</label>
-            <p>{service.price}</p>
-          </div>
+          {Object.entries(service).map((field, index) => (
+            <div className="my-5" key={index}>
+              <label className="font-bold">{field[0]}:&nbsp;</label>
+              <p>{field[1]}</p>
+            </div>
+          ))}
           <div className="modal-action">
+            <button className="btn" onClick={() => editService()}>Edit</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>

@@ -3,7 +3,7 @@
 import AdminNavbar from "./admin-navbar";
 import ListAppointments from "./list-appointments";
 import NewAppointments from "./new-appointments";
-import ServicesEditor from "./services-editor";
+import ServicesViewer from "./services-viewer";
 
 export default function AdminDashboard() {
   return (
@@ -17,7 +17,7 @@ export default function AdminDashboard() {
           <ListAppointments />
         </div>
         <div className="flex-col mx-3 md:mx-10 border-t md:border-0">
-          <ServicesEditor />
+          <ServicesViewer />
         </div>
       </div>
     </div>
