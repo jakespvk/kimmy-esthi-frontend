@@ -23,6 +23,7 @@ const Admin = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      password: "",
     },
   })
 
