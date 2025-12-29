@@ -77,6 +77,10 @@ export default function NewAppointments() {
     });
   };
 
+  const removeTimeInput = () => {
+    setSelectedTimes(selectedTimes.slice(0, -1));
+  };
+
   const handleChangeTime = (e: any) => {
     e.preventDefault();
 
@@ -99,6 +103,12 @@ export default function NewAppointments() {
         <div className="flex flex-col items-center justify-center">
           <div className="md:flex md:flex-row md:w-[500px] w-full items-center justify-center md:border rounded-xl">
             <div className="flex flex-col space-y-3 mx-3">
+              <div className="flex justify-center">
+                <button className="btn rounded-full border w-fit py-2 px-4" type="button" onClick={removeTimeInput}>Remove last time</button>
+              </div>
+              <div className="flex justify-center">
+                <button className="btn rounded-full border w-fit py-2 px-4" type="button" onClick={addTimeInput}>Add another time</button>
+              </div>
               {selectedTimes.map((timeInput, idx) => {
                 return (
                   <input
@@ -108,13 +118,10 @@ export default function NewAppointments() {
                     type={timeInput.type}
                     key={idx}
                     step={1800}
-                    className="border rounded-full px-4 py-2 bg-background"
+                    className="border rounded-full px-4 py-2 bg-background max-w-[150px] mx-auto"
                   />
                 );
               })}
-              <div className="flex justify-center">
-                <button className="rounded-full border w-fit py-2 px-4" type="button" onClick={addTimeInput}>Add another time</button>
-              </div>
             </div>
             <div className="flex justify-center items-center">
               <Calendar
@@ -129,7 +136,7 @@ export default function NewAppointments() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
-            <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
+            <button className="btn rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">Submit</button>
             <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>
         </div>

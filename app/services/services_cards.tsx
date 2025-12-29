@@ -10,11 +10,11 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
   const [prefersHover, setPrefersHover] = useState(true);
   const [clicked, setClicked] = useState(false);
   useEffect(() => setPrefersHover(window.matchMedia('(hover: hover)').matches), []);
-  // const overlayActive = prefersHover ? hovered : clicked;
 
   function toggleClicked() {
     clicked ? setClicked(false) : setClicked(true);
   }
+
   return (
     <>
       <div className="relative group" onClick={() => toggleClicked()}>
