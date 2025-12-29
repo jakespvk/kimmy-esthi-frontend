@@ -3,14 +3,21 @@
 import type React from 'react';
 import { useState } from 'react';
 
-import SignaturePad, { Base64URLString } from '@/components/ui/signature-pad';
+import { Base64URLString } from '@/app/types';
+import SignaturePad from '@/components/ui/signature-pad';
 import { Eraser, Save } from 'lucide-react';
 import { initialedStatements, InitialedStatement } from './initialed-statements';
 import Headline from '@/app/about/headline';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { submitConsentForm } from '@/app/api';
 
-const ConsentForm: React.FC = () => {
+const ConsentForm = (props: {
+  searchParams: Promise<{
+    appointmentId: string;
+  }>;
+}) => {
+  const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
   const [statements, setStatements] = useState<InitialedStatement[]>(initialedStatements);
 
@@ -19,6 +26,10 @@ const ConsentForm: React.FC = () => {
     if (statements[idx]?.initialed) statements[idx].initialed = false;
     else statements[idx].initialed = true;
     setStatements([...statements]);
+  }
+
+  async function onSubmit() {
+    await submitConsentForm((await props.searchParams).appointmentId, statements.filter((s) => s.initialed).map((s) => s.statement), initials, signature);
   }
 
   return (
@@ -36,7 +47,7 @@ const ConsentForm: React.FC = () => {
             showButtons={true}
             saveButtonIcon={<Save />}
             clearButtonIcon={<Eraser />}
-            onSave={setSignature}
+            onSave={setInitials}
           />
         </div>
         <ul>
@@ -64,6 +75,7 @@ const ConsentForm: React.FC = () => {
             clearButtonIcon={<Eraser />}
             onSave={setSignature}
           />
+          <button className="btn" onClick={onSubmit}>Submit</button>
         </div>
       </div>
     </div >

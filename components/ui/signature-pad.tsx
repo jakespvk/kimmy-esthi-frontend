@@ -9,6 +9,8 @@ import React, {
   useState,
 } from "react";
 
+import { Base64URLString } from "@/app/types";
+
 import { cva, type VariantProps } from "class-variance-authority";
 import { Eraser, Save } from "lucide-react";
 
@@ -35,8 +37,6 @@ const signaturePadVariants = cva("touch-none cursor-pencil", {
     size: "default",
   },
 });
-
-export type Base64URLString = string | null;
 
 export interface SignaturePadProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,

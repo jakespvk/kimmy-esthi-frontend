@@ -43,7 +43,4 @@ export interface Service {
   price?: string;
 }
 
-
-
-
-
+export type Base64URLString = string | null;
