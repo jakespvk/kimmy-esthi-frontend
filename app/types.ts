@@ -25,9 +25,9 @@ export interface ScheduledAppointment {
 }
 
 export enum ServiceCardType {
-  Facial,
-  Package,
-  AddOn
+  Facial = "Facial",
+  Package = "Package",
+  AddOn = "AddOn",
 }
 
 export interface Service {
@@ -36,11 +36,14 @@ export interface Service {
   cardTitle: string;
   cardContent: string;
   cardImgSrc: string;
-  cardLinkTo: string;
   cardOverlayContent?: string;
   packageItems?: string[];
   tags?: string[];
   notBookable?: boolean;
   price?: string;
 }
+
+
+
+
 

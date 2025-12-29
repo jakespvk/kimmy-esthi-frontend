@@ -1,26 +1,23 @@
 "use client";
 
 import { Service } from "@/app/types";
-import ServiceEditor from "./service-editor";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export default function AdminServiceDetails({ service }: { service: Service }) {
   const [isEditing, setIsEditing] = useState(false);
 
-  function showModal() {
-    {/* @ts-ignore */ }
-    document.getElementById("service-detail-modal")?.showModal();
-  }
-
   function toggleIsEditing() {
     setIsEditing(!isEditing);
   }
 
+  function saveChanges() {
+  }
+
   return (
     <div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <button className="btn" onClick={() => showModal()}>Details</button>
+      {/* @ts-ignore */}
+      <button className="btn" onClick={() => document.getElementById("service-detail-modal").showModal()}>Details</button>
       <dialog id="service-detail-modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Booking Details</h3>
@@ -31,7 +28,12 @@ export default function AdminServiceDetails({ service }: { service: Service }) {
             </div>
           ))}
           <div className="modal-action">
-            <button className="btn" onClick={toggleIsEditing}>{isEditing ? "Save Changes" : "Edit"}</button>
+            {isEditing 
+              ? 
+              <button className="btn" onClick={() => { toggleIsEditing(); saveChanges(); }}>Save Changes</button> 
+              : 
+              <button className="btn" onClick={toggleIsEditing}>Edit</button>
+            }
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
@@ -42,6 +44,6 @@ export default function AdminServiceDetails({ service }: { service: Service }) {
           <button>close</button>
         </form>
       </dialog>
-    </div>
+    </div >
   )
 }
