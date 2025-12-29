@@ -1,6 +1,5 @@
 "use client";
 
-import type React from 'react';
 import { useState } from 'react';
 
 import { Base64URLString } from '@/app/types';
@@ -53,9 +52,9 @@ const ConsentForm = (props: {
         <ul>
           {statements.map((stmt, idx) =>
             <li className='flex items-center my-2' key={idx}> <div className='absolute'>
-              {(stmt.initialed && signature)
+              {(stmt.initialed && initials)
                 ?
-                <img onClick={() => updateStatement(idx)} className='w-6 h-4 bg-contain bg-left border border-accent rounded-sm' height={8} src={signature} alt="initials" />
+                <img onClick={() => updateStatement(idx)} className='w-6 h-4 bg-contain bg-left border border-accent rounded-sm' height={8} src={initials} alt="initials" />
                 :
                 <Checkbox id={idx.toString()} checked={stmt.initialed ?? false} onCheckedChange={() => updateStatement(idx)} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" />
               }
