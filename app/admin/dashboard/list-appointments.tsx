@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@radix-ui/react-label";
-import { AdminAppointment, Appointment } from "@/app/types";
+import { AdminAppointment } from "@/app/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const today = new Date(new Date().setHours(0, 0, 0, 0));
@@ -68,7 +68,7 @@ export default function ListAppointments() {
 
   return (
     <div className="">
-      <h1 className="flex justify-center my-5 text-xl" id="appointments-list">Appointments List</h1>
+      <h1 className="flex justify-center my-5 text-xl scroll-mt-24" id="appointments-list">Appointments List</h1>
       <div className="flex mb-2">
         <Select value={statusFilter} onValueChange={(e) => setStatusFilter(e)}>
           <SelectTrigger className="w-[180px] mr-3">
@@ -88,4 +88,3 @@ export default function ListAppointments() {
     </div>
   )
 }
-

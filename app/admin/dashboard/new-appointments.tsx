@@ -96,7 +96,7 @@ export default function NewAppointments() {
   return (
     <>
       <div className="flex flex-col items-center justify-center my-5">
-        <h1 className="text-xl" id="create-appointments">Create New Appointments</h1>
+        <h1 className="text-xl scroll-mt-24" id="create-appointments">Create New Appointments</h1>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -136,7 +136,7 @@ export default function NewAppointments() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
-            <button className="btn rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">Submit</button>
+            <button className="btn rounded-full border px-4 py-2 hover:bg-accent-content hover:text-base-content" type="submit">Submit</button>
             <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>
         </div>

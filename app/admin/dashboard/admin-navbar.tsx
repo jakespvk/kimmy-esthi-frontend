@@ -1,16 +1,53 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function AdminNavbar() {
+  function scrollToElement(elementId: string) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
   return (
-    <div>
-      <nav className="flex flex-wrap justify-center p-2 gap-2">
-        <Button variant="outline" className="hover:bg-base-300"><Link href="#create-appointments">Create Appointments</Link></Button>
-        <Button variant="outline" className="hover:bg-base-300"><Link type="button" href="#appointments-list">Appointments List</Link></Button>
-        <Button variant="outline" className="hover:bg-base-300"><Link type="button" href="#edit-services">Edit Services</Link></Button>
+    <div className="sticky top-0 z-10">
+      <nav className="relative flex flex-wrap justify-center p-2 gap-2 *:bg-base-200 *:hover:bg-base-300 *:scroll-mt-4">
+        <Button variant="outline" onClick={() => scrollToElement("create-appointments")}>Create Appointments</Button>
+        <Button variant="outline" onClick={() => scrollToElement("appointments-list")}>Appointments List</Button>
+        <Button variant="outline" onClick={() => scrollToElement("edit-services")}>Edit Services</Button>
+        <Button variant="outline" onClick={() => scrollToElement("consent-form")}>Edit Consent Form</Button>
       </nav>
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

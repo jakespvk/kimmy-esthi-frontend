@@ -37,11 +37,11 @@ export const columns: ColumnDef<AdminAppointment>[] = [
   },
   {
     accessorKey: "appointmentType",
-    header: () => <div className="text-center">Appointment Type</div>,
+    header: () => <div className="text-center w-max">Appointment Type</div>,
     cell: ({ row }) => {
       const serviceName = row.original.scheduledAppointment?.serviceName;
       return (
-        <div className="text-center w-max">
+        <div className="justify-self-center">
           {serviceName}
         </div>
       )
@@ -110,5 +110,12 @@ export const columns: ColumnDef<AdminAppointment>[] = [
     }
   }
 ]
+
+
+
+
+
+
+
 
 

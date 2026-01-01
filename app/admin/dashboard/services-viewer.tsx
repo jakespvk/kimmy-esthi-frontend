@@ -5,7 +5,7 @@ import { serviceViewerColumns } from "./service-viewer-columns";
 export default function ServicesViewer() {
   return (
     <div>
-      <h1 className="flex justify-center my-5 text-xl" id="edit-services">Edit Services</h1>
+      <h1 className="flex justify-center my-5 text-xl scroll-mt-24" id="edit-services">Edit Services</h1>
       <div className="flex flex-col gap-5">
         <DataTable columns={serviceViewerColumns} data={signatureFacials} />
         <DataTable columns={serviceViewerColumns} data={facialPackages} />
