@@ -10,12 +10,14 @@ import Headline from '@/app/about/headline';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
+import { Input } from '@/components/ui/input';
 
 const ConsentForm = (props: {
   searchParams: Promise<{
     appointmentId: string;
   }>;
 }) => {
+  const [printedName, setPrintedName] = useState<string>('');
   const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
   const [statements, setStatements] = useState<InitialedStatement[]>(initialedStatements);
@@ -28,7 +30,7 @@ const ConsentForm = (props: {
   }
 
   async function onSubmit() {
-    await submitConsentForm((await props.searchParams).appointmentId, statements.filter((s) => s.initialed).map((s) => s.statement), initials, signature);
+    await submitConsentForm((await props.searchParams).appointmentId, printedName, statements.filter((s) => s.initialed).map((s) => s.statement), initials, signature);
   }
 
   return (
@@ -37,6 +39,8 @@ const ConsentForm = (props: {
         <Headline text="Consent Form" />
       </div>
       <div className='mx-5 lg:flex flex-col justify-center items-center'>
+        <Label className='w-max'>Print Name:</Label>
+        <Input type="text" value={printedName} onChange={(e) => setPrintedName(e.target.value)} />
         <div className='mt-5 flex flex-col justify-center items-center'>
           <Label className=''>Please enter your initials here. To apply them, check the boxes:</Label>
           <SignaturePad

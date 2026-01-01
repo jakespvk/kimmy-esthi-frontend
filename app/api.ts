@@ -2,7 +2,7 @@ import { Base64URLString } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function submitConsentForm(appointmentId: string, initialedStatements: string[], initials: Base64URLString, signature: Base64URLString) {
+export async function submitConsentForm(appointmentId: string, printedName: string, initialedStatements: string[], initials: Base64URLString, signature: Base64URLString) {
   const response = await fetch(`${baseUrl}/booking/consent`, {
     method: 'POST',
     headers: {
@@ -10,6 +10,7 @@ export async function submitConsentForm(appointmentId: string, initialedStatemen
     },
     body: JSON.stringify({
       appointmentId: appointmentId,
+      printedName: printedName,
       initialedStatements: initialedStatements,
       initials: initials,
       signature: signature,
