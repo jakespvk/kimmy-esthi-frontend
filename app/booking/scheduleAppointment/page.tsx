@@ -104,7 +104,12 @@ export default function ScheduleAppointment(
           appointmentId: searchParams.appointmentId,
           scheduledAppointment: {
             serviceName: searchParams.appointmentType,
-            ...values
+            client: {
+              preferredName: values.preferredName,
+              email: values.email,
+              phoneNumber: values.phoneNumber,
+            },
+            skinConcerns: values.skinConcerns,
           },
         }),
       });
@@ -219,6 +224,9 @@ export default function ScheduleAppointment(
     </>
   )
 }
+
+
+
 
 
 

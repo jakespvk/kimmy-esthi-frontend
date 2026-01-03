@@ -30,7 +30,13 @@ const ConsentForm = (props: {
   }
 
   async function onSubmit() {
-    await submitConsentForm((await props.searchParams).appointmentId, printedName, statements.filter((s) => s.initialed).map((s) => s.statement), initials, signature);
+    await submitConsentForm(
+      (await props.searchParams).appointmentId, 
+      printedName, 
+      statements.filter((s) => s.initialed).map((s) => s.statement), 
+      initials, 
+      signature
+    );
   }
 
   return (
