@@ -3,12 +3,16 @@
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { FormEvent, useState } from "react"
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { create } from "domain";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Appointment {
   datetime: string;
   status: number;
+  promotion?: Object;
 }
 
 const today = new Date(new Date().setHours(0, 0, 0, 0));
@@ -17,6 +21,8 @@ export default function NewAppointments() {
 
   const [selectedDates, setSelectedDates] = useState<Date[] | undefined>();
   const [responseText, setResponseText] = useState('');
+  const [createPromotion, setCreatePromotion] = useState(false);
+  const [promotionName, setPromotionName] = useState('');
 
   const timeInputsInitialState = [
     {
@@ -40,7 +46,15 @@ export default function NewAppointments() {
         const hours = parseInt(time.value.substring(0, 2));
         const minutes = parseInt(time.value.substring(3, 5));
         const datetime = format(new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes), "yyyy-MM-dd'T'HH:mm:ss");
-        appointments.push({ datetime: datetime, status: 0 });
+        if (createPromotion) {
+          if (promotionName === "") {
+            alert("Are you sure you want to create an empty promotion?");
+            return;
+          }
+          appointments.push({ datetime: datetime, status: 0, promotion: { name: promotionName } });
+        } else {
+          appointments.push({ datetime: datetime, status: 0 });
+        }
       });
     }
     const token = localStorage.getItem("super-secret-token");
@@ -93,6 +107,10 @@ export default function NewAppointments() {
     });
   };
 
+  function toggleCreatePromotion() {
+    createPromotion ? setCreatePromotion(false) : setCreatePromotion(true);
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center my-5">
@@ -136,7 +154,9 @@ export default function NewAppointments() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
-            <button className="btn rounded-full border px-4 py-2 hover:bg-accent-content hover:text-base-content" type="submit">Submit</button>
+            <Checkbox checked={createPromotion} onCheckedChange={() => toggleCreatePromotion()} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" id="archivedToggle" />
+            {createPromotion && <Input value={promotionName} onChange={(e) => setPromotionName(e.target.value)} />}
+            <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
             <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>
         </div>
