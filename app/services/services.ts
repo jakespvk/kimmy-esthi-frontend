@@ -3,6 +3,17 @@ import { Service, ServiceCardType } from "../types";
 // Signature Facials
 export const signatureFacials: Service[] = [
   {
+    serviceName: "realtor",
+    promotionName: "test-promo",
+    serviceType: ServiceCardType.Facial,
+    cardTitle: "☀️ REALTOR",
+    cardContent: "Personalized facial for luminous, refreshed skin.",
+    cardImgSrc: "https://images.squarespace-cdn.com/content/v1/54ab19d1e4b01ff9ee6258e2/1428977878229-B4ME0YAK6RU0P83JO3GL/iStock_000026513352_Large.jpg?format=1500w",
+    cardOverlayContent: "A 65-minute personalized facial designed to cleanse, exfoliate, and hydrate while melting away tension. Each step is customized to your skin's unique needs, leaving it soft, balanced, and radiant, the perfect reset for your complexion and your mind.",
+    tags: ["65 min"],
+    price: "$55",
+  },
+  {
     serviceName: "daydream",
     serviceType: ServiceCardType.Facial,
     cardTitle: "☀️ Day Dream",

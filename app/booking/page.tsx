@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, use, useMemo } from 'react';
+import { useState, useEffect, use } from 'react';
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
@@ -24,7 +24,7 @@ const today = new Date(new Date().setHours(0, 0, 0, 0));
 export default function AppointmentsPage(
   props0:
     {
-      searchParams: Promise<{ appointmentType: string }>
+      searchParams: Promise<{ appointmentType: string, promotionName?: string }>
     }
 ) {
   const searchParams = use(props0.searchParams);
@@ -33,12 +33,23 @@ export default function AppointmentsPage(
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
 
   const getAppointmentDatesAndStatuses = async () => {
-    const res = await fetch(`${baseUrl}/appointments/status`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+
+    let res;
+    if (searchParams.promotionName) {
+      res = await fetch(`${baseUrl}/appointments/promotion/status/${searchParams.promotionName}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } else {
+      res = await fetch(`${baseUrl}/appointments/status`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
 
     if (!res.ok) {
       console.error("err:");
@@ -52,12 +63,12 @@ export default function AppointmentsPage(
     if (selectedDate === undefined) return;
     const formattedDate = format(selectedDate, "MM-dd-yyyy");
     try {
-      const response = await fetch(`${baseUrl}/appointments/${formattedDate}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      let response;
+      if (searchParams.promotionName) {
+        response = await fetch(`${baseUrl}/appointments/${formattedDate}/promotion/${searchParams.promotionName}`);
+      } else {
+        response = await fetch(`${baseUrl}/appointments/${formattedDate}`);
+      }
 
       if (!response.ok) {
         throw new Error("network response was not ok");

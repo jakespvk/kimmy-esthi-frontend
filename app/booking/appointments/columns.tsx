@@ -43,7 +43,7 @@ export const columns: ColumnDef<Appointment>[] = [
       // and carry it over to the scheduling form...
       const appointment = row.original
 
-      if (appointment.status == true) {
+      if (appointment.status) {
         return <div>
           {/* @ts-ignore */}
           <a type="button" disabled

@@ -1,12 +1,13 @@
 import Link from "next/link"
 
-export const FancyButton = ({ cardLinkTo, canHover, appointmentType }: { cardLinkTo: string, canHover: boolean | undefined, appointmentType: string }) => {
+export const FancyButton = ({ cardLinkTo, canHover, appointmentType, promotionName }: { cardLinkTo: string, canHover: boolean | undefined, appointmentType: string, promotionName?: string }) => {
   return (
     <Link
       href={{
         pathname: cardLinkTo,
         query: {
           appointmentType: appointmentType,
+          promotionName: promotionName,
         },
       }}
       type="button"

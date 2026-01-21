@@ -6,7 +6,7 @@ import { FancyButton } from './fancyButton';
 import { useEffect, useState } from 'react';
 import { coiny } from '../fonts';
 
-const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardImgSrc, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
+const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, cardContent, cardImgSrc, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, promotionName?: string, serviceType: ServiceCardType, cardTitle: string, cardContent: string, cardImgSrc: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
   const [prefersHover, setPrefersHover] = useState(true);
   const [clicked, setClicked] = useState(false);
   useEffect(() => setPrefersHover(window.matchMedia('(hover: hover)').matches), []);
@@ -60,7 +60,7 @@ const ServicesCards = ({ serviceName, serviceType, cardTitle, cardContent, cardI
               {!notBookable &&
                 // TODO
                 <div className={"card-actions justify-center items-end grow " + ((prefersHover) ? "hover:touch-auto pointer-events-auto" : (clicked) ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none")}>
-                  <FancyButton cardLinkTo={"/booking"} canHover={prefersHover} appointmentType={serviceName} />
+                  <FancyButton cardLinkTo={"/booking"} canHover={prefersHover} appointmentType={serviceName} promotionName={promotionName} />
                 </div>
               }
             </div>

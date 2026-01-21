@@ -32,6 +32,7 @@ export enum ServiceCardType {
 
 export interface Service {
   serviceName: string;
+  promotionName?: string;
   serviceType: ServiceCardType;
   cardTitle: string;
   cardContent: string;

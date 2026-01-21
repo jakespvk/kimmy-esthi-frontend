@@ -3,9 +3,9 @@
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { FormEvent, useState } from "react"
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { create } from "domain";
+import { PromotionsSelector } from "./promotions-selector";
+import { Label } from "@/components/ui/label";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -58,13 +58,24 @@ export default function NewAppointments() {
       });
     }
     const token = localStorage.getItem("super-secret-token");
-    const response = await fetch(`${baseUrl}/admin/${token}/appointments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(appointments),
-    });
+    let response;
+    if (createPromotion) {
+      response = await fetch(`${baseUrl}/admin/${token}/appointments/promotion`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointments),
+      });
+    } else {
+      response = await fetch(`${baseUrl}/admin/${token}/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointments),
+      });
+    }
 
     if (!response.ok) {
       setResponseText("Error adding appointments: " + response.statusText);
@@ -154,8 +165,11 @@ export default function NewAppointments() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
-            <Checkbox checked={createPromotion} onCheckedChange={() => toggleCreatePromotion()} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" id="archivedToggle" />
-            {createPromotion && <Input value={promotionName} onChange={(e) => setPromotionName(e.target.value)} />}
+            <div className="md:mt-3 flex flex-wrap items-center">
+              <Checkbox type="button" id="promotion-checkbox" checked={createPromotion} onCheckedChange={() => toggleCreatePromotion()} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" />
+              <Label htmlFor="promotion-checkbox" className="ml-2">Assign to a promotion?</Label>
+            </div>
+            {createPromotion && <PromotionsSelector setPromotionName={setPromotionName} />}
             <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
             <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>

@@ -44,6 +44,7 @@ export default function ScheduleAppointment(
     searchParams: Promise<{
       appointmentId: string;
       appointmentType: string;
+      promotionName?: string;
       preferredName?: string;
       email?: string;
       phoneNumber?: string;
@@ -111,8 +112,13 @@ export default function ScheduleAppointment(
             },
             skinConcerns: values.skinConcerns,
           },
+          promotion: {
+            name: searchParams.promotionName ?? "",
+          }
         }),
       });
+
+      console.log(response);
 
       if (!response.ok) {
         throw new Error("network response was not ok");
@@ -209,8 +215,7 @@ export default function ScheduleAppointment(
                 )}
               />
               <div className="w-full flex justify-center">
-                <Button type="submit" className="btn p-1 mx-1 max-w-32 w-32 min-w-fit text-white bg-gradient-to-r from-amber-400 to-amber-600 
-                border-amber-500 hover:from-amber-300 hover:to-amber-500 hover:border-amber-400">
+                <Button type="submit" className="btn p-1 mx-1 max-w-32 w-32 min-w-fit text-white bg-gradient-to-r from-amber-400 to-amber-600 border-amber-500 hover:from-amber-300 hover:to-amber-500 hover:border-amber-400">
                   Submit
                 </Button>
               </div>
