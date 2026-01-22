@@ -124,12 +124,12 @@ export default function ScheduleAppointment(
         throw new Error("network response was not ok");
       }
 
-      let result = await response.text();
-      setResult(result.replace(/"/g, ""));
+      setResult("Appointment request sent! Redirecting you to Consent Form");
       setIsEnabled(true);
+      let result = await response.json();
       form.reset();
       console.log(result);
-      router.push("/booking/scheduleAppointment/consentForm?appointmentId=" + searchParams.appointmentId);
+      router.push(`/booking/scheduleAppointment/consentForm?appointmentId=${searchParams.appointmentId}&clientId=${result}`);
     } catch (error) {
       console.error("Error posting data: ", error);
       return;

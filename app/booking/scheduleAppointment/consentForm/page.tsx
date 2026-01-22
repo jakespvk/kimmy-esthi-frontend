@@ -11,16 +11,21 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 
 const ConsentForm = (props: {
   searchParams: Promise<{
     appointmentId: string;
+    clientId: string;
   }>;
 }) => {
   const [printedName, setPrintedName] = useState<string>('');
   const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
   const [statements, setStatements] = useState<InitialedStatement[]>(initialedStatements);
+  const [response, setResponse] = useState('');
+
+  const router = useRouter();
 
   function updateStatement(idx: number) {
     console.log(signature);
@@ -30,13 +35,25 @@ const ConsentForm = (props: {
   }
 
   async function onSubmit() {
-    await submitConsentForm(
-      (await props.searchParams).appointmentId, 
-      printedName, 
-      statements.filter((s) => s.initialed).map((s) => s.statement), 
-      initials, 
+    if (statements.filter(s => s.initialed).length !== statements.length) {
+      alert("must initial them all");
+    }
+    const result = await submitConsentForm(
+      (await props.searchParams).clientId,
+      printedName,
+      statements.filter((s) => s.initialed).map((s) => s.statement),
+      initials,
       signature
     );
+
+    if (result) {
+      setResponse("Thank you for filling out the consent form!");
+      setTimeout(() => setResponse(""), 10000);
+      router.push("/services");
+    } else {
+      setResponse("Something went wrong... please try again");
+      setTimeout(() => setResponse(""), 30000);
+    }
   }
 
   return (
@@ -85,6 +102,7 @@ const ConsentForm = (props: {
             onSave={setSignature}
           />
           <button className="btn" onClick={onSubmit}>Submit</button>
+          <p>{response}</p>
         </div>
       </div>
     </div >
