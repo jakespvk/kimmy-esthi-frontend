@@ -1,9 +1,13 @@
+"use client";
+
 import ServicesCards from './services_cards'
 import Headline from '../about/headline'
 import { glassAntiqua } from '../fonts'
-import { signatureFacials, facialPackages, serviceAddOns } from './services'
+import { ServicesContext } from '@/context/ServicesContext'
+import { useContext } from 'react';
 
 export default function ServicesPage() {
+  const services = useContext(ServicesContext);
   return (
     <>
       <Headline text="SunsetKimcare Services" />
@@ -20,7 +24,7 @@ export default function ServicesPage() {
 
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {signatureFacials.map((service, index) => (
+          {services.signatureFacials.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>
@@ -38,7 +42,7 @@ export default function ServicesPage() {
 
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {facialPackages.map((service, index) => (
+          {services.facialPackages.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>
@@ -55,7 +59,7 @@ export default function ServicesPage() {
       </div>
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {serviceAddOns.map((service, index) => (
+          {services.serviceAddOns.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>

@@ -28,7 +28,6 @@ const ConsentForm = (props: {
   const router = useRouter();
 
   function updateStatement(idx: number) {
-    console.log(signature);
     if (statements[idx]?.initialed) statements[idx].initialed = false;
     else statements[idx].initialed = true;
     setStatements([...statements]);
@@ -62,8 +61,8 @@ const ConsentForm = (props: {
         <Headline text="Consent Form" />
       </div>
       <div className='mx-5 lg:flex flex-col justify-center items-center'>
-        <Label className='w-max'>Print Name:</Label>
-        <Input type="text" value={printedName} onChange={(e) => setPrintedName(e.target.value)} />
+        <Label className='w-max justify-self-start'>Print Name:</Label>
+        <Input className="max-w-96" type="text" value={printedName} onChange={(e) => setPrintedName(e.target.value)} />
         <div className='mt-5 flex flex-col justify-center items-center'>
           <Label className=''>Please enter your initials here. To apply them, check the boxes:</Label>
           <SignaturePad

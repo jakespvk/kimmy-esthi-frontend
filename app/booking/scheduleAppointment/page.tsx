@@ -128,7 +128,6 @@ export default function ScheduleAppointment(
       setIsEnabled(true);
       let result = await response.json();
       form.reset();
-      console.log(result);
       router.push(`/booking/scheduleAppointment/consentForm?appointmentId=${searchParams.appointmentId}&clientId=${result}`);
     } catch (error) {
       console.error("Error posting data: ", error);

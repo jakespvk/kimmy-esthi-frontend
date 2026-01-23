@@ -3,15 +3,15 @@
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { FormEvent, useState } from "react"
-import { Checkbox } from "@/components/ui/checkbox";
 import { PromotionsSelector } from "./promotions-selector";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Appointment {
   datetime: string;
-  status: number;
+  status: boolean;
   promotion?: Object;
 }
 
@@ -21,8 +21,10 @@ export default function NewAppointments() {
 
   const [selectedDates, setSelectedDates] = useState<Date[] | undefined>();
   const [responseText, setResponseText] = useState('');
-  const [createPromotion, setCreatePromotion] = useState(false);
   const [promotionName, setPromotionName] = useState('');
+  const [selectedPromotionId, setSelectedPromotionId] = useState("0");
+  const [statusBooked, setStatusBooked] = useState(false);
+  console.log(selectedPromotionId);
 
   const timeInputsInitialState = [
     {
@@ -46,20 +48,22 @@ export default function NewAppointments() {
         const hours = parseInt(time.value.substring(0, 2));
         const minutes = parseInt(time.value.substring(3, 5));
         const datetime = format(new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes), "yyyy-MM-dd'T'HH:mm:ss");
-        if (createPromotion) {
+        if (selectedPromotionId === "1") {
           if (promotionName === "") {
             alert("Are you sure you want to create an empty promotion?");
             return;
           }
-          appointments.push({ datetime: datetime, status: 0, promotion: { name: promotionName } });
+          appointments.push({ datetime: datetime, status: statusBooked, promotion: { name: promotionName } });
+        } else if (selectedPromotionId === "0") {
+          appointments.push({ datetime: datetime, status: statusBooked });
         } else {
-          appointments.push({ datetime: datetime, status: 0 });
+          appointments.push({ datetime: datetime, status: statusBooked, promotion: { id: selectedPromotionId } });
         }
       });
     }
     const token = localStorage.getItem("super-secret-token");
     let response;
-    if (createPromotion) {
+    if (selectedPromotionId !== "0") {
       response = await fetch(`${baseUrl}/admin/${token}/appointments/promotion`, {
         method: 'POST',
         headers: {
@@ -118,10 +122,6 @@ export default function NewAppointments() {
     });
   };
 
-  function toggleCreatePromotion() {
-    createPromotion ? setCreatePromotion(false) : setCreatePromotion(true);
-  }
-
   return (
     <>
       <div className="flex flex-col items-center justify-center my-5">
@@ -165,11 +165,11 @@ export default function NewAppointments() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center py-2">
-            <div className="md:mt-3 flex flex-wrap items-center">
-              <Checkbox type="button" id="promotion-checkbox" checked={createPromotion} onCheckedChange={() => toggleCreatePromotion()} className="data-[state=unchecked]:border-accent data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-content" />
-              <Label htmlFor="promotion-checkbox" className="ml-2">Assign to a promotion?</Label>
+            <PromotionsSelector selectedPromotionId={selectedPromotionId} setSelectedPromotionId={setSelectedPromotionId} setNewPromotionName={setPromotionName} />
+            <div className="flex items-center justify-center mx-2">
+              <Checkbox defaultChecked={statusBooked} onCheckedChange={() => setStatusBooked} className="checked:bg-accent checked:text-accent-content ring-accent" id="booked-checkbox" />
+              <Label className="ml-2 wrap" htmlFor="booked-checkbox">Set status of created appointments to booked</Label>
             </div>
-            {createPromotion && <PromotionsSelector setPromotionName={setPromotionName} />}
             <button className="rounded-full border px-4 py-2 my-5 hover:bg-accent-content hover:text-base-content" type="submit">submit</button>
             <p className={responseText.startsWith("Error") ? "text-red-700" : "text-green-700"}>{responseText}</p>
           </div>

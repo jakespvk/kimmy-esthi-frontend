@@ -26,9 +26,9 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
                 src={cardImgSrc}
                 alt="Facial" />
             </figure>
-            <div className={"card-body mt-0 pt-0 " + (packageItems !== undefined && packageItems.length > 0 ? "h-72 lg:h-88" : (serviceType === ServiceCardType.AddOn ? "h-24 lg:h-28 flex items-center justify-center" : "h-44"))}>
+            <div className={"card-body mt-0 pt-0 " + (packageItems && packageItems.length > 0 ? "h-72 lg:h-88" : (serviceType === ServiceCardType.AddOn ? "h-24 lg:h-28 flex items-center justify-center" : "h-44"))}>
               <h2 id="card_title" className={coiny.className + " card-title tracking-wide text-center " + (serviceType === ServiceCardType.AddOn ? "text-lg lg:text-xl grow my-[50%]" : "text-2xl my-2")}>{cardTitle}</h2>
-              {packageItems !== undefined && packageItems.length > 0
+              {packageItems && packageItems.length > 0
                 &&
                 <ul className="mx-4 list-disc lg:text-lg">
                   {packageItems.map((item, idx) => <li key={idx} className="">{item}</li>)}

@@ -37,8 +37,6 @@ export default function ListAppointments() {
       });
     }
     try {
-      console.log(url);
-
       const response = await fetch(url,
         {
           method: 'GET',
