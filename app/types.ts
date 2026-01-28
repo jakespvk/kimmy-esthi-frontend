@@ -45,7 +45,7 @@ export interface Service {
 }
 
 export interface ConsentFormStatement {
-  id: number;
+  id?: number;
   statement: string;
   isActive: boolean;
 }

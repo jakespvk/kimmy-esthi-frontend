@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, use, Suspense } from 'react';
 import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
@@ -97,31 +97,33 @@ export default function AppointmentsPage(
       <BookingRequestWarningText />
 
       <label className='flex items-center justify-center text-center mx-5 mb-2'>Select a date to see available appointments:</label>
-      <div className='flex flex-col md:flex-row space-y-3 items-center md:items-start justify-center'>
-        <Calendar
-          mode="single"
-          selected={selectedDate}
-          onSelect={setSelectedDate}
-          disabled={(date: Date) => date < today}
-          className="rounded-xl border shadow-sm"
-          components={{
-            DayButton: ({ children, modifiers, day, ...props }) => {
-              const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).toLocaleDateString() === day.date.toLocaleDateString());
-              const dayWithAppointmentsStatus = dayWithAppointments?.status;
+      <Suspense fallback={<div>loading...</div>}>
+        <div className='flex flex-col md:flex-row space-y-3 items-center md:items-start justify-center'>
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={setSelectedDate}
+            disabled={(date: Date) => date < today}
+            className="rounded-xl border shadow-sm"
+            components={{
+              DayButton: ({ children, modifiers, day, ...props }) => {
+                const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).toLocaleDateString() === day.date.toLocaleDateString());
+                const dayWithAppointmentsStatus = dayWithAppointments?.status;
 
-              return (
-                <CalendarDayButton day={day} modifiers={modifiers} {...props}>
-                  {children}
-                  <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8 text-amber-600' /> : dayWithAppointments && <Dot className='size-8 text-red-600' />}</span>
-                </CalendarDayButton>
-              )
-            },
-          }}
-        />
-        <div className='px-5 min-w-full md:min-w-fit'>
-          <DataTable columns={columns} data={data} />
+                return (
+                  <CalendarDayButton day={day} modifiers={modifiers} {...props}>
+                    {children}
+                    <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8 text-amber-600' /> : dayWithAppointments && <Dot className='size-8 text-red-600' />}</span>
+                  </CalendarDayButton>
+                )
+              },
+            }}
+          />
+          <div className='px-5 min-w-full md:min-w-fit'>
+            <DataTable columns={columns} data={data} />
+          </div>
         </div>
-      </div>
+      </Suspense>
 
       <div className="pb-5"></div>
     </>
