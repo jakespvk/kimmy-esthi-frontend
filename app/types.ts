@@ -44,4 +44,10 @@ export interface Service {
   price?: string;
 }
 
+export interface ConsentFormStatement {
+  id: number;
+  statement: string;
+  isActive: boolean;
+}
+
 export type Base64URLString = string | null;
