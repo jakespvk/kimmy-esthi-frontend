@@ -1,5 +1,5 @@
 import { fetchServices } from "../api";
-import { Service, ServiceCardType } from "../types";
+import { Service, ServiceType } from "../types";
 
 // Signature Facials
 // export const signatureFacials: Service[] = await fetchServices(ServiceCardType.Facial);

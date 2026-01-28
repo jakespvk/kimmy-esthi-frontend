@@ -24,7 +24,6 @@ export default function NewAppointments() {
   const [promotionName, setPromotionName] = useState('');
   const [selectedPromotionId, setSelectedPromotionId] = useState("0");
   const [statusBooked, setStatusBooked] = useState(false);
-  console.log(selectedPromotionId);
 
   const timeInputsInitialState = [
     {

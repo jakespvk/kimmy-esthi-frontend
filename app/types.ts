@@ -24,7 +24,7 @@ export interface ScheduledAppointment {
   skinConcerns: string;
 }
 
-export enum ServiceCardType {
+export enum ServiceType {
   Facial = "Facial",
   Package = "Package",
   AddOn = "AddOn",
@@ -33,7 +33,7 @@ export enum ServiceCardType {
 export interface Service {
   serviceName: string;
   promotionName?: string;
-  serviceType: ServiceCardType;
+  serviceType: ServiceType;
   cardTitle: string;
   cardContent: string;
   cardImgSrc: string;

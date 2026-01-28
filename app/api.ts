@@ -1,4 +1,4 @@
-import { Base64URLString, Service, ServiceCardType } from "./types";
+import { Base64URLString, Service, ServiceType } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -41,8 +41,8 @@ export async function fetchServices(): Promise<Service[]> {
   return result;
 }
 
-export async function fetchServicesSearch(type: ServiceCardType): Promise<Service[]> {
-  const response = await fetch(`${baseUrl}/services/search?serviceCardType=${type}`);
+export async function fetchServicesSearch(type: ServiceType): Promise<Service[]> {
+  const response = await fetch(`${baseUrl}/services/search?serviceType=${type}`);
   if (!response.ok) {
     console.error("err:", response.statusText);
   }
