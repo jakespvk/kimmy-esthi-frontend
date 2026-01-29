@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Edit, Save } from "lucide-react"
 import { useState } from "react"
 
-export const ConsentFormStatementComponent = (props: { consentFormStatement: ConsentFormStatement, editMode: boolean }) => {
+export const ConsentFormStatementComponent = (props: { consentFormStatement: ConsentFormStatement, editMode: boolean, statementsList: ConsentFormStatement[] }) => {
   const [editMode, setEditMode] = useState(props.editMode);
   const [statement, setStatement] = useState(props.consentFormStatement.statement);
   const [isActive, setIsActive] = useState(props.consentFormStatement.isActive);
@@ -15,8 +15,8 @@ export const ConsentFormStatementComponent = (props: { consentFormStatement: Con
     <div className="flex justify-between items-start">
       <Input autoFocus defaultValue={statement} onChange={(e) => setStatement(e.target.value)} />
       <Checkbox defaultChecked={isActive} onCheckedChange={() => setIsActive(isActive ? false : true)} />
-      <Button onClick={() => addOrUpdateStatement(statement, isActive, props.consentFormStatement.id)}><Save className="fill-accent-content text-accent bg-accent-content" /></Button>
-    </div>
+      <Button onClick={() => { addOrUpdateStatement(statement, isActive, props.consentFormStatement.id); props.statementsList.push({ id: 0, statement: statement, isActive: isActive }); setEditMode(false); }}><Save className="fill-accent-content text-accent bg-accent-content" /></Button>
+    </div >
   )
 
   else return (

@@ -1,6 +1,6 @@
 import { Base64URLString, ConsentFormStatement, Service, ServiceType } from "./types";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function submitConsentForm(clientId: string, printedName: string, initialedStatements: string[], initials: Base64URLString, signature: Base64URLString) {
   const response = await fetch(`${baseUrl}/consentForm`, {
@@ -63,18 +63,23 @@ export async function addOrUpdateStatement(statement: string, isActive: boolean,
   let response;
   if (!id) {
     response = await fetch(`${baseUrl}/consentForm/statements`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ statement: statement, isActive: isActive }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   } else {
     response = await fetch(`${baseUrl}/consentForm/statements`, {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify({ id: id, statement: statement, isActive: isActive }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   }
   if (!response.ok) {
     console.error("err:", response.statusText);
   }
-  const result = await response.json();
-  return result;
+  return response;
 }
