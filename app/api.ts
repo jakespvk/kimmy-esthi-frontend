@@ -81,5 +81,6 @@ export async function addOrUpdateStatement(statement: string, isActive: boolean,
   if (!response.ok) {
     console.error("err:", response.statusText);
   }
-  return response;
+  let result = await response.json();
+  return result;
 }

@@ -2,27 +2,37 @@ import { addOrUpdateStatement } from "@/app/api"
 import { ConsentFormStatement } from "@/app/types"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import { Label } from "@radix-ui/react-label"
 import { Edit, Save } from "lucide-react"
 import { useState } from "react"
 
-export const ConsentFormStatementComponent = (props: { consentFormStatement: ConsentFormStatement, editMode: boolean, statementsList: ConsentFormStatement[] }) => {
+export const ConsentFormStatementComponent = (props: { consentFormStatement: ConsentFormStatement, editMode: boolean, refreshStatements: Function }) => {
   const [editMode, setEditMode] = useState(props.editMode);
   const [statement, setStatement] = useState(props.consentFormStatement.statement);
   const [isActive, setIsActive] = useState(props.consentFormStatement.isActive);
 
   if (editMode) return (
-    <div className="flex justify-between items-start">
-      <Input autoFocus defaultValue={statement} onChange={(e) => setStatement(e.target.value)} />
-      <Checkbox defaultChecked={isActive} onCheckedChange={() => setIsActive(isActive ? false : true)} />
-      <Button onClick={() => { addOrUpdateStatement(statement, isActive, props.consentFormStatement.id); props.statementsList.push({ id: 0, statement: statement, isActive: isActive }); setEditMode(false); }}><Save className="fill-accent-content text-accent bg-accent-content" /></Button>
+    <div className="flex flex-wrap justify-between items-center my-3">
+      <InputGroup className="max-w-xs">
+        <InputGroupInput autoFocus defaultValue={statement} onChange={(e) => setStatement(e.target.value)} />
+        <InputGroupAddon align="inline-end">
+          <Button className="ml-2 bg-accent h-8 w-8 hover:bg-accent/90" onClick={() => { addOrUpdateStatement(statement, isActive, props.consentFormStatement.id); props.refreshStatements(); setEditMode(false); }}><Save className="text-accent-content bg-accent" /></Button>
+        </InputGroupAddon>
+      </InputGroup>
+      <Checkbox className="m-2 ml-0" id="isActiveConsentFormStatement" defaultChecked={isActive} onCheckedChange={() => setIsActive(isActive ? false : true)} />
+      <Label className="my-2" htmlFor="isActiveConsentFormStatement">Set active Consent Form statement</Label>
     </div >
   )
 
   else return (
-    <div className="flex justify-between items-start">
-      <p>{props.consentFormStatement.statement}</p>
-      <Button onClick={() => setEditMode(true)}><Edit className="fill-accent-content text-accent bg-accent-content" /></Button>
+    <div className="flex justify-between items-start *:mb-3">
+      <p className="flex-wrap text-pretty">{statement}</p>
+      <Button className="ml-2 h-8 w-8 bg-accent hover:bg-accent/90" onClick={() => setEditMode(true)}><Edit className="text-accent-content bg-accent" /></Button>
     </div>
   )
 }
