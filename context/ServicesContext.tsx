@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchServicesSearch, fetchConsentFormStatements } from "@/app/api";
+import { fetchServicesSearch, fetchConsentFormStatements, fetchActiveConsentFormStatements } from "@/app/api";
 import { ServiceType } from "@/app/types";
 import { createContext } from "react";
 
@@ -9,4 +9,5 @@ export const ServicesContext = createContext({
   facialPackages: await fetchServicesSearch(ServiceType.Package),
   serviceAddOns: await fetchServicesSearch(ServiceType.AddOn),
   consentFormStatements: await fetchConsentFormStatements(),
+  activeConsentFormStatements: await fetchActiveConsentFormStatements(),
 });

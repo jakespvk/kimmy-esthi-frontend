@@ -59,6 +59,15 @@ export async function fetchConsentFormStatements(): Promise<ConsentFormStatement
   return result;
 }
 
+export async function fetchActiveConsentFormStatements(): Promise<ConsentFormStatement[]> {
+  const response = await fetch(`${baseUrl}/consentForm/statements/active`);
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+  const result = await response.json();
+  return result;
+}
+
 export async function addOrUpdateStatement(statement: string, isActive: boolean, id?: number) {
   let response;
   if (!id) {

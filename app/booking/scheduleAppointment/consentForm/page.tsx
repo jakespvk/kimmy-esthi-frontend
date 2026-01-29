@@ -22,7 +22,7 @@ const ConsentForm = (props: {
   const [printedName, setPrintedName] = useState<string>('');
   const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
-  const initialConsentFormStatements = useContext(ServicesContext).consentFormStatements;
+  const initialConsentFormStatements = useContext(ServicesContext).activeConsentFormStatements;
   const [consentFormStatements, setConsentFormStatements] = useState<ConsentFormStatement[]>(initialConsentFormStatements);
   const [response, setResponse] = useState('');
 
