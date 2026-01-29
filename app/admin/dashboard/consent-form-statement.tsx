@@ -31,7 +31,7 @@ export const ConsentFormStatementComponent = (props: { consentFormStatement: Con
 
   else return (
     <div className="flex justify-between items-start *:mb-3">
-      <p className="flex-wrap text-pretty">{statement}</p>
+      <p className={`flex-wrap text-pretty ` + (!isActive && "text-red-700 line-through")}>{statement}</p>
       <Button className="ml-2 h-8 w-8 bg-accent hover:bg-accent/90" onClick={() => setEditMode(true)}><Edit className="text-accent-content bg-accent" /></Button>
     </div>
   )
