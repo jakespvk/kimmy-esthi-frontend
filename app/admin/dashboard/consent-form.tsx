@@ -3,7 +3,7 @@ import { ServicesContext } from "@/context/ServicesContext";
 import { ConsentFormStatementComponent } from "./consent-form-statement";
 import { Button } from "@/components/ui/button";
 import { fetchConsentFormStatements } from "@/app/api";
-import { Plus, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 
 export default function ConsentForm() {
   const initialConsentFormStatements = useContext(ServicesContext).consentFormStatements;

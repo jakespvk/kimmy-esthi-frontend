@@ -48,6 +48,7 @@ export interface ConsentFormStatement {
   id?: number;
   statement: string;
   isActive: boolean;
+  initialed?: boolean;
 }
 
 export type Base64URLString = string | null;

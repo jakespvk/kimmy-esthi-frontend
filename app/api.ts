@@ -2,7 +2,7 @@ import { Base64URLString, ConsentFormStatement, Service, ServiceType } from "./t
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function submitConsentForm(clientId: string, printedName: string, initialedStatements: string[], initials: Base64URLString, signature: Base64URLString) {
+export async function submitConsentForm(printedName: string, initialedStatements: string[], initials: Base64URLString, signature: Base64URLString, clientId?: string) {
   const response = await fetch(`${baseUrl}/consentForm`, {
     method: 'POST',
     headers: {

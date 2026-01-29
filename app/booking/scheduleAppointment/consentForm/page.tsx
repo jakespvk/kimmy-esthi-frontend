@@ -1,48 +1,49 @@
 "use client";
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
-import { Base64URLString } from '@/app/types';
+import { Base64URLString, ConsentFormStatement } from '@/app/types';
 import SignaturePad from '@/components/ui/signature-pad';
 import { Eraser, Save } from 'lucide-react';
-import { initialedStatements, InitialedStatement } from './initialed-statements';
 import Headline from '@/app/about/headline';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
+import { ServicesContext } from '@/context/ServicesContext';
 
 const ConsentForm = (props: {
   searchParams: Promise<{
     appointmentId: string;
-    clientId: string;
+    clientId?: string;
   }>;
 }) => {
   const [printedName, setPrintedName] = useState<string>('');
   const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
-  const [statements, setStatements] = useState<InitialedStatement[]>(initialedStatements);
+  const initialConsentFormStatements = useContext(ServicesContext).consentFormStatements;
+  const [consentFormStatements, setConsentFormStatements] = useState<ConsentFormStatement[]>(initialConsentFormStatements);
   const [response, setResponse] = useState('');
 
   const router = useRouter();
 
   function updateStatement(idx: number) {
-    if (statements[idx]?.initialed) statements[idx].initialed = false;
-    else statements[idx].initialed = true;
-    setStatements([...statements]);
+    if (consentFormStatements[idx]?.initialed) consentFormStatements[idx].initialed = false;
+    else consentFormStatements[idx].initialed = true;
+    setConsentFormStatements([...consentFormStatements]);
   }
 
   async function onSubmit() {
-    if (statements.filter(s => s.initialed).length !== statements.length) {
+    if (consentFormStatements.filter(s => s.initialed).length !== consentFormStatements.length) {
       alert("must initial them all");
     }
     const result = await submitConsentForm(
-      (await props.searchParams).clientId,
       printedName,
-      statements.filter((s) => s.initialed).map((s) => s.statement),
+      consentFormStatements.filter((s) => s.initialed).map((s) => s.statement),
       initials,
-      signature
+      signature,
+      (await props.searchParams).clientId
     );
 
     if (result) {
@@ -76,7 +77,7 @@ const ConsentForm = (props: {
           />
         </div>
         <ul>
-          {statements.map((stmt, idx) =>
+          {consentFormStatements.map((stmt, idx) =>
             <li className='flex items-center my-2' key={idx}> <div className='absolute'>
               {(stmt.initialed && initials)
                 ?
