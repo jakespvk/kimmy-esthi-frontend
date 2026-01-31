@@ -1,10 +1,20 @@
 'use client';
 
-import { ServiceType } from '../types';
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { ServiceType } from '../../app/types';
 import { FancyButton } from './fancyButton';
 
 import { useEffect, useState } from 'react';
-import { coiny } from '../fonts';
+import { coiny } from '../../app/fonts';
 
 const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, cardContent, cardImgSrc, cardOverlayContent, packageItems, tags, notBookable, price }: { serviceName: string, promotionName?: string, serviceType: ServiceType, cardTitle: string, cardContent: string, cardImgSrc: string, cardOverlayContent?: string, packageItems?: string[], tags?: string[], notBookable?: boolean, price?: string }) => {
   const [prefersHover, setPrefersHover] = useState(true);
@@ -48,8 +58,7 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
         </div>
         <div className={((!prefersHover && clicked) && "opacity-100") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
           <div className={
-            "card h-full bg-base-300 shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
-            // "card h-full backdrop-blur-xl bg-radial-[at_25%_35%] from-base-200 from-5% via-base-300 via-80% to-base-200 to-100% shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out border border-base-200 "
+            "card h-full text-accent-foreground bg-[rgb(230,150,23,0.7)] shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
             + (serviceType === ServiceType.AddOn ? "w-60" : "w-full lg:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0 &&

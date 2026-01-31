@@ -2,6 +2,7 @@
 @import "./signature-pad.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@plugin "daisyui";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -331,4 +332,12 @@ html, body {
 
 .fil0 {
   fill: #fffdef;
+}
+
+.headline {
+  @apply text-2xl md:text-5xl md:pt-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
+}
+
+.headline-gradient {
+  @apply bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
 }

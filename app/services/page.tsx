@@ -1,7 +1,7 @@
 "use client";
 
-import ServicesCards from './services_cards'
-import Headline from '../about/headline'
+import ServicesCards from '@/components/ui/services_cards'
+import Headline from '@/components/ui/headline'
 import { glassAntiqua } from '../fonts'
 import { ServicesContext } from '@/context/ServicesContext'
 import { useContext } from 'react';
@@ -69,4 +69,3 @@ export default function ServicesPage() {
     </>
   )
 }
-

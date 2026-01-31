@@ -23,7 +23,5 @@ module.exports = {
     themes: ["light"],
   },
   plugins: [
-    require("@tailwindcss/typography"),
-    require("tailwindcss-animate")
   ],
 }

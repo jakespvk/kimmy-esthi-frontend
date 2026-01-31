@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ChevronLeftIcon } from "lucide-react";
-import { glassAntiqua } from "../fonts";
+import { glassAntiqua } from "../../app/fonts";
 
 const Headline = ({ text }: { text: string }) => {
   const router = useRouter();
