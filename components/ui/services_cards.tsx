@@ -58,7 +58,7 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
         </div>
         <div className={((!prefersHover && clicked) && "opacity-100") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
           <div className={
-            "card h-full text-accent-foreground bg-[rgb(230,150,23,0.7)] shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
+            "card h-full bg-[oklch(0.7376_0.1623_71.39)] text-popover-foreground shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
             + (serviceType === ServiceType.AddOn ? "w-60" : "w-full lg:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0 &&
@@ -75,7 +75,7 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
             </div>
           </div>
         </div >
-      </div >
+      </div>
     </>
   )
 }
