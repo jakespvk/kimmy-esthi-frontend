@@ -11,12 +11,20 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 
 import { glassAntiqua, msMadi } from "../app/fonts";
 import {
   useEffect,
   useState } from "react";
-import { Menu } from "lucide-react";
+import { ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  Menu } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,6 +61,8 @@ export default function Navbar() {
 }
 
 function MobileNavMenu() {
+  const [open, setOpen] = useState(false);
+
   function scrollTo(id: string) {
     const element = document.getElementById(id);
     if (element) {
@@ -66,18 +76,28 @@ function MobileNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger><Menu /></NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="w-96">
-              <ListItem href="/" title="Services">
-              </ListItem>
-              <ListItem href="/#signature-facials" title="> Signature Facials">
-                Our curated selection of facial treatments.
-              </ListItem>
-              <ListItem href="/#facial-packages" title="> Facial Packages">
-                Tailored package deals for the most bang for your buck.
-              </ListItem>
-              <ListItem href="/#facial-add-ons" title="> Add-ons">
-                Add-ons to enhance and customize your treatment experience.
-              </ListItem>
+            <ul className="w-96 max-w-[75vw]">
+              <NavigationMenuItem>
+                <Collapsible open={open} onOpenChange={setOpen}>
+                  <CollapsibleTrigger className={navigationMenuTriggerStyle()}>
+                    Services
+                    {open ? <ChevronUp className="ml-1" size={12} /> : <ChevronDown className="ml-1" size={12} />}
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <ul className="pl-4">
+                      <ListItem href="/#signature-facials" title="Signature Facials">
+                        Our curated selection of facial treatments.
+                      </ListItem>
+                      <ListItem href="/#facial-packages" title="Facial Packages">
+                        Tailored package deals for the most bang for your buck.
+                      </ListItem>
+                      <ListItem href="/#facial-add-ons" title="Add-ons">
+                        Add-ons to enhance and customize your treatment experience.
+                      </ListItem>
+                    </ul>
+                  </CollapsibleContent>
+                </Collapsible>
+              </NavigationMenuItem>
               <ListItem href="/#about" title="About">
               </ListItem>
               <ListItem href="/#socials" title="Socials">
