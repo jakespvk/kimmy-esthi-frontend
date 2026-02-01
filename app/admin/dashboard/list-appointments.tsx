@@ -4,7 +4,7 @@ import { DataTable } from "../../booking/appointments/data-table"
 import { useCallback, useEffect, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 import { AdminAppointment } from "@/app/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;

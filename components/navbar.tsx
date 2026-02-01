@@ -10,7 +10,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 
 import { glassAntiqua, msMadi } from "../app/fonts";
@@ -39,10 +38,10 @@ export default function Navbar() {
 
 
   return (
-    <div className={`sticky top-0 z-10 bg-popover py-4 px-8 flex justify-between items-center w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
+    <div className={`sticky top-0 z-10 bg-popover py-4 px-8 flex justify-between items-start w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
       <div className={glassAntiqua.className + ' flex flex-wrap items-center justify-start'}>
         <h1 className="text-2xl lg:text-3xl headline-gradient p-0 m-0">SunsetKimcare</h1>
-        <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 lg:ml-5 text-muted-foreground`}>
+        <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 min-[500px]:ml-5 text-muted-foreground`}>
           Let me make something clear... your skin
         </p>
       </div>

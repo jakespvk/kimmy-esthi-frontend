@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, use, Suspense } from 'react';
-import Headline from '../about/headline'
 import { columns } from "./appointments/columns"
 import { DataTable } from "./appointments/data-table"
 
@@ -11,6 +10,7 @@ import { Calendar, CalendarDayButton } from "@/components/ui/calendar"
 import { Appointment } from '../types'
 import { Dot } from 'lucide-react';
 import BookingRequestWarningText from '@/components/ui/booking-request-warning-text';
+import { glassAntiqua } from '../fonts';
 
 interface AppointmentDateTimeAndStatus {
   dateTime: Date;
@@ -92,7 +92,9 @@ export default function AppointmentsPage(
 
   return (
     <>
-      <Headline text={"Booking"} />
+      <div className="flex justify-center">
+        <h1 id="booking" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Booking</h1>
+      </div>
 
       <BookingRequestWarningText />
 

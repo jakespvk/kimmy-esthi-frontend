@@ -7,7 +7,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
-import { Label } from "@radix-ui/react-label"
+import { Label } from "@/components/ui/label"
 import { Edit, Save } from "lucide-react"
 import { useState } from "react"
 

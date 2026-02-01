@@ -1,5 +1,4 @@
-import InstagramEmbed from "../social/InstagramEmbed"
-// import Headline from "@/components/ui/headline"
+import InstagramEmbed from "@/components/InstagramEmbed"
 import { glassAntiqua } from "../fonts";
 
 const About = () => {
@@ -27,8 +26,6 @@ const About = () => {
           Whether you’re here for a glow-up, a deep reset, or to start your skincare journey, I can’t wait to meet you and help you fall in love with your skin again. 🤍
         </p>
       </div>
-
-      {/*<Headline text={"Socials"} />*/}
 
       <div className="flex justify-center">
         <h1 id="socials" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Socials</h1>

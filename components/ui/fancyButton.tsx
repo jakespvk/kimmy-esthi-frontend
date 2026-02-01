@@ -3,7 +3,7 @@ import { Button } from "./button";
 
 export const FancyButton = ({ cardLinkTo, canHover, appointmentType, promotionName }: { cardLinkTo: string, canHover: boolean | undefined, appointmentType: string, promotionName?: string }) => {
   return (
-    <Button variant="outline" asChild>
+    <Button asChild>
       <Link
         href={{
           pathname: cardLinkTo,

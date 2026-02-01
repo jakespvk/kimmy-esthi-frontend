@@ -4,7 +4,7 @@ import ServicesCards from '@/components/ui/services_cards'
 import { glassAntiqua } from './fonts'
 import { ServicesContext } from '@/context/ServicesContext'
 import { useContext } from 'react';
-import About from './about/page';
+import About from './about/about';
 
 export default function Home() {
   const services = useContext(ServicesContext);
