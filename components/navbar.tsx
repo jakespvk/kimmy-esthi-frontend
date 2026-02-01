@@ -16,7 +16,7 @@ import { glassAntiqua, msMadi } from "../app/fonts";
 import {
   useEffect,
   useState } from "react";
-import { Save } from "lucide-react";
+import { Menu } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,8 +40,8 @@ export default function Navbar() {
   return (
     <div className={`sticky top-0 z-10 bg-popover py-4 px-8 flex justify-between items-start w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
       <div className={glassAntiqua.className + ' flex flex-wrap items-center justify-start'}>
-        <h1 className="text-2xl lg:text-3xl headline-gradient p-0 m-0">SunsetKimcare</h1>
-        <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 min-[500px]:ml-5 text-muted-foreground`}>
+        <h1 className="text-2xl lg:text-3xl headline-gradient p-0 m-0 mr-3">SunsetKimcare</h1>
+        <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 text-muted-foreground`}>
           Let me make something clear... your skin
         </p>
       </div>
@@ -64,7 +64,7 @@ function MobileNavMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger><Save /></NavigationMenuTrigger>
+          <NavigationMenuTrigger><Menu /></NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="w-96">
               <ListItem href="/" title="Services">
@@ -105,7 +105,7 @@ function DesktopNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Services</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="w-96 right-0 left-auto">
+            <ul className="w-96">
               <ListItem href="/#signature-facials" title="Signature Facials">
                 Our curated selection of facial treatments.
               </ListItem>
