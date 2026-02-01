@@ -1,12 +1,13 @@
 import InstagramEmbed from "../social/InstagramEmbed"
-import Headline from "./headline"
+// import Headline from "@/components/ui/headline"
+import { glassAntiqua } from "../fonts";
 
 const About = () => {
   const classname = "text-lg md:text-xl py-3";
   return (
     <>
-      <div className="w-full">
-        <Headline text={"About SunsetKimcare"} />
+      <div className="flex justify-center">
+        <h1 id="about" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>About SunsetKimcare</h1>
       </div>
 
       <div className="lg:w-4/5 px-5 mx-auto my-auto">
@@ -27,7 +28,11 @@ const About = () => {
         </p>
       </div>
 
-      <Headline text={"Socials"} />
+      {/*<Headline text={"Socials"} />*/}
+
+      <div className="flex justify-center">
+        <h1 id="socials" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Socials</h1>
+      </div>
 
       <div className="text-center lg:w-2/3 px-5 mx-auto my-auto">
         <InstagramEmbed />

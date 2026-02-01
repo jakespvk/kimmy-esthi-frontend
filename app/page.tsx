@@ -4,19 +4,18 @@ import ServicesCards from '@/components/ui/services_cards'
 import { glassAntiqua } from './fonts'
 import { ServicesContext } from '@/context/ServicesContext'
 import { useContext } from 'react';
+import About from './about/page';
 
 export default function Home() {
   const services = useContext(ServicesContext);
   return (
     <>
-      <h1 className={`headline ${glassAntiqua.className}`}>SunsetKimcare Services</h1>
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="mainTitle" className="text-2xl md:text-5xl md:pt-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="signature-facials" className="scroll-mt-18 text-3xl md:text-5xl p-5 md:p-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Signature Facials
           </h1>
-          <h3 className="text-xl md:text-3xl md:mb-6">Select a facial:</h3>
         </div>
 
       </div>
@@ -32,7 +31,7 @@ export default function Home() {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="facial-packages" className="scroll-mt-18 text-3xl md:text-5xl p-5 md:p-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Packages
           </h1>
         </div>
@@ -50,7 +49,7 @@ export default function Home() {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="mainTitle" className="text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="facial-add-ons" className="scroll-mt-18 text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
             Facial Add-Ons
           </h1>
         </div>
@@ -63,6 +62,12 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/*<div className="flex justify-center">
+        <h1 className={`headline ${glassAntiqua.className}`}>About SunsetKimcare</h1>
+      </div>*/}
+
+      <About />
 
       <div className="pb-5"></div>
     </>

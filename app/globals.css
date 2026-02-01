@@ -137,14 +137,6 @@
 /* From Uiverse.io by MuhammadHasann */ 
 .jellybtn {
   position: relative;
-  padding: 12px 35px;
-  background: #fec195;
-  font-size: 17px;
-  font-weight: 500;
-  color: oklch(46.44% 0.111 37.85);
-  border: 3px solid #fec195;
-  border-radius: 8px;
-  box-shadow: 0 0 0 #fec1958c;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
@@ -216,8 +208,6 @@
 }
 
 .jellybtn:hover {
-  background-color: rgba(currentColor, 0.9);
-  color: #fec195;
   box-shadow: 0 0 25px #fec1958c;
 }
 
@@ -286,7 +276,7 @@
 }
 
 .headline {
-  @apply text-2xl md:text-5xl md:pt-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
+  @apply text-2xl md:text-7xl md:pt-5 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
 }
 
 .headline-gradient {
