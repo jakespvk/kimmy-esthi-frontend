@@ -1,7 +1,5 @@
 "use client"
 
-import Headline from "@/app/about/headline"
-
 import { useEffect, useState, use } from 'react';
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -22,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
 import BookingRequestWarningText from "@/components/ui/booking-request-warning-text";
+import { glassAntiqua } from '@/app/fonts';
 
 const formSchema = z.object({
   preferredName: z.string(),
@@ -81,7 +80,9 @@ export default function ScheduleAppointment(
         console.error("Error getting appointment data: ", err);
         return (
           <div>
-            <Headline text={"Schedule Appointment"} />
+            <div className="flex justify-center">
+              <h1 id="schedule-appointment" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Schedule Appointment</h1>
+            </div>
 
             <div className="flex justify-center">
               <p className="text-red-900">Error: appointment is no longer available :/</p>
@@ -137,8 +138,9 @@ export default function ScheduleAppointment(
 
   return (
     <>
-
-      <Headline text={"Schedule Appointment"} />
+      <div className="flex justify-center">
+        <h1 id="schedule-appointment" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Schedule Appointment</h1>
+      </div>
 
       <BookingRequestWarningText />
 
@@ -228,6 +230,11 @@ export default function ScheduleAppointment(
     </>
   )
 }
+
+
+
+
+
 
 
 

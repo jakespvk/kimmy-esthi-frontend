@@ -5,13 +5,13 @@ import { useContext, useState } from 'react';
 import { Base64URLString, ConsentFormStatement } from '@/app/types';
 import SignaturePad from '@/components/ui/signature-pad';
 import { Eraser, Save } from 'lucide-react';
-import Headline from '@/app/about/headline';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { ServicesContext } from '@/context/ServicesContext';
+import { glassAntiqua } from '@/app/fonts';
 
 const ConsentForm = (props: {
   searchParams: Promise<{
@@ -58,8 +58,8 @@ const ConsentForm = (props: {
 
   return (
     <div>
-      <div>
-        <Headline text="Consent Form" />
+      <div className="flex justify-center">
+        <h1 id="consent-form" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Consent Form</h1>
       </div>
       <div className='mx-5 lg:flex flex-col justify-center items-center'>
         <Label className='w-max justify-self-start'>Print Name:</Label>
