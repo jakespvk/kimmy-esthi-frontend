@@ -9,7 +9,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
 import { ServicesContext } from '@/context/ServicesContext';
 import { glassAntiqua } from '@/app/fonts';
 
@@ -25,8 +24,6 @@ const ConsentForm = (props: {
   const initialConsentFormStatements = useContext(ServicesContext).activeConsentFormStatements;
   const [consentFormStatements, setConsentFormStatements] = useState<ConsentFormStatement[]>(initialConsentFormStatements);
   const [response, setResponse] = useState('');
-
-  const router = useRouter();
 
   function updateStatement(idx: number) {
     if (consentFormStatements[idx]?.initialed) consentFormStatements[idx].initialed = false;
@@ -49,7 +46,6 @@ const ConsentForm = (props: {
     if (result) {
       setResponse("Thank you for filling out the consent form!");
       setTimeout(() => setResponse(""), 10000);
-      router.push("/services");
     } else {
       setResponse("Something went wrong... please try again");
       setTimeout(() => setResponse(""), 30000);

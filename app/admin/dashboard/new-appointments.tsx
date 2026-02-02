@@ -83,7 +83,7 @@ export default function NewAppointments() {
     if (!response.ok) {
       setResponseText("Error adding appointments: " + response.statusText);
       setTimeout(() => setResponseText(''), 30000);
-      console.error("err:", response);
+      console.error("err:", response.json());
       return;
     }
 
