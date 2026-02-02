@@ -230,14 +230,3 @@ export default function ScheduleAppointment(
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
