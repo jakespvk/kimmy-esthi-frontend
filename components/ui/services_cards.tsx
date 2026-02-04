@@ -19,7 +19,7 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
     <>
       <div className="relative group" onClick={() => toggleClicked()}>
         <div className="p-5">
-          <div className={"card bg-base-100 shadow-xl " + (serviceType === ServiceType.AddOn ? "w-60" : "w-80 lg:w-96")}>
+          <div className={"card rounded-3xl bg-base-100 shadow-xl " + (serviceType === ServiceType.AddOn ? "w-60" : "w-80 lg:w-96")}>
             <figure>
               <img
                 className={"w-full object-cover " + (serviceType === ServiceType.AddOn ? "h-40" : "h-52 lg:h-56")}
@@ -48,7 +48,7 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
         </div>
         <div className={((!prefersHover && clicked) && "opacity-100") + " p-5 absolute inset-0 opacity-0 hover:opacity-100 transition ease-[cubic-bezier((0.3,0.8,0.3,2.3))] duration-500 bg-blend-overlay"}>
           <div className={
-            "card h-full bg-radial-[at_50%_35%] from-amber-200 via-amber-400 to-amber-500 text-popover-content shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
+            "card rounded-3xl h-full bg-radial-[at_50%_35%] from-amber-200 via-amber-400 to-amber-500 text-popover-content shadow-[0_7px_20px_7px_rgb(230,150,23,0.7)] transition duration-200 ease-in-out"
             + (serviceType === ServiceType.AddOn ? "w-60" : "w-full lg:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0 &&
