@@ -13,7 +13,7 @@ export default function Home() {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="signature-facials" className="scroll-mt-18 text-3xl md:text-5xl p-5 md:p-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="signature-facials" className="subheading">
             Signature Facials
           </h1>
         </div>
@@ -31,7 +31,7 @@ export default function Home() {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="facial-packages" className="scroll-mt-18 text-3xl md:text-5xl p-5 md:p-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="facial-packages" className="subheading">
             Facial Packages
           </h1>
         </div>
@@ -49,7 +49,7 @@ export default function Home() {
       <div className="text-center lg:w-2/3 mx-auto my-auto">
 
         <div className={glassAntiqua.className}>
-          <h1 id="facial-add-ons" className="scroll-mt-18 text-2xl md:text-5xl p-5 md:p-10 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text">
+          <h1 id="facial-add-ons" className="subheading">
             Facial Add-Ons
           </h1>
         </div>

@@ -276,7 +276,11 @@
 }
 
 .headline {
-  @apply text-2xl md:text-7xl md:pt-5 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
+  @apply text-4xl md:text-7xl py-5 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
+}
+
+.subheading {
+  @apply scroll-mt-24 md:scroll-mt-18 text-3xl md:text-5xl p-5 md:p-10 bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text
 }
 
 .headline-gradient {
