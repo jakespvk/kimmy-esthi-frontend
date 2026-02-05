@@ -21,9 +21,7 @@ import { glassAntiqua, msMadi } from "../app/fonts";
 import {
   useEffect,
   useState } from "react";
-import { ChevronDown,
-  ChevronUp,
-  Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +78,7 @@ function MobileNavMenu() {
                 <Collapsible open={open} onOpenChange={setOpen}>
                   <CollapsibleTrigger className={navigationMenuTriggerStyle()}>
                     Services
-                    {open ? <ChevronUp className="ml-1" size={12} /> : <ChevronDown className="ml-1" size={12} />}
+                    <ChevronDown className="ml-1 transition duration-300 group-data-open/navigation-menu-trigger:rotate-180 group-data-popup-open/navigation-menu-trigger:rotate-180" size={12} />
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <ul className="pl-4">
