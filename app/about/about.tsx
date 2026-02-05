@@ -6,7 +6,7 @@ const About = () => {
   return (
     <>
       <div className="flex justify-center">
-        <h1 id="about" className={`scroll-mt-24 md:scroll-mt-18 p-5 md:p-10 headline ${glassAntiqua.className}`}>About SunsetKimcare</h1>
+        <h1 id="about" className={`scroll-mt-36 md:scroll-mt-18 p-5 md:p-10 headline ${glassAntiqua.className}`}>About</h1>
       </div>
 
       <div className="lg:w-4/5 px-5 mx-auto my-auto">
@@ -28,7 +28,7 @@ const About = () => {
       </div>
 
       <div className="flex justify-center">
-        <h1 id="socials" className={`scroll-mt-24 md:scroll-mt-18 p-5 md:p-10 headline ${glassAntiqua.className}`}>Socials</h1>
+        <h1 id="socials" className={`scroll-mt-36 md:scroll-mt-18 p-5 md:p-10 headline ${glassAntiqua.className}`}>Socials</h1>
       </div>
 
       <div className="text-center lg:w-2/3 p-5 mx-auto my-auto">
