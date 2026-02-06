@@ -1,4 +1,4 @@
-import { Base64URLString, ConsentFormStatement, Service, ServiceType } from "./types";
+import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, Service, ServiceType } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -105,4 +105,19 @@ export async function deleteStatement(id: number) {
   if (!response.ok) {
     console.error("err:", response.statusText);
   }
+}
+
+export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
+  console.log(JSON.stringify(clientInfo));
+  const response = await fetch(`${baseUrl}/consentForm/clientInfo`, {
+    method: 'POST',
+    body: JSON.stringify(clientInfo),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+  return response.status;
 }

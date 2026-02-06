@@ -52,3 +52,11 @@ export interface ConsentFormStatement {
 }
 
 export type Base64URLString = string | null;
+
+export interface ConsentFormClientInfo {
+  fullName: string;
+  dob: string;
+  gender: string;
+  phoneNumber: string;
+  email: string;
+}
