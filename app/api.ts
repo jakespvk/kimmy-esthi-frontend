@@ -1,4 +1,4 @@
-import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, Service, ServiceType } from "./types";
+import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, Service, ServiceType, SkincareHistoryQuestionnaire } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -112,6 +112,20 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
   const response = await fetch(`${baseUrl}/consentForm/clientInfo`, {
     method: 'POST',
     body: JSON.stringify(clientInfo),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+  return response.status;
+}
+
+export async function sendSkincareHistoryQuestionnaire(skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
+  const response = await fetch(`${baseUrl}/consentForm/skincareHistory`, {
+    method: 'POST',
+    body: JSON.stringify(skincareHistoryQuestionnaire),
     headers: {
       'Content-Type': 'application/json',
     },

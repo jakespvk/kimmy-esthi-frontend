@@ -60,3 +60,17 @@ export interface ConsentFormClientInfo {
   phoneNumber: string;
   email: string;
 }
+
+export interface SkincareHistoryQuestionnaire {
+  everReceivedFacial: string;
+  lastFacialDate: string;
+  retinol: string;
+  chemPeel: string;
+  lastChemPeelDate: string;
+  hairRemoval: string;
+  medicalConditions: string;
+  allergies: string;
+  botox: string;
+  negativeReaction: string;
+  skinType: string;
+}
