@@ -93,3 +93,16 @@ export async function addOrUpdateStatement(statement: string, isActive: boolean,
   let result = await response.json();
   return result;
 }
+
+export async function deleteStatement(id: number) {
+  const response = await fetch(`${baseUrl}/consentForm/statements/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+}

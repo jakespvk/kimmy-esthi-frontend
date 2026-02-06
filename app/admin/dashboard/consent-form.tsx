@@ -16,18 +16,25 @@ export default function ConsentForm() {
     setConsentFormStatements(tempStatements);
   }
 
+  function openPreview() {
+    window.open("/booking/scheduleAppointment/consentForm", "_blank");
+  }
+
   return (
-    <div className="min-w-[200px] max-w-[350px]">
+    <div className="min-w-50 max-w-87.5">
       <div className="flex relative justify-center items-center">
         <h1 className="flex justify-center my-5 text-xl scroll-mt-24" id="consent-form">Edit Consent Form</h1>
-        <Button className="absolute top-5 right-2 bg-accent h-8 w-8 hover:bg-accent/90" onClick={() => setShowAddStatement(showAddStatement ? false : true)}><PlusIcon className="bg-accent text-accent-content hover:bg-accent/90" /></Button>
+        <div className="flex items-center justify-end ml-2">
+          <Button className="" onClick={() => openPreview()}>Preview</Button>
+          <Button className="bg-accent h-8 w-8 hover:bg-accent/90" onClick={() => setShowAddStatement(showAddStatement ? false : true)}><PlusIcon className="bg-accent text-accent-content hover:bg-accent/90" /></Button>
+        </div>
       </div>
       <div className="divide-y space-y-3 border rounded-2xl p-5 pb-2">
         {consentFormStatements.map((cfs) =>
-          <ConsentFormStatementComponent key={cfs.id} consentFormStatement={cfs} editMode={false} refreshStatements={refreshStatements} />
+          <ConsentFormStatementComponent key={cfs.id} consentFormStatement={cfs} editMode={false} setShowAddStatement={setShowAddStatement} refreshStatements={refreshStatements} />
         )}
       </div>
-      {showAddStatement && <ConsentFormStatementComponent consentFormStatement={newStatement} editMode={true} refreshStatements={refreshStatements} />}
+      {showAddStatement && <ConsentFormStatementComponent consentFormStatement={newStatement} editMode={true} setShowAddStatement={setShowAddStatement} refreshStatements={refreshStatements} />}
     </div>
   )
 }

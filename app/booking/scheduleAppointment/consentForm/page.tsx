@@ -53,17 +53,15 @@ const ConsentForm = (props: {
   }
 
   return (
-    <div>
+    <div className="pb-5">
       <div className="flex justify-center">
         <h1 id="consent-form" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Consent Form</h1>
       </div>
       <div className='mx-5 lg:flex flex-col justify-center items-center'>
-        <Label className='w-max justify-self-start'>Print Name:</Label>
-        <Input className="max-w-96" type="text" value={printedName} onChange={(e) => setPrintedName(e.target.value)} />
-        <div className='mt-5 flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center items-center'>
           <Label className=''>Please enter your initials here. To apply them, check the boxes:</Label>
           <SignaturePad
-            className="w-36 my-3"
+            className="w-64 max-w-full my-3"
             penColor="hsl(var(--foreground))"
             size="xsm"
             showButtons={true}
@@ -87,7 +85,15 @@ const ConsentForm = (props: {
           )}
         </ul>
         <div className='mt-5 flex flex-col justify-center items-center'>
-          <Label className=''>By signing...</Label>
+          <h3 className="text-center text-warning-content text-xl">Client Declaration</h3>
+          <p className="text-warning-content">I confirm that the above information is accurate and complete to the
+            best of my knowledge. I understand the nature of the facial treatment
+            and agree to proceed voluntarily. I have had the opportunity to ask
+            questions and understand the risks and benefits. I give my full consent
+            to receive this service from the esthetician listed below.</p>
+          <Label className='w-max justify-self-start my-2'>Print Name:</Label>
+          <Input className="max-w-96" type="text" value={printedName} onChange={(e) => setPrintedName(e.target.value)} />
+          <Label className='w-max justify-self-start mt-2'>Signature:</Label>
           <SignaturePad
             className="my-3"
             penColor="hsl(var(--foreground))"
@@ -97,11 +103,11 @@ const ConsentForm = (props: {
             clearButtonIcon={<Eraser />}
             onSave={setSignature}
           />
-          <button className="btn" onClick={onSubmit}>Submit</button>
+          <button className="btn my-2" onClick={onSubmit}>Submit</button>
           <p>{response}</p>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
