@@ -8,8 +8,11 @@ import { glassAntiqua } from '@/app/fonts';
 import { useState } from 'react';
 import { sendSkincareHistoryQuestionnaire } from '@/app/api';
 import { SkincareHistoryQuestionnaire } from '@/app/types';
+import { useRouter } from 'next/navigation';
 
-export default function SkincareHistory() {
+export default function SkincareHistory(props: { searchParams: Promise<{ clientId: string }> }) {
+  const router = useRouter();
+
   const [everReceivedFacial, setEverReceivedFacial] = useState("no");
   const [chemPeel, setChemPeel] = useState("no");
 
@@ -29,8 +32,8 @@ export default function SkincareHistory() {
       negativeReaction: formData.get("negativeReaction") as string,
       skinType: formData.get("skinType") as string,
     }
-    console.log(skincareHistoryQuestionnaire);
-    await sendSkincareHistoryQuestionnaire(skincareHistoryQuestionnaire);
+    await sendSkincareHistoryQuestionnaire((await props.searchParams).clientId, skincareHistoryQuestionnaire);
+    router.push("/consent-form/emergency-contact?" + new URLSearchParams({ clientId: (await props.searchParams).clientId }));
   }
 
   return (
@@ -169,6 +172,32 @@ export default function SkincareHistory() {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="combination" id="r20" />
               <Label htmlFor="r20">Combination</Label>
+            </div>
+          </RadioGroup>
+        </div>
+        <div className="flex justify-center">
+          <Label className='grow my-2 text-base'>Pregnant or Nursing?</Label>
+          <RadioGroup defaultValue="no" name="pregnant" className="flex-1 flex gap-4">
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="yes" id="r21" />
+              <Label htmlFor="r21">Yes</Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="no" id="r22" />
+              <Label htmlFor="r22">No</Label>
+            </div>
+          </RadioGroup>
+        </div>
+        <div className="flex justify-center">
+          <Label className='grow my-2 text-base'>Do you smoke or consume alcohol?</Label>
+          <RadioGroup defaultValue="no" name="smoke" className="flex-1 flex gap-4">
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="yes" id="r23" />
+              <Label htmlFor="r23">Yes</Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="no" id="r24" />
+              <Label htmlFor="r24">No</Label>
             </div>
           </RadioGroup>
         </div>

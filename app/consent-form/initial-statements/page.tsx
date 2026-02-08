@@ -2,20 +2,19 @@
 
 import { useContext, useState } from 'react';
 
-import { Base64URLString, ConsentFormStatement, ConsentFormClientInfo } from '@/app/types';
+import { Base64URLString, ConsentFormStatement } from '@/app/types';
 import SignaturePad from '@/components/ui/signature-pad';
 import { Eraser, Save } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { submitConsentForm, postClientInfo } from '@/app/api';
+import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
 import { ServicesContext } from '@/context/ServicesContext';
 import { glassAntiqua } from '@/app/fonts';
-import { Button } from '@/components/ui/button';
 
 const ConsentForm = (props: {
   searchParams: Promise<{
-    appointmentId: string;
+    appointmentId?: string;
     clientId?: string;
   }>;
 }) => {
@@ -30,27 +29,6 @@ const ConsentForm = (props: {
     if (consentFormStatements[idx]?.initialed) consentFormStatements[idx].initialed = false;
     else consentFormStatements[idx].initialed = true;
     setConsentFormStatements([...consentFormStatements]);
-  }
-
-  async function submitClientInfo(e: React.SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const clientInfo: ConsentFormClientInfo = {
-      fullName: formData.get('full-name') as string,
-      dob: new Date(Date.parse(formData.get('date-of-birth') as string)).toISOString(),
-      gender: formData.get('gender') as string,
-      phoneNumber: formData.get('phone-number') as string,
-      email: formData.get('email') as string,
-    };
-    console.log(clientInfo);
-    await postClientInfo(clientInfo);
-  }
-
-  async function submitProductsUsed(e: React.SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const products: string = formData.get('products') as string;
-    await postClientInfo(clientInfo);
   }
 
   async function onSubmit() {
@@ -79,33 +57,6 @@ const ConsentForm = (props: {
       <div className="flex justify-center">
         <h1 id="consent-form" className={`scroll-mt-18 headline ${glassAntiqua.className}`}>Client Consent Form</h1>
       </div>
-      <form onSubmit={submitClientInfo} className="mx-3">
-        <div className="flex justify-center">
-          <h3 id="consent-form--client-info" className={`subheading ${glassAntiqua.className}`}>Personal Information</h3>
-        </div>
-        <Label className='w-max justify-self-start my-2'>Full Name:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="full-name" />
-        <Label className='w-max justify-self-start my-2'>Date of Birth:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="date-of-birth" />
-        <Label className='w-max justify-self-start my-2'>Gender:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="gender" />
-        <Label className='w-max justify-self-start my-2'>Phone Number:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="phone-number" />
-        <Label className='w-max justify-self-start my-2'>Email Address:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="email" />
-        <div className="flex justify-center">
-          <Button className="my-2" type="submit">Next</Button>
-        </div>
-      </form>
-      <form onSubmit={submitProductsUsed} className="mx-3">
-        <div className="flex justify-center">
-          <h3 id="consent-form--products-used" className={`subheading ${glassAntiqua.className}`}>What products are you currently using at home?</h3>
-        </div>
-        <textarea name="products" rows={2} placeholder="Versed Light Moisturizer, Dermalogica Toner Pads..." className="field-sizing-content text-sm min-w-full border border-amber-500 focused:border-amber-800 focus-visible:ring-1 ring-amber-700 focus:outline-none shadow-sm rounded-sm p-2.5 resize-none"></textarea>
-        <div className="flex justify-center">
-          <Button className="my-2" type="submit">Next</Button>
-        </div>
-      </form>
       <div className='mx-5 lg:flex flex-col justify-center items-center'>
         <div className='flex flex-col justify-center items-center'>
           <Label className=''>Please enter your initials here. To apply them, check the boxes:</Label>

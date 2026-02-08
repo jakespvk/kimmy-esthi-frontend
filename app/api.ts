@@ -1,4 +1,4 @@
-import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, Service, ServiceType, SkincareHistoryQuestionnaire } from "./types";
+import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, EmergencyContactDetails, Service, ServiceType, SkincareHistoryQuestionnaire } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -119,13 +119,57 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
   if (!response.ok) {
     console.error("err:", response.statusText);
   }
+  let result = await response.json();
+  console.log(result);
+  return result;
+}
+
+export async function sendSkincareHistoryQuestionnaire(clientId: string, skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
+  const response = await fetch(`${baseUrl}/consentForm/skincareHistory`, {
+    method: 'POST',
+    body: JSON.stringify({ clientId: clientId, skincareHistoryQuestionnaire }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
   return response.status;
 }
 
-export async function sendSkincareHistoryQuestionnaire(skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
-  const response = await fetch(`${baseUrl}/consentForm/skincareHistory`, {
+export async function saveEmergencyContact(clientId: string, emergencyContact: EmergencyContactDetails) {
+  const response = await fetch(`${baseUrl}/consentForm/emergencyContact`, {
     method: 'POST',
-    body: JSON.stringify(skincareHistoryQuestionnaire),
+    body: JSON.stringify({ clientId: clientId, emergencyContact }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+  return response.status;
+}
+
+export async function saveConsentAndAcknowledgement(clientId: string, signature: Base64URLString) {
+  const response = await fetch(`${baseUrl}/consentForm/consentAndAcknowledgement`, {
+    method: 'POST',
+    body: JSON.stringify({ clientId: clientId, signature: signature }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+  }
+  return response.status;
+}
+
+export async function saveProductsUsed(clientId: string, products: string) {
+  const response = await fetch(`${baseUrl}/consentForm/products`, {
+    method: 'POST',
+    body: JSON.stringify({ clientId: clientId, products: products }),
     headers: {
       'Content-Type': 'application/json',
     },

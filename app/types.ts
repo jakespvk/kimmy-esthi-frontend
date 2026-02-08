@@ -74,3 +74,9 @@ export interface SkincareHistoryQuestionnaire {
   negativeReaction: string;
   skinType: string;
 }
+
+export interface EmergencyContactDetails {
+  name: string;
+  phone: string;
+  relationship: string;
+}
