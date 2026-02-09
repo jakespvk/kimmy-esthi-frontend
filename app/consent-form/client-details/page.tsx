@@ -29,7 +29,7 @@ export default function ClientDetails() {
 
   return (
     <div>
-      <form onSubmit={submitClientInfo} className="mx-3">
+      <form onSubmit={submitClientInfo} className="mx-3 md:flex flex-col justify-center items-center">
         <div className="flex justify-center">
           <h3 id="consent-form--client-info" className={`subheading ${glassAntiqua.className}`}>Personal Information</h3>
         </div>

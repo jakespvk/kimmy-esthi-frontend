@@ -37,172 +37,174 @@ export default function SkincareHistory(props: { searchParams: Promise<{ clientI
   }
 
   return (
-    <div className="mx-2 mb-5">
+    <div className="mx-2 md:mx-0 mb-5 w-full md:flex justify-center">
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center">
           <h3 id="consent-form--skincare-history" className={`subheading ${glassAntiqua.className}`}>Evolution of Skincare</h3>
         </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Have you ever received a facial?</Label>
-          <RadioGroup defaultValue={everReceivedFacial} onValueChange={setEverReceivedFacial} name="everReceivedFacial" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r1" />
-              <Label htmlFor="r1">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r2" />
-              <Label htmlFor="r2">No</Label>
-            </div>
-          </RadioGroup>
+        <div className="max-w-3xl flex flex-col justify-center items-start">
+          <div className="flex justify-center">
+            <RadioGroup defaultValue={everReceivedFacial} onValueChange={setEverReceivedFacial} name="everReceivedFacial" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r1" />
+                <Label htmlFor="r1">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r2" />
+                <Label htmlFor="r2">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you ever received a facial?</Label>
+          </div>
+          <div className={`flex justify-center items-baseline transition-all duration-150 slide-in-from-top slide-out-to-top overflow-hidden ${everReceivedFacial === "yes" ? "opacity-100 max-h-20" : "opacity-0 max-h-0"}`}>
+            <Label className="mr-2">When?</Label>
+            <Input className="flex-1 max-w-96 mb-2" type="text" name="lastFacialDate" />
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="retinol" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r3" />
+                <Label htmlFor="r3">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r4" />
+                <Label htmlFor="r4">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Do you use retinol, AHAs, BHAs, or acne medications (like Accutane)?</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue={chemPeel} onValueChange={setChemPeel} name="chemPeel" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r5" />
+                <Label htmlFor="r5">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r6" />
+                <Label htmlFor="r6">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you had chemical peels, microneedling, or laser treatments recently?</Label>
+          </div>
+          <div className={`flex justify-center items-baseline transition-all duration-150 slide-in-from-top slide-out-to-top overflow-hidden ${chemPeel === "yes" ? "opacity-100 max-h-20" : "opacity-0 max-h-0"}`}>
+            <Label className="mr-2">When?</Label>
+            <Input className="flex-1 max-w-96 mb-2" type="text" name="lastChemPeelDate" />
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="hairRemoval" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r7" />
+                <Label htmlFor="r7">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r8" />
+                <Label htmlFor="r8">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you had any recent hair removal in the area(s) being treated today?</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="medicalConditions" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r9" />
+                <Label htmlFor="r9">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r10" />
+                <Label htmlFor="r10">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Any medical conditions? (Diabetes, Epilepsy, etc.)</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="allergies" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r11" />
+                <Label htmlFor="r11">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r12" />
+                <Label htmlFor="r12">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Any known allergies? (Latex, Aspirin, Essential oils, Ingredients, etc.)</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="botox" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r13" />
+                <Label htmlFor="r13">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r14" />
+                <Label htmlFor="r14">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you had an Botox, fillers, or other cosmetic treatments in the past 2 weeks?</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="negativeReaction" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r15" />
+                <Label htmlFor="r15">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r16" />
+                <Label htmlFor="r16">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you ever had a negative reaction to a skincare service?</Label>
+          </div>
+          <div className="flex justify-center">
+            <Label className='grow my-2 text-base pr-2 border-primary border-r'>How would you describe your skin type?</Label>
+            <RadioGroup defaultValue="no" name="skinType" className="flex-1 flex gap-4 ml-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="normal" id="r17" />
+                <Label htmlFor="r17">Normal</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="dry" id="r18" />
+                <Label htmlFor="r18">Dry</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="oily" id="r19" />
+                <Label htmlFor="r19">Oily</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="combination" id="r20" />
+                <Label htmlFor="r20">Combination</Label>
+              </div>
+            </RadioGroup>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="pregnant" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r21" />
+                <Label htmlFor="r21">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r22" />
+                <Label htmlFor="r22">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Pregnant or Nursing?</Label>
+          </div>
+          <div className="flex justify-center">
+            <RadioGroup defaultValue="no" name="smoke" className="flex-1 flex gap-4 mr-2">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="yes" id="r23" />
+                <Label htmlFor="r23">Yes</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="no" id="r24" />
+                <Label htmlFor="r24">No</Label>
+              </div>
+            </RadioGroup>
+            <Label className='grow my-2 text-base pl-2 border-primary border-l'>Do you smoke or consume alcohol?</Label>
+          </div>
         </div>
-        <div className={`flex justify-center items-baseline transition-all duration-150 slide-in-from-top slide-out-to-top overflow-hidden ${everReceivedFacial === "yes" ? "opacity-100 max-h-20" : "opacity-0 max-h-0"}`}>
-          <Label className="mr-2">When?</Label>
-          <Input className="flex-1 max-w-96 mb-2" type="text" name="lastFacialDate" />
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Do you use retinol, AHAs, BHAs, or acne medications (like Accutane)?</Label>
-          <RadioGroup defaultValue="no" name="retinol" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r3" />
-              <Label htmlFor="r3">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r4" />
-              <Label htmlFor="r4">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Have you had chemical peels, microneedling, or laser treatments recently?</Label>
-          <RadioGroup defaultValue={chemPeel} onValueChange={setChemPeel} name="chemPeel" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r5" />
-              <Label htmlFor="r5">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r6" />
-              <Label htmlFor="r6">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className={`flex justify-center items-baseline transition-all duration-150 slide-in-from-top slide-out-to-top overflow-hidden ${chemPeel === "yes" ? "opacity-100 max-h-20" : "opacity-0 max-h-0"}`}>
-          <Label className="mr-2">When?</Label>
-          <Input className="flex-1 max-w-96 mb-2" type="text" name="lastChemPeelDate" />
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Have you had any recent hair removal in the area(s) being treated today?</Label>
-          <RadioGroup defaultValue="no" name="hairRemoval" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r7" />
-              <Label htmlFor="r7">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r8" />
-              <Label htmlFor="r8">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Any medical conditions? (Diabetes, Epilepsy, etc.)</Label>
-          <RadioGroup defaultValue="no" name="medicalConditions" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r9" />
-              <Label htmlFor="r9">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r10" />
-              <Label htmlFor="r10">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Any known allergies? (Latex, Aspirin, Essential oils, Ingredients, etc.)</Label>
-          <RadioGroup defaultValue="no" name="allergies" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r11" />
-              <Label htmlFor="r11">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r12" />
-              <Label htmlFor="r12">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Have you had an Botox, fillers, or other cosmetic treatments in the past 2 weeks?</Label>
-          <RadioGroup defaultValue="no" name="botox" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r13" />
-              <Label htmlFor="r13">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r14" />
-              <Label htmlFor="r14">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Have you ever had a negative reaction to a skincare service?</Label>
-          <RadioGroup defaultValue="no" name="negativeReaction" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r15" />
-              <Label htmlFor="r15">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r16" />
-              <Label htmlFor="r16">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>How would you describe your skin type?</Label>
-          <RadioGroup defaultValue="no" name="skinType" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="normal" id="r17" />
-              <Label htmlFor="r17">Normal</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="dry" id="r18" />
-              <Label htmlFor="r18">Dry</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="oily" id="r19" />
-              <Label htmlFor="r19">Oily</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="combination" id="r20" />
-              <Label htmlFor="r20">Combination</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Pregnant or Nursing?</Label>
-          <RadioGroup defaultValue="no" name="pregnant" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r21" />
-              <Label htmlFor="r21">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r22" />
-              <Label htmlFor="r22">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Label className='grow my-2 text-base'>Do you smoke or consume alcohol?</Label>
-          <RadioGroup defaultValue="no" name="smoke" className="flex-1 flex gap-4">
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="yes" id="r23" />
-              <Label htmlFor="r23">Yes</Label>
-            </div>
-            <div className="flex items-center gap-3">
-              <RadioGroupItem value="no" id="r24" />
-              <Label htmlFor="r24">No</Label>
-            </div>
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center">
-          <Button className="my-2" type="submit">Next</Button>
+        <div className="flex justify-center items-center">
+          <Button className="mt-5" type="submit">Next</Button>
         </div>
       </form>
     </div>

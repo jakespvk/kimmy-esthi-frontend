@@ -1,11 +1,15 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { montserrat } from './fonts'
 import Navbar from '@/components/navbar'
 
 export const metadata: Metadata = {
   title: 'Sunset Kimcare',
   description: 'Sunset Kimcare Esthetician Services',
+}
+
+export const viewport: Viewport = {
+  maximumScale: 1.0,
 }
 
 export default function RootLayout({

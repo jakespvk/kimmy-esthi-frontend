@@ -21,7 +21,8 @@ import {
 import { glassAntiqua, msMadi } from "../app/fonts";
 import {
   useEffect,
-  useState } from "react";
+  useState
+} from "react";
 import { ChevronDown, Menu } from "lucide-react";
 
 export default function Navbar() {
@@ -44,10 +45,10 @@ export default function Navbar() {
 
 
   return (
-    <div className={`sticky top-0 z-100 bg-popover py-4 px-8 flex justify-between items-start w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
+    <div className={`sticky top-0 z-100 bg-popover py-4 px-8 flex justify-between items-center w-full min-w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
       <div className={glassAntiqua.className + ' flex flex-wrap items-center justify-start'}>
-        <Link className="mr-4" href="/">
-          <Image src="/kimmy-esthi-logo.png" alt="SunsetKimcare" width={largeScreen ? 200 : 125} height={largeScreen ? 200 : 125} />
+        <Link className="m-0 p-0 mr-4" href="/">
+          <Image src="/kimmy-esthi-logo.png" alt="SunsetKimcare" width={largeScreen ? 125 : 100} height={largeScreen ? 125 : 100} />
         </Link>
         <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 text-muted-foreground`}>
           Let me make something clear... your skin
@@ -74,7 +75,7 @@ function MobileNavMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger><Menu /></NavigationMenuTrigger>
+          <NavigationMenuTrigger className="m-0"><Menu /></NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="w-96 max-w-[75vw]">
               <NavigationMenuItem>

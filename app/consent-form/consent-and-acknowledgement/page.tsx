@@ -8,6 +8,7 @@ import { Save, Eraser } from "lucide-react";
 import { useState } from "react";
 import { saveConsentAndAcknowledgement } from "@/app/api";
 import { useRouter } from "next/navigation";
+import { glassAntiqua } from "@/app/fonts";
 
 export default function ConsentAndAcknowledgement(props: { searchParams: Promise<{ clientId: string }> }) {
   const router = useRouter();
@@ -21,26 +22,30 @@ export default function ConsentAndAcknowledgement(props: { searchParams: Promise
   }
 
   return (
-    <div>
+    <div className="w-full flex justify-center items-center mb-5">
       <form onSubmit={handleSubmit}>
-        <h1>Consent and Acknowledgement</h1>
-        <p>
-          By signing below, I acknowledge that I have been informed about the nature of the facial treatment
-          and give my consent to receive it. I understand that while the treatment is intended to improve my
-          skin’s condition, individual results may vary. I have disclosed all relevant medical information and
-          agree to follow any aftercare instructions provided.
-        </p>
-        <Label>Client's Signature:</Label>
-        <SignaturePad
-          className="my-3"
-          penColor="hsl(var(--foreground))"
-          size="sm"
-          showButtons={true}
-          saveButtonIcon={<Save />}
-          clearButtonIcon={<Eraser />}
-          onSave={setSignature}
-        />
-        <Button>Submit</Button>
+        <div className="max-w-3xl flex flex-col justify-center items-center">
+          <div className="flex justify-center">
+            <h3 id="consent-form--consent-and-acknowledgement" className={`subheading ${glassAntiqua.className}`}>Consent and Acknowledgement</h3>
+          </div>
+          <p className="mb-5">
+            By signing below, I acknowledge that I have been informed about the nature of the facial treatment
+            and give my consent to receive it. I understand that while the treatment is intended to improve my
+            skin’s condition, individual results may vary. I have disclosed all relevant medical information and
+            agree to follow any aftercare instructions provided.
+          </p>
+          <Label>Client's Signature:</Label>
+          <SignaturePad
+            className="my-3 max-w-112"
+            penColor="hsl(var(--foreground))"
+            size="sm"
+            showButtons={true}
+            saveButtonIcon={<Save />}
+            clearButtonIcon={<Eraser />}
+            onSave={setSignature}
+          />
+          <Button className="my-2">Submit</Button>
+        </div>
       </form>
     </div>
   )

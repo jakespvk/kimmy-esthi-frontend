@@ -1,6 +1,7 @@
 "use client";
 
 import { saveEmergencyContact } from "@/app/api";
+import { glassAntiqua } from "@/app/fonts";
 import { EmergencyContactDetails } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,9 +23,11 @@ export default function EmergencyContact(props: { searchParams: Promise<{ client
     router.push("/consent-form/consent-and-acknowledgement?" + new URLSearchParams({ clientId: (await props.searchParams).clientId }));
   }
   return (
-    <div>
-      <h1>Emergency Contact</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="w-full flex flex-col justify-center items-center mb-5">
+      <div className="flex justify-center">
+        <h3 id="consent-form--consent-and-acknowledgement" className={`subheading ${glassAntiqua.className}`}>Emergency Contact</h3>
+      </div>
+      <form className="max-w-3xl flex flex-col justify-center items-center *:my-2" onSubmit={handleSubmit}>
         <Label>Full Name:</Label>
         <Input name="name" type="text" />
         <Label>Phone Number:</Label>
