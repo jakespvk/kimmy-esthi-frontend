@@ -44,7 +44,7 @@ export default function NewAppointments() {
 
   const [selectedTimes, setSelectedTimes] = useState(timeInputsInitialState);
 
-  const onSubmit = async (e: SubmitEvent) => {
+  const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let appointments: Appointment[] = [];
