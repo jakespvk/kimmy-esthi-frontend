@@ -62,7 +62,7 @@ export default function EmergencyContact(props: { searchParams: Promise<{ client
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Full Name:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="text" placeholder="Emergency contact name" {...field} />
+                  <Input className="max-w-96 mb-2" type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,7 +92,7 @@ export default function EmergencyContact(props: { searchParams: Promise<{ client
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Relationship:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="text" placeholder="Spouse / Parent / Friend" {...field} />
+                  <Input className="max-w-96 mb-2" type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

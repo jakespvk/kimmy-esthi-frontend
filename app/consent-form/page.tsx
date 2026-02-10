@@ -80,7 +80,7 @@ export default function ClientDetails() {
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Full Name:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="text" placeholder="Jane Doe" {...field} />
+                  <Input className="max-w-96 mb-2" type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -110,7 +110,7 @@ export default function ClientDetails() {
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Gender:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="text" placeholder="Female / Male / Non-binary" {...field} />
+                  <Input className="max-w-96 mb-2" type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -140,7 +140,7 @@ export default function ClientDetails() {
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Email Address:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="email" placeholder="jane@example.com" {...field} />
+                  <Input className="max-w-96 mb-2" type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

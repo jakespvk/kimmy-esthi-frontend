@@ -11,7 +11,7 @@ interface PhoneInputProps {
   onBlur?: () => void
 }
 
-export default function PhoneInput({ value, onChange, className = "", placeholder = "(562) 555-1234", onBlur }: PhoneInputProps) {
+export default function PhoneInput({ value, onChange, className = "", placeholder = "", onBlur }: PhoneInputProps) {
   return (
     <PatternFormat
       format="(###) ###-####"
