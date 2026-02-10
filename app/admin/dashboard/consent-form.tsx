@@ -1,23 +1,27 @@
-import { useContext, useState } from "react";
-import { ServicesContext } from "@/context/ServicesContext";
+import { useState, useEffect } from "react";
+import { useConsentFormStatements } from "@/hooks/useServices";
 import { ConsentFormStatementComponent } from "./consent-form-statement";
 import { Button } from "@/components/ui/button";
-import { fetchConsentFormStatements } from "@/app/api";
 import { PlusIcon } from "lucide-react";
 
 export default function ConsentForm() {
-  const initialConsentFormStatements = useContext(ServicesContext).consentFormStatements;
-  const [consentFormStatements, setConsentFormStatements] = useState(initialConsentFormStatements);
+  const { data: consentFormStatements, refetch } = useConsentFormStatements();
+  const [statements, setStatements] = useState(consentFormStatements ?? []);
   const [showAddStatement, setShowAddStatement] = useState(false);
   const newStatement = { statement: "", isActive: true };
 
-  async function refreshStatements() {
-    const tempStatements = await fetchConsentFormStatements();
-    setConsentFormStatements(tempStatements);
+  useEffect(() => {
+    if (consentFormStatements) {
+      setStatements(consentFormStatements);
+    }
+  }, [consentFormStatements]);
+
+  function refreshStatements() {
+    refetch();
   }
 
   function openPreview() {
-    window.open("/booking/scheduleAppointment/consentForm", "_blank");
+    window.open("/consent-form", "_blank");
   }
 
   return (
@@ -30,7 +34,7 @@ export default function ConsentForm() {
         </div>
       </div>
       <div className="divide-y space-y-3 border rounded-2xl p-5 pb-2">
-        {consentFormStatements.map((cfs) =>
+        {statements.map((cfs) =>
           <ConsentFormStatementComponent key={cfs.id} consentFormStatement={cfs} editMode={false} setShowAddStatement={setShowAddStatement} refreshStatements={refreshStatements} />
         )}
       </div>

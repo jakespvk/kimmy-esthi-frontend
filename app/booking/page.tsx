@@ -19,18 +19,33 @@ interface AppointmentDateTimeAndStatus {
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const today = new Date(new Date().setHours(0, 0, 0, 0));
-
 export default function AppointmentsPage(
   props0:
     {
       searchParams: Promise<{ appointmentType: string, promotionName?: string }>
     }
 ) {
-  const searchParams = use(props0.searchParams);
+  return (
+    <Suspense fallback={<div>Loading appointments...</div>}>
+      <AppointmentsPageInner searchParamsPromise={props0.searchParams} />
+    </Suspense>
+  )
+}
+
+function AppointmentsPageInner({
+  searchParamsPromise,
+}: {
+  searchParamsPromise: Promise<{ appointmentType: string; promotionName?: string }>;
+}) {
+  const searchParams = use(searchParamsPromise);
+  const [today, setToday] = useState<Date | null>(null);
   const [data, setData] = useState<Appointment[]>([]);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(() => new Date())
   const [appointmentDates, setAppointmentDates] = useState<AppointmentDateTimeAndStatus[] | undefined>([]);
+
+  useEffect(() => {
+    setToday(new Date(new Date().setHours(0, 0, 0, 0)));
+  }, []);
 
   const getAppointmentDatesAndStatuses = async () => {
 
@@ -105,7 +120,7 @@ export default function AppointmentsPage(
             mode="single"
             selected={selectedDate}
             onSelect={setSelectedDate}
-            disabled={(date: Date) => date < today}
+            disabled={(date: Date) => today ? date < today : false}
             className="rounded-xl border shadow-sm"
             components={{
               DayButton: ({ children, modifiers, day, ...props }) => {

@@ -8,13 +8,17 @@ import { Label } from "@/components/ui/label";
 import { AdminAppointment } from "@/app/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-const today = new Date(new Date().setHours(0, 0, 0, 0));
 
 export default function ListAppointments() {
+  const [today, setToday] = useState<Date | null>(null);
   const [data, setData] = useState([]);
   const [statusFilter, setStatusFilter] = useState("booked");
   const [includeArchived, setIncludeArchived] = useState(false);
   const [dateFilter, setDateFilter] = useState(null);
+
+  useEffect(() => {
+    setToday(new Date(new Date().setHours(0, 0, 0, 0)));
+  }, []);
 
   function toggleIncludeArchived() {
     if (includeArchived) setIncludeArchived(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Base64URLString, ConsentFormStatement } from '@/app/types';
 import SignaturePad from '@/components/ui/signature-pad';
@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { submitConsentForm } from '@/app/api';
 import { Input } from '@/components/ui/input';
-import { ServicesContext } from '@/context/ServicesContext';
+import { useActiveConsentFormStatements } from '@/hooks/useServices';
 import { glassAntiqua } from '@/app/fonts';
 import { Button } from '@/components/ui/button';
 
@@ -22,9 +22,17 @@ const ConsentForm = (props: {
   const [printedName, setPrintedName] = useState<string>('');
   const [initials, setInitials] = useState<Base64URLString>(null);
   const [signature, setSignature] = useState<Base64URLString>(null);
-  const initialConsentFormStatements = useContext(ServicesContext).activeConsentFormStatements;
-  const [consentFormStatements, setConsentFormStatements] = useState<ConsentFormStatement[]>(initialConsentFormStatements);
+  const { data: activeStatements, isLoading } = useActiveConsentFormStatements();
+  const [consentFormStatements, setConsentFormStatements] = useState<ConsentFormStatement[]>(activeStatements ?? []);
   const [response, setResponse] = useState('');
+
+  useEffect(() => {
+    if (activeStatements) {
+      setConsentFormStatements(activeStatements);
+    }
+  }, [activeStatements]);
+
+  if (isLoading) return <div>Loading consent form statements...</div>;
 
   function updateStatement(idx: number) {
     if (consentFormStatements[idx]?.initialed) consentFormStatements[idx].initialed = false;

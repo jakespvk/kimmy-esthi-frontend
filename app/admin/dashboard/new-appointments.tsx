@@ -2,7 +2,7 @@
 
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useEffect } from "react"
 import { PromotionsSelector } from "./promotions-selector";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -15,15 +15,24 @@ interface Appointment {
   promotion?: Object;
 }
 
-const today = new Date(new Date().setHours(0, 0, 0, 0));
-
 export default function NewAppointments() {
-
   const [selectedDates, setSelectedDates] = useState<Date[] | undefined>();
   const [responseText, setResponseText] = useState('');
   const [promotionName, setPromotionName] = useState('');
   const [selectedPromotionId, setSelectedPromotionId] = useState("0");
   const [statusBooked, setStatusBooked] = useState(false);
+
+  const getToday = () => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  };
+
+  const [today, setToday] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setToday(getToday());
+  }, []);
 
   const timeInputsInitialState = [
     {
@@ -35,7 +44,7 @@ export default function NewAppointments() {
 
   const [selectedTimes, setSelectedTimes] = useState(timeInputsInitialState);
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
 
     let appointments: Appointment[] = [];
@@ -157,7 +166,7 @@ export default function NewAppointments() {
                 selected={selectedDates}
                 onSelect={setSelectedDates}
                 disabled={(date) =>
-                  date < today
+                  today ? date < today : false
                 }
                 className="px-5 md:rounded-r-xl md:border-l"
               />

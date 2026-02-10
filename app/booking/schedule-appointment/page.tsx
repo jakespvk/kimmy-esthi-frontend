@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, Suspense } from 'react';
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -51,7 +51,27 @@ export default function ScheduleAppointment(
     }>;
   }
 ) {
-  const searchParams = use(props.searchParams);
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ScheduleAppointmentInner searchParamsPromise={props.searchParams} />
+    </Suspense>
+  )
+}
+
+function ScheduleAppointmentInner({
+  searchParamsPromise,
+}: {
+  searchParamsPromise: Promise<{
+    appointmentId: string;
+    appointmentType: string;
+    promotionName?: string;
+    preferredName?: string;
+    email?: string;
+    phoneNumber?: string;
+    skinConcerns?: string;
+  }>;
+}) {
+  const searchParams = use(searchParamsPromise);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -93,7 +113,7 @@ export default function ScheduleAppointment(
     };
 
     fetchAppointment();
-  });
+  }, [searchParams.appointmentId]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
