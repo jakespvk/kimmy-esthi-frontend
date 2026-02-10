@@ -27,6 +27,7 @@ export async function fetchPromotions() {
   const response = await fetch(`${baseUrl}/promotions`);
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   const result = await response.json();
   return result;
@@ -36,6 +37,7 @@ export async function fetchServices(): Promise<Service[]> {
   const response = await fetch(`${baseUrl}/services`);
   if (!response.ok) {
     console.error("err:", response.statusText);
+    throw new Error("unable to fetch services");
   }
   const result = await response.json();
   return result;
@@ -45,6 +47,7 @@ export async function fetchServicesSearch(type: ServiceType): Promise<Service[]>
   const response = await fetch(`${baseUrl}/services/search?serviceType=${type}`);
   if (!response.ok) {
     console.error("err:", response.statusText);
+    throw new Error("unable to fetch services");
   }
   const result = await response.json();
   return result;
@@ -54,6 +57,7 @@ export async function fetchConsentFormStatements(): Promise<ConsentFormStatement
   const response = await fetch(`${baseUrl}/consentForm/statements`);
   if (!response.ok) {
     console.error("err:", response.statusText);
+    throw new Error("unable to fetch services");
   }
   const result = await response.json();
   return result;
@@ -63,6 +67,7 @@ export async function fetchActiveConsentFormStatements(): Promise<ConsentFormSta
   const response = await fetch(`${baseUrl}/consentForm/statements/active`);
   if (!response.ok) {
     console.error("err:", response.statusText);
+    throw new Error("unable to fetch services");
   }
   const result = await response.json();
   return result;
@@ -89,6 +94,7 @@ export async function addOrUpdateStatement(statement: string, isActive: boolean,
   }
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   let result = await response.json();
   return result;
@@ -104,6 +110,7 @@ export async function deleteStatement(id: number) {
 
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
 }
 
@@ -118,6 +125,7 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
   });
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   let result = await response.json();
   console.log(result);
@@ -126,7 +134,7 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
 
 export async function sendSkincareHistoryQuestionnaire(clientId: string, skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
   const convertToBool = (value: string): boolean => value === 'yes';
-  
+
   const convertToIsoDate = (dateString: string): string | null => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -158,6 +166,7 @@ export async function sendSkincareHistoryQuestionnaire(clientId: string, skincar
   });
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   return response.status;
 }
@@ -172,6 +181,7 @@ export async function saveEmergencyContact(clientId: string, emergencyContact: E
   });
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   return response.status;
 }
@@ -186,6 +196,7 @@ export async function saveConsentAndAcknowledgement(clientId: string, signature:
   });
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   return response.status;
 }
@@ -200,6 +211,7 @@ export async function saveProductsUsed(clientId: string, products: string) {
   });
   if (!response.ok) {
     console.error("err:", response.statusText);
+    return;
   }
   return response.status;
 }

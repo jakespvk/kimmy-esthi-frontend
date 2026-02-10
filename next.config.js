@@ -4,6 +4,7 @@ const nextConfig = {
     // ignoreBuildErrors: true,
   },
   reactStrictMode: true,
+  cacheComponents: true,
 }
 
 module.exports = nextConfig

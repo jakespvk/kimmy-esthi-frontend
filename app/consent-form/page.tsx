@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { postClientInfo } from "@/app/api";
 import { ConsentFormClientInfo } from "@/app/types";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 export default function ClientDetails() {
 
@@ -19,8 +20,8 @@ export default function ClientDetails() {
       fullName: formData.get('full-name') as string,
       dob: new Date(Date.parse(formData.get('date-of-birth') as string)).toISOString(),
       gender: formData.get('gender') as string,
-      phoneNumber: formData.get('phone-number') as string,
-      email: formData.get('email') as string,
+      phoneNumber: z.string().min(10).max(10).parse(formData.get('phone-number') as string),
+      email: z.string().min(2).max(10).parse(formData.get('email') as string),
     };
     console.log(clientInfo);
     const response = await postClientInfo(clientInfo);
@@ -34,15 +35,15 @@ export default function ClientDetails() {
           <h3 id="consent-form--client-info" className={`subheading ${glassAntiqua.className}`}>Personal Information</h3>
         </div>
         <Label className='w-max justify-self-start my-2'>Full Name:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="full-name" />
+        <Input className="max-w-96 mb-2" type="text" name="full-name" required />
         <Label className='w-max justify-self-start my-2'>Date of Birth:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="date-of-birth" />
+        <Input className="max-w-96 mb-2" type="text" name="date-of-birth" required />
         <Label className='w-max justify-self-start my-2'>Gender:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="gender" />
+        <Input className="max-w-96 mb-2" type="text" name="gender" required />
         <Label className='w-max justify-self-start my-2'>Phone Number:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="phone-number" />
+        <Input className="max-w-96 mb-2" type="text" name="phone-number" required />
         <Label className='w-max justify-self-start my-2'>Email Address:</Label>
-        <Input className="max-w-96 mb-2" type="text" name="email" />
+        <Input className="max-w-96 mb-2" type="text" name="email" required />
         <div className="flex justify-center">
           <Button className="my-2" type="submit">Next</Button>
         </div>

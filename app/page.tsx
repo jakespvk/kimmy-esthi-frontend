@@ -1,13 +1,14 @@
-"use client";
-
 import ServicesCards from '@/components/ui/services_cards'
 import { glassAntiqua } from './fonts'
-import { ServicesContext } from '@/context/ServicesContext'
-import { useContext } from 'react';
 import About from './about/about';
+import { fetchServicesSearch } from './api';
+import { ServiceType } from './types';
 
-export default function Home() {
-  const services = useContext(ServicesContext);
+export default async function Home() {
+  "use cache";
+  const facials = await fetchServicesSearch(ServiceType.Facial);
+  const packages = await fetchServicesSearch(ServiceType.Package);
+  const addOns = await fetchServicesSearch(ServiceType.AddOn);
   return (
     <>
       <div className="text-center lg:w-2/3 mx-auto my-auto">
@@ -22,7 +23,7 @@ export default function Home() {
 
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {services.signatureFacials.map((service, index) => (
+          {facials.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>
@@ -40,7 +41,7 @@ export default function Home() {
 
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {services.facialPackages.map((service, index) => (
+          {packages.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>
@@ -57,15 +58,11 @@ export default function Home() {
       </div>
       <div className="lg:2/3 mx-auto my-auto min-w-fit">
         <div className="flex flex-wrap justify-center">
-          {services.serviceAddOns.map((service, index) => (
+          {addOns.map((service, index) => (
             <ServicesCards key={index} {...service} />
           ))}
         </div>
       </div>
-
-      {/*<div className="flex justify-center">
-        <h1 className={`headline ${glassAntiqua.className}`}>About SunsetKimcare</h1>
-      </div>*/}
 
       <About />
 
