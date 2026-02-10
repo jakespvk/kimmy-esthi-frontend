@@ -107,7 +107,7 @@ const ConsentForm = (props: {
               onSave={setSignature}
             />
             <Button className="my-2" onClick={onSubmit}>Submit</Button>
-            <p>{response}</p>
+            <p className={response.includes("wrong") ? "text-red-500" : "text-green-500"}>{response}</p>
           </div>
         </div>
       </div>

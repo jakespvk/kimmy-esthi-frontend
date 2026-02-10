@@ -125,9 +125,33 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
 }
 
 export async function sendSkincareHistoryQuestionnaire(clientId: string, skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
+  const convertToBool = (value: string): boolean => value === 'yes';
+  
+  const convertToIsoDate = (dateString: string): string | null => {
+    if (!dateString) return null;
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? null : date.toISOString();
+  };
+
+  const processedQuestionnaire = {
+    id: skincareHistoryQuestionnaire.id,
+    clientId: clientId,
+    everReceivedFacial: convertToBool(skincareHistoryQuestionnaire.everReceivedFacial),
+    lastFacialDate: convertToIsoDate(skincareHistoryQuestionnaire.lastFacialDate),
+    retinol: convertToBool(skincareHistoryQuestionnaire.retinol),
+    chemPeel: convertToBool(skincareHistoryQuestionnaire.chemPeel),
+    lastChemPeelDate: convertToIsoDate(skincareHistoryQuestionnaire.lastChemPeelDate),
+    hairRemoval: convertToBool(skincareHistoryQuestionnaire.hairRemoval),
+    medicalConditions: convertToBool(skincareHistoryQuestionnaire.medicalConditions),
+    allergies: convertToBool(skincareHistoryQuestionnaire.allergies),
+    botox: convertToBool(skincareHistoryQuestionnaire.botox),
+    negativeReaction: convertToBool(skincareHistoryQuestionnaire.negativeReaction),
+    skinType: skincareHistoryQuestionnaire.skinType,
+  };
+
   const response = await fetch(`${baseUrl}/consentForm/skincareHistory`, {
     method: 'POST',
-    body: JSON.stringify({ clientId: clientId, skincareHistoryQuestionnaire }),
+    body: JSON.stringify({ clientId: clientId, skincareHistoryQuestionnaire: processedQuestionnaire }),
     headers: {
       'Content-Type': 'application/json',
     },

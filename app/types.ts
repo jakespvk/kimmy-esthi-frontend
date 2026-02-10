@@ -62,6 +62,7 @@ export interface ConsentFormClientInfo {
 }
 
 export interface SkincareHistoryQuestionnaire {
+  id?: string;
   everReceivedFacial: string;
   lastFacialDate: string;
   retinol: string;
