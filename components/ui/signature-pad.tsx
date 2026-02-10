@@ -302,6 +302,7 @@ const SignaturePad = React.forwardRef<SignaturePadRef, SignaturePadProps>(
         {showButtons && ( // (showButtons && !isDrawing)
           <div className="absolute bottom-2 right-2 flex gap-1">
             <Button
+              type="button"
               variant="outline"
               size={size === "xsm" ? undefined : "sm"}
               onClick={handleClear}
@@ -310,6 +311,7 @@ const SignaturePad = React.forwardRef<SignaturePadRef, SignaturePadProps>(
               {clearButtonIcon || <Eraser />}
             </Button>
             <Button
+              type="button"
               variant="outline"
               size={size === "xsm" ? undefined : "sm"}
               onClick={handleSave}
