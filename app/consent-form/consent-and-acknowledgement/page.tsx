@@ -22,11 +22,11 @@ export default function ConsentAndAcknowledgement(props: { searchParams: Promise
   }
 
   return (
-    <div className="w-full mx-5 md:mx-0 md:flex justify-center items-center mb-5">
+    <div className="w-full md:flex justify-center items-center mb-5">
       <form onSubmit={handleSubmit}>
-        <div className="max-w-3xl flex flex-col justify-center items-center">
-          <div className="flex justify-center items-center">
-            <h3 id="consent-form--consent-and-acknowledgement" className={`subheading ${glassAntiqua.className}`}>Consent and Acknowledgement</h3>
+        <div className="max-w-3xl flex flex-col justify-center items-center mx-5 md:mx-0">
+          <div className="flex flex-wrap justify-center items-center">
+            <h3 id="consent-form--consent-and-acknowledgement" className={`subheading text-center pretty ${glassAntiqua.className}`}>Consent and Acknowledgement</h3>
           </div>
           <p className="mb-5">
             By signing below, I acknowledge that I have been informed about the nature of the facial treatment
@@ -34,7 +34,7 @@ export default function ConsentAndAcknowledgement(props: { searchParams: Promise
             skin’s condition, individual results may vary. I have disclosed all relevant medical information and
             agree to follow any aftercare instructions provided.
           </p>
-          <Label>Client's Signature:</Label>
+          <Label className='flex justify-center items-center'>Client's Signature:</Label>
           <SignaturePad
             className="my-3 max-w-full w-112"
             penColor="hsl(var(--foreground))"
@@ -44,7 +44,9 @@ export default function ConsentAndAcknowledgement(props: { searchParams: Promise
             clearButtonIcon={<Eraser />}
             onSave={setSignature}
           />
-          <Button className="my-2">Submit</Button>
+          <div className='flex justify-center items-center'>
+            <Button className="my-2">Submit</Button>
+          </div>
         </div>
       </form>
     </div>
