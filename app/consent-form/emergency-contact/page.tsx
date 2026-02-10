@@ -35,7 +35,7 @@ export default function EmergencyContact(props: { searchParams: Promise<{ client
         <Label className='w-max justify-self-start my-2'>Relationship:</Label>
         <Input className="max-w-96 mb-2" type="text" name="relationship" />
         <div className="flex justify-center my-5">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Next</Button>
         </div>
       </form>
     </div>

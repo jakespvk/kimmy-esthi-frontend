@@ -45,7 +45,7 @@ export default function ConsentAndAcknowledgement(props: { searchParams: Promise
             onSave={setSignature}
           />
           <div className='flex justify-center items-center'>
-            <Button className="my-2">Submit</Button>
+            <Button className="my-2">Next</Button>
           </div>
         </div>
       </form>

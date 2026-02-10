@@ -37,12 +37,12 @@ export default function SkincareHistory(props: { searchParams: Promise<{ clientI
   }
 
   return (
-    <div className="mx-2 md:mx-0 mb-5 w-full md:flex justify-center">
+    <div className="mx-5 md:mx-0 mb-5 max-w-full md:flex justify-center">
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center">
           <h3 id="consent-form--skincare-history" className={`subheading ${glassAntiqua.className}`}>Evolution of Skincare</h3>
         </div>
-        <div className="max-w-3xl flex flex-col justify-center items-start">
+        <div className="max-w-3xl flex flex-col max-md:flex-wrap justify-center items-start">
           <div className="flex justify-center">
             <RadioGroup defaultValue={everReceivedFacial} onValueChange={setEverReceivedFacial} name="everReceivedFacial" className="flex-1 flex gap-4 mr-2">
               <div className="flex items-center gap-3">
@@ -155,9 +155,9 @@ export default function SkincareHistory(props: { searchParams: Promise<{ clientI
             </RadioGroup>
             <Label className='grow my-2 text-base pl-2 border-primary border-l'>Have you ever had a negative reaction to a skincare service?</Label>
           </div>
-          <div className="flex justify-center">
-            <Label className='grow my-2 text-base pr-2 border-primary border-r'>How would you describe your skin type?</Label>
-            <RadioGroup defaultValue="no" name="skinType" className="flex-1 flex gap-4 ml-2">
+          <div className="flex flex-wrap justify-center py-5">
+            <Label className='grow py-2 text-base pr-2 border-primary md:border-r mr-2'>How would you describe your skin type?</Label>
+            <RadioGroup defaultValue="no" name="skinType" className="flex-1 flex max-md:flex-col gap-4">
               <div className="flex items-center gap-3">
                 <RadioGroupItem value="normal" id="r17" />
                 <Label htmlFor="r17">Normal</Label>
