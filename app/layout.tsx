@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className='bg-[oklch(0.9739_0.034_103.42)]'>
+    <html lang="en" className='bg-[oklch(0.9849_0.0204_91.58)]'>
       <body className={montserrat.className}>
         <Navbar />
         {children}
