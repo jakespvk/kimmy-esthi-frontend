@@ -64,16 +64,18 @@ export interface ConsentFormClientInfo {
 export interface SkincareHistoryQuestionnaire {
   id?: string;
   everReceivedFacial: string;
-  lastFacialDate: string;
+  lastFacialDate?: string;
   retinol: string;
   chemPeel: string;
-  lastChemPeelDate: string;
+  lastChemPeelDate?: string;
   hairRemoval: string;
   medicalConditions: string;
   allergies: string;
   botox: string;
   negativeReaction: string;
   skinType: string;
+  pregnant: string;
+  smoke: string;
 }
 
 export interface EmergencyContactDetails {

@@ -135,20 +135,13 @@ export async function postClientInfo(clientInfo: ConsentFormClientInfo) {
 export async function sendSkincareHistoryQuestionnaire(clientId: string, skincareHistoryQuestionnaire: SkincareHistoryQuestionnaire) {
   const convertToBool = (value: string): boolean => value === 'yes';
 
-  const convertToIsoDate = (dateString: string): string | null => {
-    if (!dateString) return null;
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? null : date.toISOString();
-  };
-
   const processedQuestionnaire = {
-    id: skincareHistoryQuestionnaire.id,
     clientId: clientId,
     everReceivedFacial: convertToBool(skincareHistoryQuestionnaire.everReceivedFacial),
-    lastFacialDate: convertToIsoDate(skincareHistoryQuestionnaire.lastFacialDate),
+    lastFacialDate: skincareHistoryQuestionnaire.lastFacialDate,
     retinol: convertToBool(skincareHistoryQuestionnaire.retinol),
     chemPeel: convertToBool(skincareHistoryQuestionnaire.chemPeel),
-    lastChemPeelDate: convertToIsoDate(skincareHistoryQuestionnaire.lastChemPeelDate),
+    lastChemPeelDate: skincareHistoryQuestionnaire.lastChemPeelDate,
     hairRemoval: convertToBool(skincareHistoryQuestionnaire.hairRemoval),
     medicalConditions: convertToBool(skincareHistoryQuestionnaire.medicalConditions),
     allergies: convertToBool(skincareHistoryQuestionnaire.allergies),
