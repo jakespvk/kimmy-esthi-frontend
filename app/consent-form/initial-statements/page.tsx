@@ -65,7 +65,7 @@ const ConsentForm = (props: {
             <SignaturePad
               className="w-64 max-w-full my-3"
               penColor="hsl(var(--foreground))"
-              size="xsm"
+              size="sm"
               showButtons={true}
               saveButtonIcon={<Save />}
               clearButtonIcon={<Eraser />}
