@@ -30,7 +30,7 @@ export default function Navbar() {
   const [largeScreen, setLargeScreen] = useState(false);
 
   function handleScroll() {
-    setScrolled(window.scrollY > 0 ? false : true);
+    setScrolled(window.scrollY > 0 ? true : false);
   }
 
   useEffect(() => {
