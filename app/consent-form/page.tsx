@@ -140,7 +140,7 @@ export default function ClientDetails() {
               <FormItem>
                 <Label className='w-max justify-self-start my-2'>Email Address:</Label>
                 <FormControl>
-                  <Input className="max-w-96 mb-2" type="email" {...field} />
+                  <Input className="max-w-96 mb-2" type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
