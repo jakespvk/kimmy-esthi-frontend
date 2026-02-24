@@ -87,7 +87,7 @@ export const columns: ColumnDef<AdminAppointment>[] = [
         return <div>
           <Link
             href={{
-              pathname: "/booking/scheduleAppointment",
+              pathname: "/booking/schedule-appointment",
               query: {
                 appointmentId: appointment.id,
                 appointmentType: "blah",
