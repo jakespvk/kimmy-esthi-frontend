@@ -130,7 +130,7 @@ function AppointmentsPageInner({
                 return (
                   <CalendarDayButton day={day} modifiers={modifiers} {...props}>
                     {children}
-                    <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8 text-amber-300' /> : dayWithAppointments && <Dot className='size-8 text-red-600' />}</span>
+                    <span className='absolute top-5'>{dayWithAppointmentsStatus ? <Dot className='size-12 text-amber-300' /> : dayWithAppointments && <Dot className='size-12 text-red-600' />}</span>
                   </CalendarDayButton>
                 )
               },
