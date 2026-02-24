@@ -121,7 +121,7 @@ function AppointmentsPageInner({
             selected={selectedDate}
             onSelect={setSelectedDate}
             disabled={(date: Date) => today ? date < today : false}
-            className="rounded-xl border shadow-sm"
+            className="rounded-xl border shadow-sm [--cell-size:--spacing(12)]"
             components={{
               DayButton: ({ children, modifiers, day, ...props }) => {
                 const dayWithAppointments = appointmentDates?.find(x => (new Date(x.dateTime)).toLocaleDateString() === day.date.toLocaleDateString());
@@ -130,7 +130,7 @@ function AppointmentsPageInner({
                 return (
                   <CalendarDayButton day={day} modifiers={modifiers} {...props}>
                     {children}
-                    <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8 text-amber-600' /> : dayWithAppointments && <Dot className='size-8 text-red-600' />}</span>
+                    <span className='absolute top-3.5'>{dayWithAppointmentsStatus ? <Dot className='size-8 text-amber-300' /> : dayWithAppointments && <Dot className='size-8 text-red-600' />}</span>
                   </CalendarDayButton>
                 )
               },
