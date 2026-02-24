@@ -7,3 +7,7 @@
 # booking
 - big buttons -- mobile or santa ana? after selecting time for booking
 - disclaimer tag "price does not include additional travel charge for mobile facials"
+- select add ons while booking
+- add addon for chem peel
+
+# review page
