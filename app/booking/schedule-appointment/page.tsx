@@ -149,7 +149,7 @@ function ScheduleAppointmentInner({
       setIsEnabled(true);
       let result = await response.json();
       form.reset();
-      router.push("/consentForm/client-details?" + new URLSearchParams({ appointmentId: searchParams.appointmentId, clientId: result }));
+      router.push("/consent-form?" + new URLSearchParams({ appointmentId: searchParams.appointmentId, clientId: result }));
     } catch (error) {
       console.error("Error posting data: ", error);
       return;
