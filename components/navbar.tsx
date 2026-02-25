@@ -50,7 +50,7 @@ export default function Navbar() {
         <Link className="m-0 p-0 mr-4" href="/">
           <Image src="/kimmy-esthi-logo.png" alt="SunsetKimcare" width={largeScreen ? 125 : 100} height={largeScreen ? 125 : 100} />
         </Link>
-        <p className={`${msMadi.className} text-lg lg:text-2xl p-0 m-0 text-muted-foreground`}>
+        <p className={`${msMadi.className} text-lg lg:text-3xl p-0 m-0 text-muted-foreground`}>
           Let me make something clear... your skin
         </p>
       </div>
@@ -124,7 +124,7 @@ function DesktopNavMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-lg">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="w-96">
               <ListItem href="/#signature-facials" title="Signature Facials">
@@ -141,7 +141,7 @@ function DesktopNavMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/#about">About</Link>
+            <Link className="text-lg" href="/#about">About</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
@@ -164,7 +164,7 @@ function ListItem({
     <li {...props}>
       <NavigationMenuLink asChild>
         <Link href={href}>
-          <div className="flex flex-col gap-1 text-sm">
+          <div className="flex flex-col gap-1 text-base">
             <div className="leading-none font-medium">{title}</div>
             <div className="text-muted-foreground line-clamp-2">{children}</div>
           </div>

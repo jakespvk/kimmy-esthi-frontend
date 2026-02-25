@@ -23,6 +23,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <Providers>
           <Navbar />
+          {/* <div className="fixed-gradient-bg"></div> */}
           {children}
         </Providers>
       </body>
