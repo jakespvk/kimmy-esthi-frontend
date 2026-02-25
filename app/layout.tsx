@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className='bg-[oklch(0.9849_0.0204_91.58)]'>
+    <html lang="en" className='bg-[oklch(0.9849_0.0204_91.58)] scroll-smooth' data-scroll-behavior="smooth">
       <body className={montserrat.className}>
         <Providers>
           <Navbar />

@@ -122,13 +122,11 @@
   }
 }
 
-/* border-[oklch(0.6512_0.2348_26.76)] border-t-4 border-l-4 border-[oklch(0.6512_0.2348_26.76)] border-b-4 border-r-4 */
 
 .card-multiple-border {
   position: relative;
   border: 12px solid oklch(0.6059 0.2246 30.27);
   @apply rounded-3xl;
-  /* border-radius: inherit; */
 }
 
 .card-multiple-border::before {
@@ -140,9 +138,6 @@
   right: -5px;
   border-radius: inherit;
   border: 8px solid oklch(0.6935 0.1774 49.66);
-  /* z-index: -1; */
-  /* outline: 8px solid oklch(0.6059 0.2246 30.27); */
-  /* outline-offset: -8px; */
 }
 
 .gradient-bg {

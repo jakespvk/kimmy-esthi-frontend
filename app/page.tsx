@@ -3,6 +3,7 @@ import { glassAntiqua } from './fonts'
 import About from './about/about';
 import { fetchServicesSearch } from './api';
 import { ServiceType } from './types';
+import RatingsPage from './ratings/page';
 
 export default async function Home() {
   "use cache";
@@ -65,6 +66,8 @@ export default async function Home() {
       </div>
 
       <About />
+
+      <RatingsPage />
 
       <div className="pb-5"></div>
     </>

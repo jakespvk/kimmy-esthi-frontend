@@ -103,6 +103,8 @@ function MobileNavMenu() {
               </ListItem>
               <ListItem href="/#socials" title="Socials">
               </ListItem>
+              <ListItem href="/#reviews" title="Reviews">
+              </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -147,6 +149,11 @@ function DesktopNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/#socials">Socials</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/#reviews">Reviews</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
