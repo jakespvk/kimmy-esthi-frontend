@@ -1,4 +1,3 @@
-import InstagramEmbed from "@/components/InstagramEmbed"
 import { glassAntiqua } from "../fonts";
 
 const About = () => {
@@ -25,14 +24,6 @@ const About = () => {
         <p className={classname}>
           Whether you’re here for a glow-up, a deep reset, or to start your skincare journey, I can’t wait to meet you and help you fall in love with your skin again. 🤍
         </p>
-      </div>
-
-      <div className="flex justify-center">
-        <h1 id="socials" className={`scroll-mt-36 md:scroll-mt-18 p-5 md:p-10 headline ${glassAntiqua.className}`}>Socials</h1>
-      </div>
-
-      <div className="text-center lg:w-2/3 p-5 mx-auto my-auto">
-        <InstagramEmbed />
       </div>
     </>
   )
