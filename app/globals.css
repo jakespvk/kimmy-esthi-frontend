@@ -3,7 +3,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @plugin "daisyui" {
-  theme: ["light"],
+  themes: light;
 }
 
 @theme {
@@ -312,4 +312,8 @@
 
 .headline-gradient {
   @apply bg-linear-to-r from-amber-600 via-amber-300 to-amber-500 inline-block text-transparent bg-clip-text;
+}
+
+.reviews-cards {
+  grid-template-columns: repeat(autofit, minmax(min(400px, 100%), 1fr));
 }
