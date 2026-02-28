@@ -83,3 +83,10 @@ export interface EmergencyContactDetails {
   phone: string;
   relationship: string;
 }
+
+export interface Rating {
+  title: string;
+  author: string;
+  rating: number;
+  content: string;
+}

@@ -1,4 +1,4 @@
-import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, EmergencyContactDetails, Service, ServiceType, SkincareHistoryQuestionnaire } from "./types";
+import { Base64URLString, ConsentFormClientInfo, ConsentFormStatement, EmergencyContactDetails, Rating, Service, ServiceType, SkincareHistoryQuestionnaire } from "./types";
 
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -198,6 +198,26 @@ export async function saveProductsUsed(clientId: string, products: string) {
   const response = await fetch(`${baseUrl}/consentForm/products`, {
     method: 'POST',
     body: JSON.stringify({ clientId: clientId, products: products }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    console.error("err:", response.statusText);
+    return;
+  }
+  return response.status;
+}
+
+export async function getAllRatings() {
+  const response = await fetch(`${baseUrl}/reviews`);
+  return await response.json();
+}
+
+export async function savePostRating(review: Rating) {
+  const response = await fetch(`${baseUrl}/reviews`, {
+    method: 'POST',
+    body: JSON.stringify(review),
     headers: {
       'Content-Type': 'application/json',
     },
