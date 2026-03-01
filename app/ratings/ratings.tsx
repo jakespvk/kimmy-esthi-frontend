@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Ratings() {
 
@@ -68,10 +69,11 @@ const Review = (props: { review: Rating }) => {
 }
 
 const ratingFormSchema = z.object({
-  title: z.string().min(1, "Title is required").max(150),
-  author: z.string().min(1, "Feel free to put something like 'Anonymous' here"),
-  rating: z.number().min(1).max(5),
-  content: z.string().max(500),
+  title: z.string().min(1, "Title is required").max(150, "Title must not exceed 150 characters, please consider moving something to content of review. Thanks!"),
+  author: z.string().min(1, "Author name is required, but if you choose, will not be shared publicly."),
+  hideName: z.boolean(),
+  rating: z.number().min(1, "Please select a suns rating 1 through 5").max(5, "Please select a suns rating 1 through 5"),
+  content: z.string().max(1000, "Content must not exceed 1000 characters, sorry about that and thank you for writing!"),
 })
 
 const ReviewForm = () => {
@@ -81,6 +83,7 @@ const ReviewForm = () => {
     defaultValues: {
       title: "",
       author: "",
+      hideName: false,
       rating: 0,
       content: "",
     },
@@ -140,6 +143,7 @@ const ReviewForm = () => {
                             }))}
                           </RadioGroup>
                         </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -156,6 +160,22 @@ const ReviewForm = () => {
                         <Input className="text-amber-400 w-80 max-w-full" {...field} />
                       </div>
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="hideName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="flex items-center my-2">
+                        <Checkbox className="mr-3" defaultChecked={field.value} onCheckedChange={field.onChange} id="hideName" />
+                        <Label htmlFor="hideName">Please hide my name</Label>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -166,10 +186,11 @@ const ReviewForm = () => {
                   <FormItem>
                     <FormControl>
                       <div>
-                        <Label className="my-2">Content:</Label>
+                        <Label className="mb-2">Content:</Label>
                         <textarea rows={2} className="field-sizing-content text-sm w-full max-w-full min-h-[81px] border border-amber-500 focused:border-amber-800 focus-visible:ring-1 ring-amber-700 focus:outline-none shadow-sm rounded-sm p-2.5 resize-none" {...field}></textarea>
                       </div>
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
