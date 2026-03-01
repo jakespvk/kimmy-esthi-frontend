@@ -87,6 +87,7 @@ export interface EmergencyContactDetails {
 export interface Rating {
   title: string;
   author: string;
+  hideName: boolean;
   rating: number;
   content: string;
 }

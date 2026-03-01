@@ -60,7 +60,7 @@ const Review = (props: { review: Rating }) => {
               ))}
             </div>
           </div>
-          <p className="lg:text-lg text-amber-400">{props.review.author}</p>
+          {!props.review.hideName && <p className="lg:text-lg text-amber-400">{props.review.author}</p>}
           <p className="lg:text-lg">{props.review.content}</p>
         </div>
       </div >
