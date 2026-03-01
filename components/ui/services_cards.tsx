@@ -35,9 +35,9 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
                 </ul>
               }
               <p className="lg:text-lg">{cardContent}</p>
-              {((tags) || (price)) &&
+              {(tags || price) &&
                 <div className="card-actions justify-end">
-                  {(tags) && tags.map((tag: string, idx) =>
+                  {tags && tags.map((tag: string, idx) =>
                     <div key={idx} className="text-warning">{tag}</div>
                   )}
                   <div>{price}</div>
