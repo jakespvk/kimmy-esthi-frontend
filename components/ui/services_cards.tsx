@@ -52,10 +52,10 @@ const ServicesCards = ({ serviceName, promotionName, serviceType, cardTitle, car
             + (serviceType === ServiceType.AddOn ? "w-60" : "w-full lg:w-96")}
           >
             {cardOverlayContent !== undefined && cardOverlayContent.length > 0 &&
-              <p className={"p-5 text-center lg:text-lg " + (serviceType === ServiceType.AddOn ? "my-auto" : "grow")}>{cardOverlayContent}</p>
+              <p className={`p-5 text-center md:text-lg ${serviceType === ServiceType.AddOn ? " my-auto " : " grow "} ${serviceType === ServiceType.Package && " md:text-xl "}`}>{cardOverlayContent}</p>
             }
             <div className="flex flex-col">
-              {price && <strong className="text-center my-2">{price}</strong>}
+              {price && <strong className="text-center font-bold my-2">{price}</strong>}
               {!notBookable &&
                 // TODO
                 <div className={"card-actions justify-center items-end grow " + ((prefersHover) ? "hover:touch-auto pointer-events-auto" : (clicked) ? "touch-auto pointer-events-auto" : "touch-none pointer-events-none")}>
