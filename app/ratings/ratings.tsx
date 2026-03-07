@@ -12,7 +12,7 @@ import { getAllRatings, savePostRating } from "../api";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Ratings() {
@@ -89,10 +89,13 @@ const ReviewForm = () => {
     },
   })
 
+  const queryClient = useQueryClient();
+
   async function postRating(values: z.infer<typeof ratingFormSchema>) {
     await savePostRating(values as Rating);
     form.reset();
     // TODO invalidate cached reviews and refetch, or optimistically update the ui
+    queryClient.invalidateQueries({ queryKey: ['ratings'] });
   }
 
   return (
