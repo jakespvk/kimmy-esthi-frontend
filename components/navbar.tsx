@@ -48,7 +48,7 @@ export default function Navbar() {
     <div className={`sticky top-0 z-100 bg-popover py-4 pl-8 pr-4 md:pr-8 flex justify-between items-center w-full min-w-full ${scrolled && "shadow-md border-b border-b-muted"}`}>
       <div className={glassAntiqua.className + ' flex flex-wrap items-center justify-start'}>
         <Link className="m-0 p-0 mr-4" href="/">
-          <Image src="/kimmy-esthi-logo.png" alt="SunsetKimcare" width={largeScreen ? 125 : 100} height={largeScreen ? 125 : 100} />
+          <Image loading="eager" src="/kimmy-esthi-logo.png" alt="SunsetKimcare" width={largeScreen ? 125 : 100} height={largeScreen ? 125 : 100} />
         </Link>
         <p className={`${msMadi.className} text-lg lg:text-3xl p-0 m-0 text-muted-foreground`}>
           Let me make something clear... your skin

@@ -18,6 +18,8 @@ import { format, addDays } from "date-fns";
 import * as dotenv from "dotenv";
 import * as path from "path";
 
+import { mockActiveStatements } from "./fixtures/mock-data";
+
 // ---- Load credentials from .env.e2e.local ----
 dotenv.config({ path: path.resolve(__dirname, "../.env.e2e.local") });
 
@@ -221,9 +223,10 @@ test.describe("Happy Path: Landing → Booking → Consent Form", () => {
     expect(page.url()).toContain("clientId=");
 
     // ================================================================
-    // CONSENT FORM - Step 1: Personal Information
+    // CONSENT FORM - Single Page
     // ================================================================
     await expect(page.getByText("Personal Information")).toBeVisible();
+    await expect(page.getByText("Terms and Agreements")).toBeVisible();
 
     await page.locator("input[name='fullName']").fill("E2E Test User");
 
@@ -235,124 +238,49 @@ test.describe("Happy Path: Landing → Booking → Consent Form", () => {
     await page.getByRole("gridcell", { name: "15" }).first().click();
 
     await page.locator("input[name='gender']").fill("Non-binary");
-    await page.locator("input[type='tel']").fill("5625559999");
+    await page.locator("input[type='tel']").first().fill("5625559999");
     await page.locator("input[name='email']").fill("e2e-test@example.com");
-
-    await clickSubmitButton(page);
-
-    // ================================================================
-    // CONSENT FORM - Step 2: Products
-    // ================================================================
-    await page.waitForURL(/\/consent-form\/products/, { timeout: 10_000 });
-    expect(page.url()).toContain("clientId=");
-
-    await expect(
-      page.getByText("What products are you currently using at home?")
-    ).toBeVisible();
 
     await page
       .locator("textarea")
       .fill("CeraVe Moisturizing Cream, La Roche-Posay SPF 50");
 
-    await clickSubmitButton(page);
-
-    // ================================================================
-    // CONSENT FORM - Step 3: Skincare History
-    // ================================================================
-    await page.waitForURL(/\/consent-form\/skincare-history/, {
-      timeout: 10_000,
-    });
-    expect(page.url()).toContain("clientId=");
-
     await expect(page.getByText("Evolution of Skincare")).toBeVisible();
 
-    // Leave all defaults (No for everything, Normal skin type) and submit
-    await clickSubmitButton(page);
-
-    // ================================================================
-    // CONSENT FORM - Step 4: Emergency Contact
-    // ================================================================
-    await page.waitForURL(/\/consent-form\/emergency-contact/, {
-      timeout: 10_000,
-    });
-    expect(page.url()).toContain("clientId=");
+    await page.locator("#r1").click();
+    await page.locator("input[placeholder='YYYY-MM-DD']").first().fill("2024-06-15");
+    await page.locator("#r3").click();
+    await page.locator("#r19").click();
 
     await expect(page.getByText("Emergency Contact")).toBeVisible();
 
-    await page.locator("input[name='name']").fill("Emergency Contact Person");
-    await page.locator("input[type='tel']").fill("5625558888");
+    await page.locator("input[name='emergencyName']").fill("Emergency Contact Person");
+    await page.locator("input[type='tel']").nth(1).fill("5625558888");
     await page.locator("input[name='relationship']").fill("Sibling");
-
-    await clickSubmitButton(page);
-
-    // ================================================================
-    // CONSENT FORM - Step 5: Consent & Acknowledgement
-    // ================================================================
-    await page.waitForURL(/\/consent-form\/consent-and-acknowledgement/, {
-      timeout: 10_000,
-    });
-    expect(page.url()).toContain("clientId=");
 
     await expect(
       page.getByText("Consent and Acknowledgement")
     ).toBeVisible();
 
-    // Draw and save signature
-    const step5SigPad = page.locator(".relative:has(canvas)").first();
-    await drawAndSaveSignature(page, step5SigPad);
-
-    await clickSubmitButton(page);
-
-    // ================================================================
-    // CONSENT FORM - Step 6: Initial Statements (Final)
-    // ================================================================
-    await page.waitForURL(/\/consent-form\/initial-statements/, {
-      timeout: 10_000,
-    });
-    expect(page.url()).toContain("clientId=");
-
-    await expect(page.getByText("Terms and Agreements")).toBeVisible();
-
-    // Wait for statements to load from the API
-    // The backend has 11 active statements. Wait for at least the first one.
-    await expect(page.locator("li").first()).toBeVisible({ timeout: 10_000 });
-
-    // 1. Draw and save initials
     const signaturePads = page.locator(".relative:has(canvas)");
-    const initialsPad = signaturePads.first();
-    await drawAndSaveSignature(page, initialsPad);
+    await drawAndSaveSignature(page, signaturePads.nth(0));
+    await drawAndSaveSignature(page, signaturePads.nth(1));
 
-    // 2. Check all statement checkboxes
-    //    After initials are saved, checkboxes appear. IDs are numeric (0, 1, 2...).
-    const checkboxes = page.locator("li input[type='checkbox'], li [id]").filter({
-      has: page.locator("self:not(li)"),
-    });
-    // Simpler approach: click every <li> that contains an unchecked checkbox-like element
-    const listItems = page.locator("ol li, ul li");
-    const listItemCount = await listItems.count();
-    for (let i = 0; i < listItemCount; i++) {
-      const item = listItems.nth(i);
-      // The checkbox element uses id="0", id="1", etc.
-      const checkbox = item.locator(`[id="${i}"]`);
-      if (await checkbox.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await checkbox.click();
-      }
+    for (let i = 0; i < mockActiveStatements.length; i++) {
+      await page.locator(`[id="${i}"]`).click();
     }
 
-    // 3. Fill printed name
     await page
       .locator("input[placeholder='Jane Doe']")
       .fill("E2E Test User");
 
-    // 4. Draw and save final signature (second signature pad)
-    const finalSigPad = signaturePads.nth(1);
+    const finalSigPad = signaturePads.nth(2);
     await finalSigPad.evaluate((el) =>
       el.scrollIntoView({ behavior: "instant", block: "center" })
     );
     await page.waitForTimeout(300);
     await drawAndSaveSignature(page, finalSigPad);
 
-    // 5. Submit the final form
     await clickSubmitButton(page);
 
     // ================================================================
